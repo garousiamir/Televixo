@@ -142,7 +142,14 @@ final class Assignment {
 		if ( ! $candidates ) {
 			return null;
 		}
-		$loads = self::open_loads( array_map( static fn( $o ) => (int) $o['id'], $candidates ) );
+		$ids   = array_map( static fn( $o ) => (int) $o['id'], $candidates );
+		$loads = self::open_loads( $ids );
+		// Recency of the last assignment by monotonic assignment ID (timestamps
+		// have one-second resolution and tie under load).
+		$recent = array();
+		foreach ( Db::rows( Db::prepare( 'SELECT operator_id, MAX(id) AS last_id FROM {assignments} WHERE operator_id IN (' . Db::in_ints( $ids ) . ') GROUP BY operator_id' ) ) as $row ) {
+			$recent[ (int) $row['operator_id'] ] = (int) $row['last_id'];
+		}
 		$candidates = array_values(
 			array_filter( $candidates, static fn( $o ) => ( $loads[ (int) $o['id'] ] ?? 0 ) < max( 1, (int) $o['max_concurrent'] ) )
 		);
@@ -151,7 +158,7 @@ final class Assignment {
 		}
 		usort(
 			$candidates,
-			static function ( $a, $b ) use ( $strategy, $loads ): int {
+			static function ( $a, $b ) use ( $strategy, $loads, $recent ): int {
 				if ( 'load' === $strategy ) {
 					$cmp = ( $loads[ (int) $a['id'] ] ?? 0 ) <=> ( $loads[ (int) $b['id'] ] ?? 0 );
 					if ( 0 !== $cmp ) {
@@ -159,7 +166,7 @@ final class Assignment {
 					}
 				}
 				// Round robin: least recently assigned first; ties by ID for determinism.
-				$cmp = strcmp( (string) $a['last_assigned_at'], (string) $b['last_assigned_at'] );
+				$cmp = ( $recent[ (int) $a['id'] ] ?? 0 ) <=> ( $recent[ (int) $b['id'] ] ?? 0 );
 				return 0 !== $cmp ? $cmp : ( (int) $a['id'] <=> (int) $b['id'] );
 			}
 		);

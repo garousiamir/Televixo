@@ -65,7 +65,10 @@ final class UpdateProcessor {
 	}
 
 	/**
-	 * Chats from which operator messages are accepted.
+	 * Chats from which operator messages are accepted: the current
+	 * destination, extra allowlisted chats, team destinations, and every chat
+	 * an existing conversation was routed to (so changing the destination
+	 * never orphans conversations that started under the previous one).
 	 *
 	 * @return string[]
 	 */
@@ -73,7 +76,8 @@ final class UpdateProcessor {
 		$chats = array_merge(
 			array( (string) Settings::get( 'telegram.destination_chat_id', '' ) ),
 			(array) Settings::get( 'telegram.allowed_chat_ids', array() ),
-			Db::wpdb()->get_col( Db::prepare( "SELECT destination_chat_id FROM {teams} WHERE destination_chat_id <> ''" ) )
+			Db::wpdb()->get_col( Db::prepare( "SELECT destination_chat_id FROM {teams} WHERE destination_chat_id <> ''" ) ),
+			Db::wpdb()->get_col( Db::prepare( "SELECT DISTINCT provider_chat_id FROM {conversations} WHERE provider_chat_id <> ''" ) )
 		);
 		return array_values( array_unique( array_filter( array_map( 'strval', $chats ) ) ) );
 	}

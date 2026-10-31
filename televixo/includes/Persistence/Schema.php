@@ -148,6 +148,7 @@ final class Schema {
   KEY operator_status (assigned_operator_id,status),
   KEY team_status (team_id,status),
   KEY last_activity (last_message_at,id),
+  KEY provider_chat (provider_chat_id),
   KEY created_at (created_at)
 ) $c;",
 			"CREATE TABLE {$t('participants')} (
