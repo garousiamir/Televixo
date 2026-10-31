@@ -7,3 +7,4 @@
 .phpunit.result.cache
 *.log
 .DS_Store
+/marketing/video/build/
