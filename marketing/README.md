@@ -1,4 +1,7 @@
-# Televixo promo video (60 s, 1920×1080, 60 fps)
+# Televixo promo videos
+
+* `televixo-promo.mp4` — 60 s, 1920×1080 (16:9), 60 fps
+* `televixo-promo-short.mp4` — 60 s, 1080×1920 (9:16) for YouTube Shorts, Reels and TikTok, same soundtrack and timing
 
 Everything is generated from code in `video/` — no stock footage, samples or licensed music.
 
@@ -9,6 +12,7 @@ Everything is generated from code in `video/` — no stock footage, samples or l
 | `video/index.html` | Motion graphics; `render(t)` sets every element from the time value (deterministic) |
 | `video/render.cjs` | Renders 3,600 frames in headless Chromium and encodes H.264 |
 | `video/preview.cjs` | Renders chosen timestamps into a contact sheet for review |
+| `video/make-vertical.py` | Generates `video/vertical.html` (9:16 layout) from `index.html` |
 | `televixo-promo.mp4` | Final video (H.264 + AAC 256 kb/s) |
 | `televixo-promo-poster.jpg` | Thumbnail |
 
@@ -25,6 +29,22 @@ node video/render.cjs
 ```bash
 ffmpeg -y -i video/build/video-only.mp4 -i video/build/soundtrack.wav -c:v copy -c:a aac -b:a 256k -shortest -movflags +faststart televixo-promo.mp4
 ```
+
+Vertical version:
+
+```bash
+python3 video/make-vertical.py
+```
+
+```bash
+PAGE=vertical.html W=1080 H=1920 OUT=video-only-vertical.mp4 node video/render.cjs
+```
+
+```bash
+ffmpeg -y -i video/build/video-only-vertical.mp4 -i video/build/soundtrack.wav -c:v copy -c:a aac -b:a 256k -shortest -movflags +faststart televixo-promo-short.mp4
+```
+
+In the vertical layout, key content stays between roughly y 180 and 1500 and away from the right edge, clear of the Shorts title and button overlays.
 
 Requires Playwright with Chromium, ffmpeg and the Noto Color Emoji font.
 

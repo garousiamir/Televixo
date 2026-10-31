@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Televixo promo (vertical)</title>
+<style>
+@font-face { font-family: "Hanken"; font-weight: 400; src: url(assets/hanken-400.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 500; src: url(assets/hanken-500.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 900; src: url(assets/hanken-900.woff2) format("woff2"); }
+@font-face { font-family: "Serif"; font-style: italic; src: url(assets/serif-italic.woff2) format("woff2"); }
+@font-face { font-family: "Serif"; font-style: normal; src: url(assets/serif.woff2) format("woff2"); }
+:root {
+  --ink: #000; --dark: #1c1c1c; --chip: #f6f6f6; --line: #eee; --pink: #e0385d; --cobalt: #2563eb;
+  --sky: #2aabee; --amber: #efbc2f; --green: #109f55; --lime: #4ade80; --cream: #f6f4ef;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+body { font-family: "Hanken", "Noto Color Emoji", sans-serif; letter-spacing: -0.016em; -webkit-font-smoothing: antialiased; color: #000; }
+.serif { font-family: "Serif", "Noto Color Emoji", serif; font-style: italic; letter-spacing: -0.01em; font-weight: 400; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--cream); }
+.scene { position: absolute; inset: 0; overflow: hidden; display: none; }
+.abs { position: absolute; }
+.center { position: absolute; left: 50%; top: 50%; }
+.hatch { background-image: repeating-linear-gradient(120deg, rgba(0,0,0,.045) 0 4.2px, transparent 4.2px 7.3px); }
+.btn-dark { background: linear-gradient(180deg, #333 0%, #111 100%); border: 1px solid #000; box-shadow: inset -2px -4px 4px #000, 0 1px 2px rgba(0,0,0,.08); color: #fff; }
+.arr { background: linear-gradient(180deg, #292929 0%, #393939 100%); border: .8px solid #000; box-shadow: inset -.64px -1.2px 0 rgba(255,255,255,.25), inset 2.4px 3.2px 3.2px rgba(0,0,0,.13), inset -1.6px 0 3.2px rgba(255,255,255,.25); }
+.glass { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(12px); }
+.chip { display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 24px; border-radius: 14px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 24px; text-transform: uppercase; letter-spacing: 0; color: #222; white-space: nowrap; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; }
+svg { display: block; }
+.ico { width: 100%; height: 100%; }
+
+/* ---------- reusable widget look (from the reference) ---------- */
+.panel { position: absolute; width: 380px; background: #fff; border: 1px solid #eee; border-radius: 24px; box-shadow: 0 32px 64px -24px rgba(0,0,0,.35); overflow: hidden; transform-origin: 100% 100%; }
+.phead { background: #1c1c1c; color: #fff; padding: 16px 20px; border-radius: 0 0 24px 24px; display: flex; align-items: center; gap: 12px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f8c9a0, #e0385d); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; color: #fff; flex: none; }
+.ptitle { font-size: 16px; font-weight: 500; }
+.psub { font-size: 12px; color: #a0a0a0; display: flex; align-items: center; gap: 5px; margin-top: 6px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+.plog { padding: 18px 16px 10px; display: flex; flex-direction: column; gap: 10px; min-height: 250px; }
+.b { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 20.6px; }
+.b.them { background: #f6f6f6; border-bottom-left-radius: 6px; align-self: flex-start; }
+.b.me { background: #1c1c1c; color: #fff; border-bottom-right-radius: 6px; align-self: flex-end; }
+.meta { font-size: 11px; color: #6f6f6f; padding: 0 4px; margin-top: -4px; }
+.meta.r { align-self: flex-end; }
+.field { margin: 0 12px 12px; height: 48px; border: 1px solid #eee; border-radius: 32px; display: flex; align-items: center; padding: 0 8px 0 18px; gap: 8px; font-size: 14px; color: #6f6f6f; }
+.field .txt { flex: 1; color: #000; white-space: nowrap; overflow: hidden; }
+.field .ph { flex: 1; color: #8a8a8a; }
+.send { height: 32px; padding: 0 16px; border-radius: 999px; font-size: 12px; font-weight: 500; display: flex; align-items: center; }
+.launcher { position: absolute; height: 56px; border-radius: 999px; display: flex; align-items: center; gap: 10px; padding: 0 6px 0 20px; font-size: 15px; font-weight: 500; transform-origin: 100% 50%; }
+.launcher .arr { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.caret { display: inline-block; width: 2px; height: 18px; background: #000; vertical-align: middle; margin-left: 1px; }
+
+/* ---------- phone ---------- */
+.phone { position: absolute; width: 430px; height: 880px; border-radius: 64px; background: #111; padding: 14px; box-shadow: 0 60px 120px -40px rgba(0,0,0,.55), inset 0 0 0 2px #333; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #e9eef3; }
+.tgbar { height: 132px; background: linear-gradient(135deg, #2563eb, #2aabee); color: #fff; padding: 62px 26px 0; display: flex; gap: 14px; align-items: center; }
+.tgav { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 20px; }
+.tgchat { position: absolute; top: 132px; left: 0; right: 0; bottom: 84px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; justify-content: flex-end;
+  background-image: radial-gradient(circle at 20% 30%, rgba(37,99,235,.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(42,171,238,.10), transparent 40%); }
+.tgmsg { background: #fff; border-radius: 18px 18px 18px 6px; padding: 12px 14px; font-size: 15px; line-height: 21px; box-shadow: 0 1px 1px rgba(0,0,0,.08); max-width: 330px; align-self: flex-start; }
+.tgmsg .who { color: #2563eb; font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+.tgmsg.mine { background: #e5f9ea; border-radius: 18px 18px 6px 18px; align-self: flex-end; }
+.tgbtns { display: flex; gap: 6px; margin-top: 6px; max-width: 330px; }
+.tgbtns div { flex: 1; text-align: center; padding: 9px 0; border-radius: 12px; background: rgba(37,99,235,.12); color: #1e4fc7; font-size: 14px; font-weight: 500; }
+.tginput { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #fff; display: flex; align-items: center; padding: 0 18px 18px; gap: 12px; font-size: 16px; color: #999; }
+.tginput .box { flex: 1; height: 46px; border-radius: 23px; background: #f1f3f5; display: flex; align-items: center; padding: 0 16px; color: #000; overflow: hidden; white-space: nowrap; }
+.tgsend { width: 46px; height: 46px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; }
+.replybar { position: absolute; left: 0; right: 0; bottom: 84px; height: 54px; background: #fff; border-top: 1px solid #eef; display: flex; align-items: center; gap: 12px; padding: 0 22px; font-size: 14px; }
+.replybar .ln { width: 3px; height: 34px; background: #2563eb; border-radius: 2px; }
+
+/* ---------- browser ---------- */
+.browser { position: absolute; width: 1280px; height: 852px; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 60px 120px -40px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.06); transform-origin: 50% 50%; }
+.bbar { height: 52px; background: #f3f3f3; display: flex; align-items: center; gap: 9px; padding: 0 20px; border-bottom: 1px solid #e6e6e6; }
+.bbar i { width: 13px; height: 13px; border-radius: 50%; display: block; }
+.url { margin-left: 24px; height: 32px; flex: 1; max-width: 560px; border-radius: 10px; background: #fff; display: flex; align-items: center; padding: 0 14px; font-size: 15px; color: #555; }
+.site { position: absolute; top: 52px; left: 0; width: 1280px; height: 800px; background-size: cover; background-position: top left; }
+
+/* ---------- features ---------- */
+.feat { position: absolute; inset: 0; }
+.fnum { font-size: 28px; font-weight: 500; letter-spacing: 0; }
+.ftitle { font-size: 92px; line-height: .98; font-weight: 500; letter-spacing: -0.035em; }
+.fdesc { font-size: 30px; line-height: 1.38; color: #4a4a4a; max-width: 640px; }
+.card { position: absolute; background: #fff; border: 1px solid #eee; border-radius: 28px; box-shadow: 0 40px 80px -36px rgba(0,0,0,.35); }
+.rule { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 18px; background: #fafafa; border: 1px solid #eee; font-size: 26px; }
+.tick { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex: none; }
+.kpi { position: absolute; background: #fafafa; border-radius: 22px; padding: 26px 30px; }
+.kpi b { display: block; font-size: 58px; font-weight: 500; letter-spacing: -0.03em; }
+.kpi span { font-size: 18px; text-transform: uppercase; color: #6f6f6f; letter-spacing: 0; }
+.tile { position: absolute; width: 400px; height: 520px; border-radius: 36px; padding: 44px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.tile b { font-size: 132px; font-weight: 500; letter-spacing: -0.05em; line-height: .9; }
+.tile span { font-size: 32px; line-height: 1.2; }
+.progress { position: absolute; left: 160px; right: 160px; bottom: 64px; height: 6px; display: flex; gap: 10px; }
+.progress i { flex: 1; border-radius: 3px; background: rgba(0,0,0,.1); overflow: hidden; position: relative; display: block; }
+.progress i b { position: absolute; inset: 0; background: #000; transform-origin: 0 50%; display: block; }
+.word { display: inline-block; will-change: transform; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.grain { position: absolute; inset: -50%; opacity: .05; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.cursor { position: absolute; width: 34px; height: 34px; z-index: 50; }
+.token { position: absolute; width: 74px; height: 74px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 18px 40px -10px rgba(0,0,0,.45); z-index: 40; }
+.trail { position: absolute; width: 18px; height: 18px; border-radius: 50%; z-index: 39; }
+.conf { position: absolute; border-radius: 4px; }
+</style>
+
+<style>
+/* ---------- vertical (9:16) layout ---------- */
+#s1a, #s1b { width: 1000px !important; margin-left: -500px !important; margin-top: -330px !important; font-size: 128px !important; }
+#w4, #w8 { font-size: 150px !important; }
+#logo { width: 1000px !important; margin-left: -500px !important; margin-top: -330px !important; }
+#logoPill { height: 130px !important; font-size: 40px !important; }
+#logoPill .arr { width: 102px !important; height: 102px !important; }
+#wordmark { font-size: 176px !important; }
+#tagline { font-size: 44px !important; }
+#tagline .serif { font-size: 54px !important; }
+#browser { left: -100px !important; top: 434px !important; }
+#phone { left: 325px !important; top: 940px !important; }
+#caption { top: 800px !important; font-size: 56px !important; }
+#caption2 { top: 925px !important; bottom: auto !important; font-size: 56px !important; }
+#cap3 { font-size: 66px !important; padding: 24px 40px !important; text-align: center; max-width: 940px; }
+#brk { width: 1000px !important; margin-left: -500px !important; margin-top: -330px !important; font-size: 106px !important; }
+#k2 { font-size: 118px !important; }
+.feat > .abs:first-child { left: 80px !important; top: 230px !important; width: 900px; }
+.ftitle { font-size: 86px !important; }
+.fdesc { font-size: 30px !important; max-width: 880px !important; }
+#f1a { left: 67px !important; top: 692px !important; }
+#f1b { left: 450px !important; top: 760px !important; }
+#f2shot { left: 80px !important; top: 830px !important; width: 900px !important; height: 563px !important; }
+#fc0 { left: 80px !important; top: 1420px !important; }
+#fc1 { left: 300px !important; top: 1450px !important; }
+#fc2 { left: 560px !important; top: 1410px !important; }
+#fc3 { left: 620px !important; top: 770px !important; }
+#f3card { left: 80px !important; top: 800px !important; width: 900px !important; }
+#f3teaser { left: 300px !important; top: 1260px !important; }
+#f3launch { left: 700px !important; top: 1380px !important; }
+#f4card { left: 80px !important; top: 830px !important; width: 900px !important; }
+#f5card { left: 80px !important; top: 800px !important; width: 900px !important; height: 640px !important; }
+#shield { left: 110px !important; top: 860px !important; width: 270px !important; height: 324px !important; }
+#checks { left: 430px !important; top: 900px !important; font-size: 30px !important; }
+.progress { left: 80px !important; right: 80px !important; bottom: auto !important; top: 150px !important; }
+.tile { width: 430px !important; height: 520px !important; padding: 40px !important; }
+.tile b { font-size: 118px !important; }
+.tile span { font-size: 30px !important; }
+#t1 { left: 75px !important; top: 360px !important; }
+#t2 { left: 575px !important; top: 360px !important; }
+#t3 { left: 75px !important; top: 920px !important; }
+#t4 { left: 575px !important; top: 920px !important; }
+#outro { width: 1000px !important; margin-left: -500px !important; margin-top: -400px !important; }
+#oLogo span:last-child { font-size: 132px !important; }
+#oLogo .btn-dark { width: 108px !important; height: 108px !important; }
+#oTag { font-size: 56px !important; }
+#oTag .serif { font-size: 66px !important; }
+#oCta { font-size: 38px !important; height: 104px !important; }
+#oFoot { font-size: 22px !important; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ============ S1 HOOK ============ -->
+  <section class="scene" id="s1" style="background:#0b0b0b">
+    <div class="blob" id="s1b1" style="width:700px;height:700px;left:-120px;top:-180px;background:#e0385d"></div>
+    <div class="blob" id="s1b2" style="width:800px;height:800px;right:-200px;bottom:-260px;background:#2563eb"></div>
+    <div class="center" id="s1a" style="width:1700px;margin-left:-850px;margin-top:-150px;text-align:center;color:#fff;font-size:150px;font-weight:500;line-height:1.02;letter-spacing:-0.045em">
+      <div><span class="word" id="w1">Your</span> <span class="word" id="w2">visitors</span> <span class="word" id="w3">have</span></div>
+      <div><span class="word serif" id="w4" style="color:#e0385d;font-size:172px">questions.</span></div>
+    </div>
+    <div class="center" id="s1b" style="width:1700px;margin-left:-850px;margin-top:-150px;text-align:center;color:#fff;font-size:150px;font-weight:500;line-height:1.02;letter-spacing:-0.045em">
+      <div><span class="word" id="w5">Answer</span> <span class="word" id="w6">them</span> <span class="word" id="w7">from</span></div>
+      <div><span class="word serif" id="w8" style="color:#2aabee;font-size:172px">Telegram.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ S2 LOGO ============ -->
+  <section class="scene hatch" id="s2" style="background-color:#fff">
+    <div id="rings"></div>
+    <div class="center" id="logo" style="width:1400px;margin-left:-700px;margin-top:-230px;text-align:center">
+      <div id="logoPill" class="btn-dark" style="display:inline-flex;align-items:center;gap:22px;height:150px;border-radius:999px;padding:0 16px 0 52px;font-size:46px;font-weight:500">
+        <span>Chat with us</span>
+        <span class="arr" style="width:118px;height:118px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg>
+        </span>
+      </div>
+      <div id="wordmark" style="font-size:210px;font-weight:500;letter-spacing:-0.06em;line-height:1;margin-top:46px"></div>
+      <div id="tagline" style="font-size:52px;margin-top:22px;color:#222">Telegram <span class="serif" style="font-size:64px;color:#e0385d">live chat</span> for WordPress</div>
+    </div>
+  </section>
+
+  <!-- ============ S3 DEMO ============ -->
+  <section class="scene" id="s3" style="background:#f3f2ee">
+    <div class="blob" id="s3b1" style="width:900px;height:900px;left:-300px;top:-300px;background:#2563eb;opacity:.18"></div>
+    <div class="blob" id="s3b2" style="width:800px;height:800px;right:-260px;bottom:-320px;background:#e0385d;opacity:.16"></div>
+    <div class="blob" id="s3b3" style="width:500px;height:500px;right:300px;top:-200px;background:#efbc2f;opacity:.18"></div>
+    <div id="cam" class="abs" style="inset:0;transform-origin:50% 50%">
+      <div class="browser" id="browser" style="left:320px;top:114px">
+        <div class="bbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
+          <div class="url">🔒&nbsp; chio.store/product/oversized-sweatshirt</div></div>
+        <div class="site" style="background-image:url(assets/site-product.png)"></div>
+        <div class="launcher btn-dark" id="dLauncher" style="right:28px;bottom:28px"><span>Chat with us</span>
+          <span class="arr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></span></div>
+        <div class="panel" id="dPanel" style="right:28px;bottom:28px">
+          <div class="phead"><div class="avatar">C</div><div><div class="ptitle">Chio care</div><div class="psub"><span class="dot"></span>Clara usually replies in minutes</div></div>
+            <div style="margin-left:auto;width:40px;height:40px;border-radius:10px" class="glass"></div></div>
+          <div class="plog" id="dLog">
+            <div class="b them">Hi! I’m Clara from the Chio studio. Looking for a size? 👋</div>
+            <div class="b me" id="dMine">Which size am I? I’m 175&nbsp;cm 🙂</div>
+            <div class="meta r" id="dMineMeta">Sent · just now</div>
+            <div class="b them" id="dReply">You’re a perfect S — it runs relaxed! 💙</div>
+            <div class="meta" id="dReplyMeta">Clara · now</div>
+          </div>
+          <div class="field"><span class="txt" id="dTyped"></span><span class="ph" id="dPh">Type your message…</span><span class="send btn-dark">Send</span></div>
+        </div>
+      </div>
+      <div class="phone" id="phone" style="left:1380px;top:100px">
+        <div class="screen">
+          <div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Chio Support Team</div><div style="font-size:15px;opacity:.85">Telegram group · 4 operators</div></div></div>
+          <div class="tgchat" id="tgchat">
+            <div id="tgIn">
+              <div class="tgmsg" id="tgMsg"><div class="who">Chio care bot</div>💬 C-7K2M9Q · Anna<br>🌐 /product/oversized-sweatshirt<br><br>Which size am I? I’m 175&nbsp;cm 🙂</div>
+              <div class="tgbtns"><div>Claim</div><div>Close</div></div>
+            </div>
+            <div class="tgmsg mine" id="tgMine"><div style="font-size:12px;color:#2563eb;border-left:3px solid #2563eb;padding-left:8px;margin-bottom:6px">Anna · Which size am I?</div>You’re a perfect S — it runs relaxed! 💙</div>
+          </div>
+          <div class="replybar" id="replybar"><div class="ln"></div><div><div style="color:#2563eb;font-weight:500">Reply to Anna</div><div style="color:#777">Which size am I? I’m 175 cm 🙂</div></div></div>
+          <div class="tginput"><div class="box" id="tgTyped"><span style="color:#999" id="tgPh">Message</span></div>
+            <div class="tgsend"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3 11.5 20 4l-4.5 16-4-6.5z"/></svg></div></div>
+          <div id="tapRipple" class="abs" style="width:80px;height:80px;border-radius:50%;background:rgba(37,99,235,.25);left:120px;top:560px"></div>
+        </div>
+      </div>
+      <div class="token" id="tok1" style="background:#2563eb"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></div>
+      <div class="token" id="tok2" style="background:#e0385d"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg></div>
+      <div id="trails"></div>
+      <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.5L9 19z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+    <div id="caption" class="abs" style="left:0;right:0;top:60px;text-align:center;font-size:80px;font-weight:500;letter-spacing:-0.04em;line-height:1.05">
+      <div id="cap1" style="display:inline-block;background:#fff;padding:14px 36px;border-radius:26px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)">Visitors chat on <span class="serif" style="color:#e0385d">your site.</span></div>
+    </div>
+    <div id="caption2" class="abs" style="left:0;right:0;bottom:70px;text-align:center;font-size:80px;font-weight:500;letter-spacing:-0.04em">
+      <div id="cap2" style="display:inline-block;background:#1c1c1c;color:#fff;padding:14px 36px;border-radius:26px">You reply in <span class="serif" style="color:#2aabee">Telegram.</span></div>
+    </div>
+    <div id="cap3wrap" class="abs" style="inset:0;display:flex;align-items:center;justify-content:center">
+      <div id="cap3" style="background:#109f55;color:#fff;font-size:96px;font-weight:500;letter-spacing:-0.045em;padding:26px 56px;border-radius:34px;box-shadow:0 40px 80px -30px rgba(16,159,85,.6)">Everything stays in <span class="serif">WordPress.</span></div>
+    </div>
+    <div id="wipe" class="abs" style="left:-30%;top:-30%;width:160%;height:160%;background:#e0385d;transform-origin:50% 50%"></div>
+  </section>
+
+  <!-- ============ S4 BREAK ============ -->
+  <section class="scene" id="s4" style="background:#e0385d;color:#fff">
+    <div class="abs hatch" style="inset:0;opacity:.35"></div>
+    <div class="center" id="brk" style="width:1600px;margin-left:-800px;margin-top:-220px;text-align:center;font-size:140px;font-weight:500;letter-spacing:-0.05em;line-height:1.05">
+      <div class="word" id="k1">One plugin.</div><br>
+      <div class="word serif" id="k2" style="font-size:160px">Every conversation.</div><br>
+      <div class="word" id="k3">Under control.</div>
+    </div>
+    <div id="iris" class="center" style="width:200px;height:200px;margin-left:-100px;margin-top:-100px;border-radius:50%;background:#0b0b0b"></div>
+  </section>
+
+  <!-- ============ S5 FEATURES ============ -->
+  <section class="scene" id="s5" style="background:#fbfaf7">
+    <div class="abs hatch" style="inset:0;opacity:.6"></div>
+    <div class="blob" id="fblob" style="width:900px;height:900px;right:-160px;top:40px;opacity:.28"></div>
+
+    <div class="feat" id="f1">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum" style="color:#2563eb">01 — ROUTING</div>
+        <div class="ftitle" style="margin-top:26px">Reply Mode<br>or <span class="serif" style="color:#2563eb">Topics.</span></div>
+        <div class="fdesc" style="margin-top:34px">Reply to the bot’s message, or give every conversation its own forum topic.</div></div>
+      <div class="card" id="f1a" style="left:800px;top:170px;width:360px;padding:26px;zoom:1.2">
+        <div style="font-size:18px;color:#6f6f6f;text-transform:uppercase;margin-bottom:16px">Reply Mode</div>
+        <div class="tgmsg" style="font-size:16px;max-width:none"><div class="who">Bot</div>💬 C-7K2M · Anna<br>Is it in stock?</div>
+        <div class="tgmsg mine" style="font-size:16px;margin-top:12px;max-width:none"><div style="font-size:12px;color:#2563eb;border-left:3px solid #2563eb;padding-left:8px;margin-bottom:4px">Reply · Anna</div>Yes — ships today! 🚚</div>
+      </div>
+      <div class="card" id="f1b" style="left:1180px;top:260px;width:380px;padding:26px;zoom:1.2">
+        <div style="font-size:18px;color:#6f6f6f;text-transform:uppercase;margin-bottom:16px">Topics Mode</div>
+        <div id="topics"></div>
+      </div>
+    </div>
+
+    <div class="feat" id="f2">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum" style="color:#109f55">02 — TEAM INBOX</div>
+        <div class="ftitle" style="margin-top:26px">A real inbox<br>in <span class="serif" style="color:#109f55">WordPress.</span></div>
+        <div class="fdesc" style="margin-top:34px">Claim, transfer, internal notes, canned replies, round-robin routing.</div></div>
+      <div class="abs" id="f2shot" style="left:960px;top:190px;width:920px;height:575px;border-radius:24px;overflow:hidden;box-shadow:0 50px 100px -40px rgba(0,0,0,.45);background:url(assets/admin-inbox.png) center/cover"></div>
+      <div id="f2chips"></div>
+    </div>
+
+    <div class="feat" id="f3">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum" style="color:#c48a00">03 — TARGETING</div>
+        <div class="ftitle" style="margin-top:26px">Say hello at<br>the <span class="serif" style="color:#e0a400">right moment.</span></div>
+        <div class="fdesc" style="margin-top:34px">Visual rules for pages, behaviour, WooCommerce, UTM and schedules — with frequency caps.</div></div>
+      <div class="card" id="f3card" style="left:1010px;top:230px;width:760px;padding:34px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:20px;text-transform:uppercase;color:#6f6f6f">When</div>
+        <div class="rule" id="r1"><div class="tick" style="background:#efbc2f">✓</div>URL matches <b style="font-weight:500">/pricing*</b></div>
+        <div class="rule" id="r2"><div class="tick" style="background:#efbc2f">✓</div>Visible for <b style="font-weight:500">15 seconds</b></div>
+        <div class="rule" id="r3"><div class="tick" style="background:#efbc2f">✓</div>Chat not opened yet</div>
+      </div>
+      <div class="abs" id="f3teaser" style="left:1250px;top:720px;background:#fff;border:1px solid #eee;border-radius:24px 24px 8px 24px;padding:22px 28px;font-size:28px;box-shadow:0 40px 80px -30px rgba(0,0,0,.35)">Questions about our plans? 👋</div>
+      <div class="launcher btn-dark abs" id="f3launch" style="left:1640px;top:850px"><span>Chat with us</span><span class="arr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></span></div>
+    </div>
+
+    <div class="feat" id="f4">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum" style="color:#109f55">04 — AVAILABILITY</div>
+        <div class="ftitle" style="margin-top:26px">Honest <span class="serif" style="color:#109f55">online</span><br>status.</div>
+        <div class="fdesc" style="margin-top:34px">Business hours, holidays and away mode. “Online” only when a real person is available.</div></div>
+      <div class="card" id="f4card" style="left:1000px;top:210px;width:780px;padding:36px">
+        <div id="hours"></div>
+        <div style="display:flex;gap:16px;margin-top:30px">
+          <div id="pillOn" style="display:flex;align-items:center;gap:12px;background:#effaf5;color:#0a6b3a;border-radius:999px;padding:16px 26px;font-size:28px;font-weight:500"><span style="width:14px;height:14px;border-radius:50%;background:#4ade80;display:block"></span>Online now</div>
+          <div id="pillOff" style="display:flex;align-items:center;gap:12px;background:#fff7e0;color:#8a6100;border-radius:999px;padding:16px 26px;font-size:28px;font-weight:500"><span style="width:14px;height:14px;border-radius:50%;background:#efbc2f;display:block"></span>Opens Mon 9:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat" id="f5">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum" style="color:#e0385d">05 — REPORTS</div>
+        <div class="ftitle" style="margin-top:26px">Know what<br><span class="serif" style="color:#e0385d">works.</span></div>
+        <div class="fdesc" style="margin-top:34px">First response, resolution time, queue wait, CSAT and automation conversion.</div></div>
+      <div class="card" id="f5card" style="left:1000px;top:190px;width:800px;height:640px;padding:36px">
+        <div id="bars" class="abs" style="left:40px;right:40px;bottom:40px;height:260px;display:flex;align-items:flex-end;gap:14px"></div>
+        <div class="kpi" style="left:40px;top:40px;width:340px"><b id="kpiA">0m 00s</b><span>Median first reply</span></div>
+        <div class="kpi" style="left:410px;top:40px;width:350px"><div id="stars" style="font-size:48px;letter-spacing:4px;color:#ddd">★★★★★</div><span>Customer satisfaction</span></div>
+        <div class="abs" style="right:40px;top:196px;font-size:15px;color:#999">Sample data</div>
+      </div>
+    </div>
+
+    <div class="feat" id="f6">
+      <div class="abs" style="left:160px;top:270px"><div class="fnum">06 — SECURITY</div>
+        <div class="ftitle" style="margin-top:26px">Private by<br><span class="serif" style="color:#2563eb">design.</span></div>
+        <div class="fdesc" style="margin-top:34px">Self-hosted. Your data lives in your WordPress database.</div></div>
+      <div class="abs" id="shield" style="left:1040px;top:250px;width:300px;height:360px">
+        <svg viewBox="0 0 100 120" class="ico"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#2aabee"/></linearGradient></defs>
+          <path d="M50 4 92 20v34c0 30-19 52-42 62C27 106 8 84 8 54V20z" fill="url(#sg)"/>
+          <rect x="33" y="52" width="34" height="28" rx="5" fill="#fff"/><path id="shackle" d="M39 52v-8a11 11 0 0 1 22 0v8" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <div class="abs" id="checks" style="left:1400px;top:250px;display:flex;flex-direction:column;gap:20px;font-size:32px"></div>
+    </div>
+
+    <div class="progress" id="prog"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  </section>
+
+  <!-- ============ S6 STATS ============ -->
+  <section class="scene" id="s6" style="background:#0b0b0b">
+    <div class="tile" id="t1" style="left:120px;top:280px;background:linear-gradient(160deg,#2563eb,#1a3fae)"><b>22<small style="font-size:60px"> KB</small></b><span>Lightweight widget. Zero external requests.</span></div>
+    <div class="tile" id="t2" style="left:560px;top:280px;background:linear-gradient(160deg,#e0385d,#a91c3f)"><b>RTL</b><span>Translation ready.<br><span style="font-size:44px">سلام! 👋</span></span></div>
+    <div class="tile" id="t3" style="left:1000px;top:280px;background:linear-gradient(160deg,#efbc2f,#d18f00);color:#1c1c1c"><b>5<small style="font-size:60px"> min</small></b><span>Guided Telegram setup.</span></div>
+    <div class="tile" id="t4" style="left:1440px;top:280px;background:linear-gradient(160deg,#109f55,#0a6b3a)"><b>$0</b><span>Monthly fees. No SaaS. Self-hosted.</span></div>
+  </section>
+
+  <!-- ============ S7 OUTRO ============ -->
+  <section class="scene hatch" id="s7" style="background-color:#fff">
+    <div class="blob" id="ob1" style="width:700px;height:700px;left:-200px;top:-200px;background:#2563eb;opacity:.25"></div>
+    <div class="blob" id="ob2" style="width:700px;height:700px;right:-200px;top:-150px;background:#e0385d;opacity:.22"></div>
+    <div class="blob" id="ob3" style="width:700px;height:700px;left:600px;bottom:-400px;background:#efbc2f;opacity:.25"></div>
+    <div class="center" id="outro" style="width:1600px;margin-left:-800px;margin-top:-300px;text-align:center">
+      <div id="oLogo" style="display:inline-flex;align-items:center;gap:30px">
+        <span class="btn-dark" style="width:132px;height:132px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg width="62" height="62" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></span>
+        <span style="font-size:170px;font-weight:500;letter-spacing:-0.06em">Televixo</span>
+      </div>
+      <div id="oTag" style="font-size:64px;font-weight:500;letter-spacing:-0.035em;margin-top:30px">Your website chat, answered in <span class="serif" style="color:#2aabee;font-size:76px">Telegram.</span></div>
+      <div id="oCta" class="btn-dark" style="display:inline-flex;align-items:center;gap:20px;height:110px;border-radius:999px;padding:0 14px 0 50px;font-size:40px;font-weight:500;margin-top:60px">Get Televixo now
+        <span class="arr" style="width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      <div id="oFoot" style="font-size:26px;color:#6f6f6f;margin-top:40px;text-transform:uppercase;letter-spacing:.02em">WordPress plugin · Self-hosted · No Telegram account needed for visitors</div>
+    </div>
+    <div id="confetti"></div>
+  </section>
+
+  <div class="grain" id="grain"></div>
+  <div class="flash" id="flash"></div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const P = (t, a, b) => clamp((t - a) / (b - a));
+const oc = (k) => 1 - Math.pow(1 - k, 3);
+const ox = (k) => (k >= 1 ? 1 : 1 - Math.pow(2, -10 * k));
+const io = (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+const ob = (k) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+const BEAT = 60 / 128;
+function S(el, o) {
+  if (typeof el === 'string') el = $(el);
+  if (!el) return;
+  let tr = '';
+  if (o.x != null || o.y != null) tr += `translate(${o.x || 0}px, ${o.y || 0}px) `;
+  if (o.rx != null) tr += `perspective(1600px) rotateX(${o.rx}deg) `;
+  if (o.ry != null) tr += `perspective(1600px) rotateY(${o.ry}deg) `;
+  if (o.r != null) tr += `rotate(${o.r}deg) `;
+  if (o.s != null) tr += `scale(${o.s}) `;
+  if (o.sx != null) tr += `scaleX(${o.sx}) `;
+  el.style.transform = tr;
+  if (o.o != null) { el.style.opacity = o.o; el.style.visibility = o.o <= 0.001 ? 'hidden' : 'visible'; }
+  if (o.blur != null) el.style.filter = o.blur > 0.05 ? `blur(${o.blur}px)` : 'none';
+  if (o.clip != null) el.style.clipPath = o.clip;
+}
+// Pop-in helper: appears at t0 with overshoot.
+const pop = (t, t0, d = .45) => ob(P(t, t0, t0 + d));
+const kickEnv = (t) => Math.exp(-((t % BEAT) / 0.11));
+const inDrop = (t) => (t >= 3.75 && t < 7.5) || (t >= 26.25 && t < 48.75) || (t >= 52.5 && t < 56.25);
+
+// ---------- build dynamic DOM ----------
+const RINGS = ['#e0385d', '#2563eb', '#efbc2f', '#109f55'];
+RINGS.forEach((c, i) => { const d = document.createElement('div'); d.className = 'center'; d.id = 'ring' + i; d.style.cssText = `width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;border:${26 - i * 4}px solid ${c}`; $('rings').appendChild(d); });
+'Televixo'.split('').forEach((ch, i) => { const s = document.createElement('span'); s.className = 'word'; s.id = 'lt' + i; s.textContent = ch; $('wordmark').appendChild(s); });
+[['C-7K2M · Anna', '#2563eb', '3'], ['C-9QX1 · Ben', '#e0385d', '1'], ['C-4HD8 · Sara', '#efbc2f', ''], ['C-2LMP · Omid', '#109f55', '2']].forEach(([name, c, n], i) => {
+  const d = document.createElement('div'); d.id = 'tp' + i;
+  d.style.cssText = 'display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f0f0f0;font-size:21px';
+  d.innerHTML = `<span style="width:40px;height:40px;border-radius:12px;background:${c};display:block;flex:none"></span><span style="flex:1">${name}</span>${n ? `<span style="background:#2563eb;color:#fff;border-radius:999px;min-width:28px;height:28px;font-size:15px;display:flex;align-items:center;justify-content:center">${n}</span>` : ''}`;
+  $('topics').appendChild(d);
+});
+[['Claim', '#109f55', 1000, 830], ['Transfer', '#2563eb', 1230, 860], ['Internal note', '#efbc2f', 1500, 820], ['Round-robin', '#e0385d', 1590, 140]].forEach(([l, c, x, y], i) => {
+  const d = document.createElement('div'); d.className = 'chip abs'; d.id = 'fc' + i; d.style.left = x + 'px'; d.style.top = y + 'px';
+  d.innerHTML = `<span style="width:14px;height:14px;border-radius:50%;background:${c};display:block"></span>${l}`; $('f2chips').appendChild(d);
+});
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+DAYS.forEach((d, i) => {
+  const row = document.createElement('div'); row.style.cssText = 'display:flex;align-items:center;gap:18px;margin-bottom:12px;font-size:22px';
+  const [a, b] = i < 5 ? [9, 18] : i === 5 ? [10, 15] : [0, 0];
+  row.innerHTML = `<span style="width:60px;color:#6f6f6f">${d}</span><span style="flex:1;height:24px;border-radius:12px;background:#f3f3f3;position:relative;display:block"><span id="hb${i}" style="position:absolute;left:${a / 24 * 100}%;width:${(b - a) / 24 * 100}%;top:0;bottom:0;border-radius:12px;background:${i < 5 ? '#109f55' : '#efbc2f'};transform-origin:0 50%;display:block"></span></span>`;
+  $('hours').appendChild(row);
+});
+const BARS = [38, 52, 46, 64, 58, 72, 66, 84, 78, 92, 88, 100];
+BARS.forEach((h, i) => { const b = document.createElement('div'); b.id = 'bar' + i; b.style.cssText = `flex:1;height:${h}%;border-radius:10px 10px 4px 4px;background:${i === BARS.length - 1 ? '#e0385d' : '#1c1c1c'};transform-origin:50% 100%`; $('bars').appendChild(b); });
+['Encrypted bot token', 'Signed webhooks', 'GDPR export & erase', 'No tracking. No SaaS.'].forEach((l, i) => {
+  const d = document.createElement('div'); d.id = 'ck' + i; d.style.cssText = 'display:flex;align-items:center;gap:18px';
+  d.innerHTML = `<span class="tick" style="background:#2563eb">✓</span>${l}`; $('checks').appendChild(d);
+});
+for (let i = 0; i < 14; i++) { const d = document.createElement('div'); d.className = 'trail'; d.id = 'tr' + i; $('trails').appendChild(d); }
+const CONF = [];
+const CC = ['#e0385d', '#2563eb', '#efbc2f', '#109f55', '#2aabee', '#1c1c1c'];
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < 90; i++) {
+  const d = document.createElement('div'); d.className = 'conf'; const w = 10 + rnd() * 16;
+  d.style.cssText = `width:${w}px;height:${w * (rnd() > .5 ? 1 : .45)}px;background:${CC[i % CC.length]};left:960px;top:540px`;
+  $('confetti').appendChild(d);
+  CONF.push({ el: d, a: rnd() * Math.PI * 2, v: 700 + rnd() * 900, spin: (rnd() - .5) * 1440 });
+}
+
+// ---------- scenes ----------
+function scene(id, t, a, b, fadeIn = 0, fadeOut = 0) {
+  const el = $(id);
+  const on = t >= a - fadeIn && t < b + fadeOut;
+  el.style.display = on ? 'block' : 'none';
+  return on;
+}
+
+function s1(t) {
+  if (!scene('s1', t, 0, 3.75)) return;
+  const words1 = ['w1', 'w2', 'w3', 'w4'], words2 = ['w5', 'w6', 'w7', 'w8'];
+  words1.forEach((w, i) => { const k = pop(t, i * BEAT, .4); S(w, { y: (1 - k) * 90, o: clamp(k * 1.5), blur: (1 - clamp(k)) * 12 }); });
+  const out1 = io(P(t, 1.65, 1.875));
+  S('s1a', { y: -out1 * 160, o: 1 - out1, blur: out1 * 20 });
+  words2.forEach((w, i) => { const k = pop(t, 1.875 + i * BEAT, .4); S(w, { y: (1 - k) * 90, o: clamp(k * 1.5), blur: (1 - clamp(k)) * 12 }); });
+  const zoom = io(P(t, 3.3, 3.75));
+  S('s1b', { s: 1 + zoom * 2.6, o: 1 - zoom, blur: zoom * 18 });
+  S('s1b1', { x: Math.sin(t * 1.2) * 60, y: Math.cos(t) * 40, s: 1 + t * 0.06 });
+  S('s1b2', { x: Math.cos(t * 1.1) * 70, y: Math.sin(t * .9) * 50, s: 1 + t * 0.05 });
+}
+
+function s2(t) {
+  if (!scene('s2', t, 3.75, 7.5)) return;
+  const lt = t - 3.75;
+  RINGS.forEach((_, i) => { const k = ox(P(lt, i * 0.06, 1.4 + i * 0.1)); S('ring' + i, { s: k * (14 + i * 3), o: 1 - k }); });
+  const pk = ob(P(lt, 0, .5));
+  const bump = inDrop(t) ? kickEnv(t) * 0.025 : 0;
+  S('logoPill', { s: pk * (1 + bump), o: clamp(pk * 2), r: (1 - pk) * -8 });
+  for (let i = 0; i < 8; i++) { const k = ob(P(lt, .25 + i * .045, .7 + i * .045)); S('lt' + i, { y: (1 - k) * 120, o: clamp(k * 2), r: (1 - k) * 14 }); }
+  const tk = oc(P(lt, .9, 1.5));
+  S('tagline', { y: (1 - tk) * 40, o: tk });
+  const out = io(P(t, 7.15, 7.5));
+  S('logo', { s: 1 - out * .25, x: -out * 900, o: 1 - out, blur: out * 10 });
+}
+
+function bez(p0, p1, p2, k) { const a = (1 - k) * (1 - k), b = 2 * (1 - k) * k, c = k * k; return [a * p0[0] + b * p1[0] + c * p2[0], a * p0[1] + b * p1[1] + c * p2[1]]; }
+
+function s3(t) {
+  if (!scene('s3', t, 7.5, 22.5)) return;
+  const lt = t;
+  // background drift
+  S('s3b1', { x: Math.sin(t * .6) * 80, y: Math.cos(t * .5) * 60 });
+  S('s3b2', { x: Math.cos(t * .5) * 80, y: Math.sin(t * .7) * 60 });
+  S('s3b3', { x: Math.sin(t * .8) * 60 });
+  // browser enters
+  const be = oc(P(t, 7.5, 8.3));
+  // camera: split screen from 12.4, then zoom back out for captions at 18.75
+  const split = io(P(t, 12.4, 13.1));
+  const outz = io(P(t, 18.6, 19.3));
+  S('browser', { y: (1 - be) * 900 + lerp(0, -360, split), rx: (1 - be) * 28, s: lerp(.8, .74, split) * lerp(1, .92, outz), o: be });
+  S('phone', { y: lerp(900, 0, split), r: lerp(8, 0, split), s: .78 * lerp(1, .94, outz), o: split });
+  // launcher & panel
+  const lp = pop(t, 8.44, .5);
+  const panelOpen = ob(P(t, 9.45, 9.95));
+  S('dLauncher', { s: lp * (1 - clamp(panelOpen * 1.2)), o: clamp(lp * 2) * (1 - clamp(panelOpen * 1.5)) });
+  S('dPanel', { s: lerp(.2, 1, panelOpen), o: clamp(panelOpen * 2) });
+  // cursor path to launcher (positions in stage coordinates)
+  const ck = io(P(t, 8.5, 9.3));
+  const cx = lerp(540, 948, ck), cy = lerp(1400, 1156, ck);
+  const press = t > 9.33 && t < 9.5 ? .82 : 1;
+  S('cursor', { x: cx, y: cy, s: press, o: P(t, 8.4, 8.6) * (1 - P(t, 10, 10.3)) });
+  // typing in the widget
+  const msg = 'Which size am I? I’m 175 cm 🙂';
+  const chars = Math.floor(clamp((t - 10.3) / 1.7) * [...msg].length);
+  const sent = t >= 12.19;
+  $('dTyped').innerHTML = sent ? '' : [...msg].slice(0, chars).join('') + (t > 10.1 && Math.floor(t * 3) % 2 === 0 ? '<span class="caret"></span>' : '');
+  $('dPh').style.display = (chars > 0 && !sent) ? 'none' : 'block';
+  $('dTyped').style.display = (chars > 0 && !sent) ? 'block' : 'none';
+  const mineK = ob(P(t, 12.19, 12.55));
+  S('dMine', { s: lerp(.6, 1, mineK), o: clamp(mineK * 2), y: (1 - mineK) * 20 });
+  S('dMineMeta', { o: P(t, 12.4, 12.7) });
+  const repK = ob(P(t, 18.28, 18.7));
+  S('dReply', { s: lerp(.6, 1, repK), o: clamp(repK * 2), y: (1 - repK) * 20 });
+  S('dReplyMeta', { o: P(t, 18.5, 18.8) });
+  $('dMine').style.transformOrigin = '100% 100%';
+  $('dReply').style.transformOrigin = '0% 100%';
+  // tokens fly website -> phone and back (stage coords, after the split)
+  const A = [850, 760], B = [540, 1500], C1 = [1000, 1150];
+  const k1 = io(P(t, 12.4, 13.1));
+  const k2 = io(P(t, 17.5, 18.28));
+  const p1 = bez(A, C1, B, k1), p2 = bez([610, 1590], [80, 1150], [760, 690], k2);
+  S('tok1', { x: p1[0] - 37, y: p1[1] - 37, s: Math.sin(Math.PI * k1) * .4 + .8, o: k1 > 0 && k1 < 1 ? 1 : 0 });
+  S('tok2', { x: p2[0] - 37, y: p2[1] - 37, s: Math.sin(Math.PI * k2) * .4 + .8, o: k2 > 0 && k2 < 1 ? 1 : 0 });
+  for (let i = 0; i < 14; i++) {
+    const lag = i * 0.022;
+    const a1 = io(P(t - lag, 12.4, 13.1)), a2 = io(P(t - lag, 17.5, 18.28));
+    const use2 = t > 15;
+    const kk = use2 ? a2 : a1, pp = use2 ? bez([610, 1590], [80, 1150], [760, 690], a2) : bez(A, C1, B, a1);
+    const vis = kk > 0 && kk < 1 && (use2 ? k2 : k1) < 1 ? (1 - i / 14) * .8 : 0;
+    const el = $('tr' + i); el.style.background = use2 ? '#e0385d' : '#2563eb';
+    S(el, { x: pp[0] - 9, y: pp[1] - 9, s: 1 - i / 18, o: vis });
+  }
+  // phone content
+  const inK = ob(P(t, 13.13, 13.55));
+  S('tgIn', { y: (1 - inK) * 60, s: lerp(.85, 1, inK), o: clamp(inK * 2) });
+  const tap = P(t, 14.5, 15);
+  S('tapRipple', { s: .3 + tap * 2.4, o: tap > 0 && tap < 1 ? (1 - tap) : 0 });
+  S('replybar', { y: (1 - oc(P(t, 14.6, 14.95))) * 60, o: P(t, 14.6, 14.8) * (1 - P(t, 17.34, 17.5)) });
+  const reply = 'You’re a perfect S — it runs relaxed! 💙';
+  const rc = Math.floor(clamp((t - 15) / 2.1) * [...reply].length);
+  const rsent = t >= 17.34;
+  $('tgTyped').innerHTML = rsent || rc === 0 ? '<span style="color:#999">Message</span>' : [...reply].slice(0, rc).join('') + (Math.floor(t * 3) % 2 ? '<span class="caret"></span>' : '');
+  const mk = ob(P(t, 17.34, 17.7));
+  S('tgMine', { s: lerp(.7, 1, mk), o: clamp(mk * 2), y: (1 - mk) * 30 });
+  $('tgMine').style.display = t >= 17.34 ? 'block' : 'none';
+  $('tgMine').style.transformOrigin = '100% 100%';
+  // captions
+  const c1 = ob(P(t, 18.75, 19.15)), c2 = ob(P(t, 19.69, 20.1));
+  const capOut = io(P(t, 20.4, 20.7));
+  S('cap1', { y: (1 - c1) * -120, s: lerp(.8, 1, c1), o: clamp(c1 * 2) * (1 - capOut) });
+  S('cap2', { y: (1 - c2) * 120, s: lerp(.8, 1, c2), o: clamp(c2 * 2) * (1 - capOut) });
+  const c3 = ob(P(t, 20.63, 21.1));
+  S('cap3', { s: c3 * (1 + (t > 20.63 ? kickEnv(t) * .02 : 0)), r: (1 - c3) * -6, o: clamp(c3 * 2) });
+  // camera: zoom on the widget while the visitor types, on the phone while the operator replies
+  const zw = io(P(t, 9.2, 10.0)) * (1 - io(P(t, 12.3, 13.0)));
+  const zp = io(P(t, 13.6, 14.3)) * (1 - io(P(t, 17.3, 17.9)));
+  const zr = io(P(t, 17.9, 18.4)) * (1 - io(P(t, 18.65, 19.1)));
+  let cs = 1, ctx = 0, cty = 0;
+  const focus = (fx, fy, z, k) => { const sc = lerp(1, z, k); return [sc, lerp(0, 540 - fx * sc, k), lerp(0, 940 - fy * sc, k)]; };
+  if (zw > 0) [cs, ctx, cty] = focus(878, 1009, 2.0, zw);
+  else if (zp > 0) [cs, ctx, cty] = focus(540, 1430, 1.35, zp);
+  else if (zr > 0) [cs, ctx, cty] = focus(850, 650, 1.7, zr);
+  const fin = io(P(t, 20.6, 21.2));
+  $('cam').style.transformOrigin = '0 0';
+  $('cam').style.transform = `translate(${ctx}px, ${cty + outz * 20}px) scale(${cs * (1 - fin * .08)})`;
+  $('cam').style.filter = fin > .02 ? `blur(${fin * 6}px)` : 'none';
+  // wipe to break
+  const w = io(P(t, 21.95, 22.5));
+  S('wipe', { x: lerp(-2600, 0, w), r: -18, o: w > 0 ? 1 : 0 });
+}
+
+function s4(t) {
+  if (!scene('s4', t, 22.5, 26.25)) return;
+  ['k1', 'k2', 'k3'].forEach((k, i) => {
+    const a = 22.6 + i * 0.94;
+    const e = ob(P(t, a, a + .5));
+    S(k, { y: (1 - e) * 80, o: clamp(e * 2), blur: (1 - clamp(e)) * 10 });
+  });
+  const suck = io(P(t, 25.4, 26.1));
+  S('brk', { s: 1 - suck * .6 + P(t, 22.5, 25.4) * .06, o: 1 - suck, blur: suck * 14 });
+  const iris = io(P(t, 25.7, 26.25));
+  S('iris', { s: iris * 22, o: iris > 0 ? 1 : 0 });
+}
+
+const FEAT = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'];
+const FCOL = ['#2563eb', '#109f55', '#efbc2f', '#4ade80', '#e0385d', '#2aabee'];
+function s5(t) {
+  if (!scene('s5', t, 26.25, 48.75)) return;
+  const lt = t - 26.25, D = 3.75;
+  const idx = Math.min(5, Math.floor(lt / D));
+  const bump = kickEnv(t) * .03;
+  $('fblob').style.background = FCOL[idx];
+  S('fblob', { s: 1 + bump * 2, x: Math.sin(t) * 40 });
+  FEAT.forEach((f, i) => {
+    const a = i * D, inK = oc(P(lt, a, a + .55)), outK = io(P(lt, a + D - .3, a + D));
+    const vis = lt >= a - .01 && lt < a + D;
+    $(f).style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    S(f, { x: (1 - inK) * 520 - outK * 520, o: clamp(inK * 1.6) * (1 - outK) });
+  });
+  // progress
+  [...$('prog').children].forEach((el, i) => { S(el.firstChild, { sx: clamp((lt - i * D) / D) }); });
+  // f1
+  const f1 = lt; S('f1a', { y: (1 - ob(P(f1, .2, .7))) * 200, r: -4 * (1 - ob(P(f1, .2, .7))) - 2 });
+  S('f1b', { y: (1 - ob(P(f1, .45, .95))) * 200, r: 3 });
+  for (let i = 0; i < 4; i++) { const k = ob(P(f1, .8 + i * .25, 1.2 + i * .25)); S('tp' + i, { x: (1 - k) * 60, o: clamp(k * 2) }); }
+  // f2
+  const f2 = lt - D;
+  const z = oc(P(f2, 0, 3.5));
+  S('f2shot', { ry: lerp(-18, -6, z), s: lerp(.9, 1.02, z), y: (1 - oc(P(f2, 0, .6))) * 120 });
+  for (let i = 0; i < 4; i++) { const k = ob(P(f2, .6 + i * .32, 1.0 + i * .32)); S('fc' + i, { s: k, o: clamp(k * 2), y: Math.sin(t * 2 + i) * 6 }); }
+  // f3
+  const f3 = lt - 2 * D;
+  S('f3card', { y: (1 - ob(P(f3, .15, .65))) * 160 });
+  ['r1', 'r2', 'r3'].forEach((r, i) => { const k = ob(P(f3, .5 + i * .35, .9 + i * .35)); S(r, { x: (1 - k) * 80, o: clamp(k * 2) }); const tick = $(r).firstChild; S(tick, { s: ob(P(f3, .7 + i * .35, 1.05 + i * .35)) }); });
+  const tz = ob(P(f3, 1.85, 2.3));
+  S('f3teaser', { s: tz, o: clamp(tz * 2), y: Math.sin(t * 3) * 4 });
+  $('f3teaser').style.transformOrigin = '100% 100%';
+  S('f3launch', { s: ob(P(f3, 1.55, 1.95)) * (1 + (f3 > 2.85 && f3 < 3.2 ? Math.sin((f3 - 2.85) / .35 * Math.PI) * .08 : 0)) });
+  // f4
+  const f4 = lt - 3 * D;
+  S('f4card', { y: (1 - ob(P(f4, .1, .6))) * 160 });
+  for (let i = 0; i < 7; i++) S('hb' + i, { sx: oc(P(f4, .4 + i * .08, .9 + i * .08)) });
+  const swap = P(f4, 2.1, 2.4);
+  S('pillOn', { s: ob(P(f4, 1.0, 1.4)) * (1 - swap * .2), o: 1 - swap * .55 });
+  S('pillOff', { s: ob(P(f4, 2.1, 2.5)), o: clamp(ob(P(f4, 2.1, 2.5)) * 2) });
+  // f5
+  const f5 = lt - 4 * D;
+  S('f5card', { y: (1 - ob(P(f5, .1, .6))) * 160 });
+  BARS.forEach((_, i) => S('bar' + i, { s: 1, sx: 1, y: 0, o: 1, clip: `inset(${(1 - oc(P(f5, .5 + i * .07, 1.1 + i * .07))) * 100}% 0 0 0)` }));
+  const sec = Math.round(oc(P(f5, .5, 2)) * 102);
+  $('kpiA').textContent = `${Math.floor(sec / 60)}m ${String(sec % 60).padStart(2, '0')}s`;
+  const stars = Math.round(oc(P(f5, .9, 2.2)) * 5);
+  $('stars').innerHTML = `<span style="color:#efbc2f">${'★'.repeat(stars)}</span>${'★'.repeat(5 - stars)}`;
+  // f6
+  const f6 = lt - 5 * D;
+  const sh = ob(P(f6, .1, .6));
+  S('shield', { s: sh, r: (1 - sh) * -20 });
+  const lock = io(P(f6, 1.6, 1.9));
+  S('shackle', { y: (1 - lock) * -10 });
+  for (let i = 0; i < 4; i++) { const k = ob(P(f6, .5 + i * .3, .9 + i * .3)); S('ck' + i, { x: (1 - k) * 80, o: clamp(k * 2) }); }
+}
+
+function s6(t) {
+  if (!scene('s6', t, 48.75, 52.5)) return;
+  ['t1', 't2', 't3', 't4'].forEach((id, i) => {
+    const a = 48.75 + i * 0.9375;
+    const k = ob(P(t, a, a + .45));
+    S(id, { y: (1 - k) * 600, r: (1 - k) * (i % 2 ? 12 : -12), s: lerp(.7, 1, k) * (1 + kickEnv(t) * .015), o: clamp(k * 3) });
+  });
+  const out = io(P(t, 52.1, 52.5));
+  S('s6', {});
+  ['t1', 't2', 't3', 't4'].forEach((id) => { if (out > 0) S(id, { s: 1 - out * .3, o: 1 - out, y: -out * 200 }); });
+}
+
+function s7(t) {
+  if (!scene('s7', t, 52.5, 60)) return;
+  const lt = t - 52.5;
+  ['ob1', 'ob2', 'ob3'].forEach((b, i) => S(b, { x: Math.sin(t * .7 + i) * 80, y: Math.cos(t * .6 + i) * 60, s: 1 + (inDrop(t) ? kickEnv(t) * .05 : 0) }));
+  const lg = ob(P(lt, 0, .6));
+  S('oLogo', { s: lerp(.6, 1, lg) * (1 + (inDrop(t) ? kickEnv(t) * .015 : 0)), o: clamp(lg * 2), blur: (1 - clamp(lg)) * 12 });
+  const tg = oc(P(lt, .5, 1.1));
+  S('oTag', { y: (1 - tg) * 50, o: tg });
+  const cta = ob(P(lt, 1.88, 2.35));
+  const pulse = t > 56.25 ? 1 + Math.sin((t - 56.25) * 5) * .025 * Math.exp(-(t - 56.25) * .6) : 1;
+  S('oCta', { s: cta * pulse, o: clamp(cta * 2) });
+  S('oFoot', { o: oc(P(lt, 2.4, 3)) });
+  // finale confetti at 56.25
+  const ft = t - 56.25;
+  CONF.forEach((c) => {
+    if (ft < 0) { S(c.el, { o: 0 }); return; }
+    const x = Math.cos(c.a) * c.v * ft, y = Math.sin(c.a) * c.v * ft + 600 * ft * ft;
+    S(c.el, { x, y, r: c.spin * ft, o: clamp(1 - ft / 3.2) });
+  });
+  const end = io(P(t, 59.3, 60));
+  S('outro', { o: 1 - end });
+}
+
+function render(t) {
+  // camera shake on impacts
+  let sx = 0, sy = 0;
+  for (const it of [3.75, 26.25, 52.5, 56.25]) {
+    const d = t - it;
+    if (d >= 0 && d < .45) { const a = 14 * Math.exp(-d * 9); sx += Math.sin(d * 90) * a; sy += Math.cos(d * 70) * a; }
+  }
+  $('stage').style.transform = `translate(${sx}px, ${sy}px)`;
+  s1(t); s2(t); s3(t); s4(t); s5(t); s6(t); s7(t);
+  // white flash on impacts
+  let f = 0;
+  for (const it of [3.75, 26.25, 52.5]) { const d = t - it; if (d >= 0 && d < .35) f = Math.max(f, (1 - d / .35) * .85); }
+  const d2 = t - 56.25; if (d2 >= 0 && d2 < .5) f = Math.max(f, (1 - d2 / .5) * .6);
+  $('flash').style.opacity = f;
+  $('flash').style.background = t >= 26.25 && t < 26.6 ? '#000' : '#fff';
+  $('grain').style.transform = `translate(${(Math.floor(t * 24) * 37) % 200}px, ${(Math.floor(t * 24) * 53) % 200}px)`;
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => 0))));
+render(0);
+</script>
+</body>
+</html>
