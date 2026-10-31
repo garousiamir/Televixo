@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Televixo – Telegram Live Chat for WordPress</title>
+<meta name="description" content="Self-hosted live chat for WordPress. Visitors chat on your site without a Telegram account; your team answers in Telegram or the WordPress inbox.">
+<meta property="og:title" content="Televixo – Telegram Live Chat for WordPress">
+<meta property="og:description" content="Visitors chat on your site. Your team answers in Telegram.">
+<meta property="og:image" content="assets/og-image.jpg">
+<link rel="icon" href="assets/favicon.png">
+<style>
+
+
+@font-face { font-family: "Hanken"; font-weight: 400; font-display: swap; src: url(assets/hanken-400.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 500; font-display: swap; src: url(assets/hanken-500.woff2) format("woff2"); }
+@font-face { font-family: "Serif"; font-style: italic; font-display: swap; src: url(assets/serif-italic.woff2) format("woff2"); }
+:root { --ink:#000; --dark:#1c1c1c; --chip:#f6f6f6; --line:#eee; --pink:#e0385d; --cobalt:#2563eb; --sky:#2aabee; --amber:#efbc2f; --green:#109f55; --lime:#4ade80; --cream:#fbfaf7; --mute:#555; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: "Hanken", system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); letter-spacing: -0.016em; -webkit-font-smoothing: antialiased; line-height: 1.5; overflow-x: hidden; }
+a { color: inherit; }
+img, video { max-width: 100%; height: auto; display: block; }
+.serif { font-family: "Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+.wrap { width: min(1220px, 100% - 32px); margin: 0 auto; }
+.hatch { background-image: repeating-linear-gradient(120deg, rgba(0,0,0,.04) 0 4.2px, transparent 4.2px 7.3px); }
+.btn { display: inline-flex; align-items: center; gap: 12px; height: 54px; padding: 0 8px 0 26px; border-radius: 999px; font-size: 17px; font-weight: 500; text-decoration: none; transition: filter .15s ease, transform .15s ease; white-space: nowrap; }
+.btn:active { transform: translateY(1px); }
+.btn-dark { background: linear-gradient(180deg,#333 0%,#111 100%); border: 1px solid #000; box-shadow: inset -2px -4px 4px #000, 0 1px 2px rgba(0,0,0,.08); color: #fff; }
+.btn-dark:hover { filter: brightness(1.25); }
+.btn .arr { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg,#292929,#393939); border: .8px solid #000; box-shadow: inset -.64px -1.2px 0 rgba(255,255,255,.25), inset 2.4px 3.2px 3.2px rgba(0,0,0,.13); }
+.btn-ghost { background: #fff; border: 1px solid #e0e0e0; padding: 0 26px; }
+.btn-ghost:hover { background: #f7f7f7; }
+:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border-radius: 10px; border: 1px solid #e0e0e0; background: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 0; color: #222; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+.eyebrow { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .03em; }
+h1, h2, h3 { font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* nav */
+nav { position: sticky; top: 12px; z-index: 20; margin-top: 12px; }
+.navbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: rgba(28,28,28,.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; border-radius: 22px; padding: 10px 10px 10px 20px; box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 12px 32px -12px rgba(0,0,0,.35); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 500; letter-spacing: -0.04em; text-decoration: none; }
+.brand .mark { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(180deg,#3a3a3a,#111); display: flex; align-items: center; justify-content: center; border: 1px solid #000; }
+.navlinks { display: flex; gap: 6px; }
+.navlinks a { text-decoration: none; padding: 9px 14px; border-radius: 12px; font-size: 15px; color: #d6d6d6; }
+.navlinks a:hover { background: rgba(255,255,255,.08); color: #fff; }
+.navbar .btn { height: 44px; font-size: 15px; padding: 0 6px 0 18px; background: #fff; color: #000; border: 0; box-shadow: none; }
+.navbar .btn .arr { width: 32px; height: 32px; }
+
+/* hero */
+.hero { position: relative; padding: 88px 0 72px; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; position: relative; }
+.hero h1 { font-size: clamp(44px, 5vw, 74px); }
+.hero h1 .serif { color: var(--sky); font-size: 1.12em; }
+.lead { font-size: clamp(18px, 1.6vw, 22px); color: #444; margin: 26px 0 32px; max-width: 560px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.trust { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
+.stage { position: relative; height: 560px; }
+.stage .site { position: absolute; left: 0; top: 30px; width: 88%; aspect-ratio: 16/10.5; border-radius: 18px; overflow: hidden; background: #fff url(assets/site-product.jpg) left 0 top 34px / 100% auto no-repeat; box-shadow: 0 50px 100px -40px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.06); }
+.stage .site::before { content: ""; position: absolute; inset: 0 0 auto; height: 34px; background: #f3f3f3 radial-gradient(circle at 18px 17px, #ff5f57 5px, transparent 5.5px), radial-gradient(circle at 36px 17px, #febc2e 5px, transparent 5.5px), radial-gradient(circle at 54px 17px, #28c840 5px, transparent 5.5px); border-bottom: 1px solid #e6e6e6; }
+.panel { position: absolute; left: 6%; bottom: 0; width: 320px; background: #fff; border: 1px solid #eee; border-radius: 24px; box-shadow: 0 32px 64px -24px rgba(0,0,0,.35); overflow: hidden; }
+.phead { background: #1c1c1c; color: #fff; padding: 14px 18px; border-radius: 0 0 24px 24px; display: flex; align-items: center; gap: 12px; }
+.avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg,#f8c9a0,#e0385d); display: flex; align-items: center; justify-content: center; font-weight: 500; color: #fff; flex: none; }
+.ptitle { font-size: 15px; font-weight: 500; line-height: 1.2; } .psub { font-size: 12px; color: #a0a0a0; display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+.plog { padding: 16px 14px 8px; display: flex; flex-direction: column; gap: 9px; min-height: 230px; }
+.b { max-width: 84%; padding: 11px 15px; border-radius: 16px; font-size: 14px; line-height: 20px; opacity: 0; transform: translateY(10px) scale(.96); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1.2); }
+.b.show { opacity: 1; transform: none; }
+.b.them { background: #f6f6f6; border-bottom-left-radius: 6px; align-self: flex-start; transform-origin: 0 100%; }
+.b.me { background: #1c1c1c; color: #fff; border-bottom-right-radius: 6px; align-self: flex-end; transform-origin: 100% 100%; }
+.typing { display: none; gap: 4px; padding: 14px; border-radius: 16px; background: #f6f6f6; align-self: flex-start; }
+.typing.show { display: inline-flex; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: #b5b5b5; animation: bounce 1s infinite; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes bounce { 0%,100% { transform: translateY(-25%); } 50% { transform: none; } }
+.field { margin: 0 12px 12px; height: 46px; border: 1px solid #eee; border-radius: 32px; display: flex; align-items: center; padding: 0 7px 0 16px; gap: 8px; font-size: 14px; color: #8a8a8a; }
+.field span:first-child { flex: 1; } .send { height: 32px; padding: 0 15px; border-radius: 999px; font-size: 12px; font-weight: 500; display: flex; align-items: center; }
+.phone { position: absolute; right: 0; top: 40px; width: 220px; height: 450px; border-radius: 40px; background: #111; padding: 9px; box-shadow: 0 40px 90px -30px rgba(0,0,0,.55), inset 0 0 0 2px #333; }
+.screen { position: relative; height: 100%; border-radius: 32px; overflow: hidden; background: #e9eef3; }
+.tgbar { height: 78px; background: linear-gradient(135deg,#2563eb,#2aabee); color: #fff; padding: 34px 16px 0; font-size: 13px; line-height: 1.2; }
+.tgbar b { display: block; font-size: 14px; font-weight: 500; }
+.tgchat { position: absolute; top: 78px; left: 0; right: 0; bottom: 52px; padding: 10px; display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; }
+.tg { background: #fff; border-radius: 13px 13px 13px 5px; padding: 8px 10px; font-size: 11.5px; line-height: 15px; box-shadow: 0 1px 1px rgba(0,0,0,.08); align-self: flex-start; max-width: 95%; opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .35s; }
+.tg.show { opacity: 1; transform: none; }
+.tg .who { color: #2563eb; font-weight: 500; }
+.tg.mine { background: #e5f9ea; border-radius: 13px 13px 5px 13px; align-self: flex-end; }
+.tginput { position: absolute; left: 0; right: 0; bottom: 0; height: 52px; background: #fff; display: flex; align-items: center; padding: 0 10px 8px; gap: 8px; font-size: 12px; color: #999; }
+.tginput div { flex: 1; height: 32px; border-radius: 16px; background: #f1f3f5; display: flex; align-items: center; padding: 0 12px; }
+
+/* sections */
+section { position: relative; }
+.sec { padding: 96px 0; }
+.sec-head { max-width: 760px; margin-bottom: 52px; }
+.sec-head h2 { font-size: clamp(40px, 5vw, 68px); margin-top: 14px; }
+.sec-head p { font-size: 20px; color: var(--mute); margin-top: 18px; }
+.video { border-radius: 28px; overflow: hidden; background: #000; box-shadow: 0 50px 100px -40px rgba(0,0,0,.5); aspect-ratio: 16/9; }
+.video video { width: 100%; height: 100%; object-fit: cover; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.step { background: #fff; border: 1px solid #ececec; border-radius: 26px; padding: 32px; }
+.step .n { width: 50px; height: 50px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 20px; }
+.step h3 { font-size: 28px; margin: 24px 0 10px; letter-spacing: -0.03em; line-height: 1.1; }
+.step p { color: var(--mute); font-size: 17px; }
+.truth { margin-top: 20px; background: #1c1c1c; color: #fff; border-radius: 26px; padding: 30px 36px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.truth b { font-size: 26px; font-weight: 500; letter-spacing: -0.03em; } .truth span { color: #a8a8a8; font-size: 17px; flex: 1; min-width: 260px; }
+.row { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: center; margin-bottom: 110px; }
+.row:nth-child(even) { grid-template-columns: 1.25fr 1fr; }
+.row:nth-child(even) .copy { order: 2; }
+.row h3 { font-size: clamp(36px, 4vw, 56px); margin: 14px 0 18px; }
+.row p { font-size: 19px; color: var(--mute); }
+.ticks { list-style: none; margin-top: 24px; display: grid; gap: 12px; font-size: 17px; }
+.ticks li { display: flex; gap: 12px; align-items: center; }
+.ticks li::before { content: "✓"; width: 26px; height: 26px; border-radius: 50%; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center; background: var(--c, #000); flex: none; }
+.shot { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 50px 100px -40px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.06); }
+.shot .bar { height: 36px; background: #f3f3f3 radial-gradient(circle at 18px 18px, #ff5f57 5px, transparent 5.5px), radial-gradient(circle at 36px 18px, #febc2e 5px, transparent 5.5px), radial-gradient(circle at 54px 18px, #28c840 5px, transparent 5.5px); border-bottom: 1px solid #e6e6e6; }
+.dark { background: #0b0b0b; color: #fff; overflow: hidden; }
+.dark .sec-head p { color: #b0b0b0; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.cards div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 28px; }
+.cards b { font-size: 22px; font-weight: 500; display: block; letter-spacing: -0.02em; }
+.cards span { color: #b8b8b8; font-size: 16px; display: block; margin-top: 8px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.grid4 div { background: #fff; border: 1px solid #ececec; border-radius: 20px; padding: 20px 22px; display: flex; gap: 12px; }
+.grid4 i { width: 11px; height: 11px; border-radius: 50%; flex: none; margin-top: 7px; }
+.grid4 b { font-weight: 500; font-size: 17px; display: block; } .grid4 small { color: #666; font-size: 14px; }
+.req { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.faq { max-width: 860px; }
+.faq details { border-bottom: 1px solid #e6e6e6; padding: 22px 0; }
+.faq summary { font-size: 21px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; letter-spacing: -0.02em; }
+.faq summary::after { content: "+"; font-size: 26px; line-height: 1; color: #888; }
+.faq details[open] summary::after { content: "–"; }
+.faq p { color: var(--mute); font-size: 17px; margin-top: 12px; }
+.final { text-align: center; padding: 110px 0; overflow: hidden; }
+.final h2 { font-size: clamp(44px, 6vw, 84px); }
+.final p { font-size: 20px; color: var(--mute); margin: 20px auto 34px; max-width: 560px; }
+footer { padding: 34px 0 50px; color: #777; font-size: 14px; border-top: 1px solid #ececec; }
+footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 980px) {
+  .hero-grid, .row, .row:nth-child(even) { grid-template-columns: 1fr; }
+  .row:nth-child(even) .copy { order: 0; }
+  .stage { height: 520px; max-width: 620px; }
+  .steps, .cards { grid-template-columns: 1fr; }
+  .grid4 { grid-template-columns: repeat(2, 1fr); }
+  .navlinks { display: none; }
+}
+@media (max-width: 560px) {
+  .stage { height: 470px; }
+  .panel { left: auto; }
+  .stage .site { width: 100%; }
+  .panel { right: 4%; width: 290px; }
+  .phone { display: none; }
+  .grid4 { grid-template-columns: 1fr; }
+  .sec { padding: 70px 0; }
+  .navbar .btn span:first-child { display: none; }
+  .navbar .btn { padding: 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .b, .tg { transition: none; }
+  .typing i { animation: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="wrap"><nav aria-label="Main">
+  <div class="navbar">
+    <a class="brand" href="#top"><span class="mark"><svg width="18" height="18" style="color:#fff"><use href="#chat"/></svg></span>Televixo</a>
+    <div class="navlinks"><a href="#video">Video</a><a href="#how">How it works</a><a href="#features">Features</a><a href="#faq">FAQ</a></div>
+    <a class="btn buy" href="#get"><span>Get Televixo</span><span class="arr" style="background:#111;border:0"><svg width="14" height="14" style="color:#fff"><use href="#arrow"/></svg></span></a>
+  </div>
+</nav></div>
+
+<main id="top">
+<header class="hero hatch">
+  <div class="blob" style="width:700px;height:700px;left:-280px;top:-300px;background:#2563eb;opacity:.2"></div>
+  <div class="blob" style="width:600px;height:600px;right:-200px;bottom:-280px;background:#e0385d;opacity:.18"></div>
+  <div class="blob" style="width:420px;height:420px;right:30%;top:-220px;background:#efbc2f;opacity:.2"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chip"><i style="background:#4ade80"></i>WordPress plugin</span>
+      <h1 style="margin-top:22px">Your website chat,<br>answered in <span class="serif">Telegram.</span></h1>
+      <p class="lead">Visitors chat on your site — no Telegram account needed. Your team replies from a Telegram group or the WordPress inbox. Self-hosted, with no monthly fees.</p>
+      <div class="ctas">
+        <a class="btn btn-dark buy" href="#get">Get Televixo <span class="arr"><svg width="15" height="15" style="color:#fff"><use href="#arrow"/></svg></span></a>
+        <a class="btn btn-ghost" href="#video">Watch the 60-second video</a>
+      </div>
+      <div class="trust"><span class="chip"><i style="background:#109f55"></i>Self-hosted</span><span class="chip"><i style="background:#2563eb"></i>Reply &amp; Topics Mode</span><span class="chip"><i style="background:#e0385d"></i>RTL ready</span></div>
+    </div>
+    <div class="stage" aria-label="Animated demo: a visitor asks a question on the website and an operator answers from Telegram">
+      <div class="site" role="img" aria-label="Example store product page"></div>
+      <div class="panel">
+        <div class="phead"><div class="avatar">C</div><div><div class="ptitle">Chio care</div><div class="psub"><span class="dot"></span>Clara usually replies in minutes</div></div></div>
+        <div class="plog" id="log">
+          <div class="b them" data-at="0">Hi! I’m Clara. Looking for a size? 👋</div>
+          <div class="b me" data-at="1">Which size am I? I’m 175 cm 🙂</div>
+          <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="b them" data-at="4">You’re a perfect S — it runs relaxed! 💙</div>
+        </div>
+        <div class="field"><span>Type your message…</span><span class="send btn-dark">Send</span></div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="tgbar"><b>Chio Support Team</b>Telegram group</div>
+          <div class="tgchat">
+            <div class="tg" data-at="2"><span class="who">Chio care bot</span><br>💬 C-7K2M9Q · Anna<br>🌐 /product/sweatshirt<br><br>Which size am I? I’m 175 cm 🙂</div>
+            <div class="tg mine" data-at="3.4">You’re a perfect S — it runs relaxed! 💙</div>
+          </div>
+          <div class="tginput"><div>Message</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="video" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow" style="color:#e0385d">Watch</span><h2>See it in <span class="serif" style="color:#e0385d">60 seconds.</span></h2></div>
+    <div class="video reveal"><video controls preload="none" playsinline poster="assets/poster.jpg"><source src="assets/televixo-promo-720p.mp4" type="video/mp4">Your browser does not support video.</video></div>
+  </div>
+</section>
+
+<section id="how" class="sec hatch">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow" style="color:#2563eb">How it works</span><h2>Three steps. <span class="serif" style="color:#2563eb">Zero friction.</span></h2></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n" style="background:#2563eb">1</div><h3>Visitor writes on your site</h3><p>A polished widget with files, emoji, voice notes, pre-chat and offline forms. No sign-up for visitors.</p></div>
+      <div class="step reveal"><div class="n" style="background:#e0385d">2</div><h3>Your team gets it in Telegram</h3><p>In a group using Reply Mode, or one forum topic per conversation. Operators are linked individually.</p></div>
+      <div class="step reveal"><div class="n" style="background:#109f55">3</div><h3>The reply reaches the visitor</h3><p>Instantly on the website, across tabs and page reloads — or answer from the WordPress inbox instead.</p></div>
+    </div>
+    <div class="truth reveal"><b>WordPress stays the source of truth.</b><span>Messages, files, routing and delivery status live in your own database. Telegram is the conversation channel.</span></div>
+  </div>
+</section>
+
+<section id="features" class="sec">
+  <div class="wrap">
+    <div class="row">
+      <div class="copy reveal"><span class="eyebrow" style="color:#109f55">Team inbox</span><h3>A real inbox in <span class="serif" style="color:#109f55">WordPress.</span></h3><p>Everything your team needs when they prefer the dashboard over Telegram.</p>
+        <ul class="ticks" style="--c:#109f55"><li>Claim and transfer with conflict protection</li><li>Teams, round-robin and least-busy routing</li><li>Internal notes, tags, priority and canned replies</li><li>Visitor context, history, blocking and spam handling</li></ul></div>
+      <div class="shot reveal"><div class="bar"></div><img src="assets/admin-inbox.jpg" alt="Televixo inbox in the WordPress admin" width="1440" height="900"></div>
+    </div>
+    <div class="row">
+      <div class="copy reveal"><span class="eyebrow" style="color:#c48a00">Targeting &amp; automation</span><h3>Say hello at the <span class="serif" style="color:#e0a400">right moment.</span></h3><p>A visual rule builder with AND/OR groups, exclusions, priorities and frequency caps — plus a “why did this match?” preview.</p>
+        <ul class="ticks" style="--c:#efbc2f"><li>Pages, URL wildcards, WooCommerce cart and products</li><li>Time on page, scroll depth, desktop exit intent</li><li>UTM, referrer, business hours and availability</li><li>Welcome flows with hand-off to a human</li></ul></div>
+      <div class="shot reveal"><div class="bar"></div><img src="assets/admin-rules.jpg" alt="Targeting rule builder" width="1440" height="900"></div>
+    </div>
+    <div class="row">
+      <div class="copy reveal"><span class="eyebrow" style="color:#e0385d">Design</span><h3>Looks <span class="serif" style="color:#e0385d">premium</span> on any theme.</h3><p>Isolated from your theme’s CSS, customizable with a live preview, and accessible.</p>
+        <ul class="ticks" style="--c:#e0385d"><li>Pill or circle launcher, avatar, custom icon</li><li>Logical left/right, mobile offsets, full-screen mobile view</li><li>RTL and translation ready (Persian included)</li><li>Keyboard friendly, reduced motion, WCAG 2.2 AA target</li></ul></div>
+      <div class="shot reveal"><div class="bar"></div><img src="assets/admin-appearance.jpg" alt="Widget appearance settings with live preview" width="1440" height="900"></div>
+    </div>
+    <div class="row">
+      <div class="copy reveal"><span class="eyebrow" style="color:#2563eb">Reports</span><h3>Know what <span class="serif" style="color:#2563eb">works.</span></h3><p>Clear definitions, your time zone, and automated replies never counted as human responses.</p>
+        <ul class="ticks" style="--c:#2563eb"><li>First response, resolution time and queue wait</li><li>Customer satisfaction with comments</li><li>Operator and team performance</li><li>Automation conversion per rule</li></ul></div>
+      <div class="shot reveal"><div class="bar"></div><img src="assets/admin-reports.jpg" alt="Reports screen" width="1440" height="900"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="blob" style="width:700px;height:700px;right:-200px;top:-200px;background:#2563eb;opacity:.35"></div>
+  <div class="wrap" style="position:relative">
+    <div class="sec-head reveal"><span class="eyebrow" style="color:#2aabee">Reliability &amp; security</span><h2>Built for <span class="serif" style="color:#2aabee">reliable</span> delivery.</h2><p>Messages are stored first, then delivered — with retries, rate-limit handling and a dead-letter screen for anything that needs attention.</p></div>
+    <div class="cards">
+      <div class="reveal"><b>Durable queue</b><span>Back-off with jitter, per-conversation ordering and crash recovery.</span></div>
+      <div class="reveal"><b>Shared-hosting friendly</b><span>No Node, Redis or WebSockets. WP-Cron or a real cron job, with health warnings.</span></div>
+      <div class="reveal"><b>Works with page caching</b><span>Nothing personal in page HTML; live data comes from no-store endpoints.</span></div>
+      <div class="reveal"><b>Encrypted bot token</b><span>Authenticated encryption at rest, key rotation, wp-config overrides.</span></div>
+      <div class="reveal"><b>Signed webhooks</b><span>Secret-token checks, operator allowlists, rate limits and safe file handling.</span></div>
+      <div class="reveal"><b>Privacy tools</b><span>Retention, WordPress export &amp; erase, consent text. No tracking, no external fonts.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec hatch">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Everything included</span><h2>One plugin. <span class="serif" style="color:#e0385d">No monthly fees.</span></h2></div>
+    <div class="grid4">
+      <div class="reveal"><i style="background:#2563eb"></i><span><b>Reply &amp; Topics Mode</b><small>Exact reply matching</small></span></div>
+      <div class="reveal"><i style="background:#109f55"></i><span><b>WordPress inbox</b><small>Notes, tags, priority</small></span></div>
+      <div class="reveal"><i style="background:#e0385d"></i><span><b>Teams &amp; routing</b><small>Round-robin, least busy</small></span></div>
+      <div class="reveal"><i style="background:#efbc2f"></i><span><b>Targeting rules</b><small>Behaviour, pages, Woo</small></span></div>
+      <div class="reveal"><i style="background:#2aabee"></i><span><b>Pre-chat &amp; offline forms</b><small>Custom fields, consent</small></span></div>
+      <div class="reveal"><i style="background:#2563eb"></i><span><b>Files &amp; voice notes</b><small>Server-side file checks</small></span></div>
+      <div class="reveal"><i style="background:#109f55"></i><span><b>Business hours</b><small>Holidays, away mode</small></span></div>
+      <div class="reveal"><i style="background:#e0385d"></i><span><b>Welcome flows</b><small>Hand-off to a human</small></span></div>
+      <div class="reveal"><i style="background:#efbc2f"></i><span><b>Help articles</b><small>Searchable FAQ cards</small></span></div>
+      <div class="reveal"><i style="background:#2aabee"></i><span><b>Ratings &amp; transcripts</b><small>CSAT with comments</small></span></div>
+      <div class="reveal"><i style="background:#2563eb"></i><span><b>Reports</b><small>Response &amp; resolution</small></span></div>
+      <div class="reveal"><i style="background:#109f55"></i><span><b>Privacy tools</b><small>Export, erase, retention</small></span></div>
+      <div class="reveal"><i style="background:#e0385d"></i><span><b>RTL &amp; translations</b><small>POT + Persian included</small></span></div>
+      <div class="reveal"><i style="background:#efbc2f"></i><span><b>Honest presence</b><small>Online only when someone is</small></span></div>
+      <div class="reveal"><i style="background:#2aabee"></i><span><b>WP-CLI commands</b><small>Worker, queue, secrets</small></span></div>
+      <div class="reveal"><i style="background:#2563eb"></i><span><b>Diagnostics</b><small>Redacted health report</small></span></div>
+    </div>
+    <div class="req reveal"><span class="chip"><i style="background:#1c1c1c"></i>WordPress 6.7+</span><span class="chip"><i style="background:#1c1c1c"></i>PHP 8.2+</span><span class="chip"><i style="background:#1c1c1c"></i>MySQL 5.7+ / MariaDB 10.4+</span><span class="chip"><i style="background:#1c1c1c"></i>HTTPS</span><span class="chip"><i style="background:#1c1c1c"></i>A free Telegram bot</span></div>
+  </div>
+</section>
+
+<section id="faq" class="sec">
+  <div class="wrap faq">
+    <div class="sec-head reveal"><span class="eyebrow" style="color:#109f55">FAQ</span><h2>Questions, <span class="serif" style="color:#109f55">answered.</span></h2></div>
+    <details><summary>Do my visitors need Telegram?</summary><p>No. Visitors use the chat widget on your website. Only your operators use Telegram — or the WordPress inbox if they prefer.</p></details>
+    <details><summary>Is there a monthly fee or external service?</summary><p>No. Televixo is self-hosted. The only external service is the free Telegram Bot API, using your own bot.</p></details>
+    <details><summary>What is the difference between Reply Mode and Topics Mode?</summary><p>In Reply Mode, operators reply to the bot’s message in a group. In Topics Mode, every conversation gets its own forum topic and operators simply write inside it. You can switch at any time; existing conversations keep their routing.</p></details>
+    <details><summary>Who can see the messages in Telegram?</summary><p>Everyone in the Telegram group you choose. For private teams, use a separate group per team or answer in the WordPress inbox.</p></details>
+    <details><summary>Will it work on shared hosting?</summary><p>Yes. It needs PHP 8.2+, HTTPS and outbound access to Telegram. A real cron job is recommended for the fastest delivery on low-traffic sites.</p></details>
+    <details><summary>Does it work with caching plugins and WooCommerce?</summary><p>Page HTML contains nothing personal, so full-page caching is safe. WooCommerce targeting conditions (cart value, products, checkout pages) activate automatically when WooCommerce is installed.</p></details>
+    <details><summary>Is it translation ready?</summary><p>Yes. All strings are translatable, a POT file is included, and a Persian translation of the visitor-facing text ships with RTL support.</p></details>
+  </div>
+</section>
+
+<section id="get" class="final hatch">
+  <div class="blob" style="width:600px;height:600px;left:-200px;top:-200px;background:#2563eb;opacity:.2"></div>
+  <div class="blob" style="width:600px;height:600px;right:-200px;bottom:-250px;background:#e0385d;opacity:.2"></div>
+  <div class="wrap" style="position:relative">
+    <h2 class="reveal">Start chatting in <span class="serif" style="color:#2aabee">minutes.</span></h2>
+    <p class="reveal">Install the plugin, connect your bot, pick a group — your team is ready.</p>
+    <a class="btn btn-dark buy reveal" href="#get" style="height:62px;font-size:19px">Get Televixo <span class="arr" style="width:46px;height:46px"><svg width="16" height="16" style="color:#fff"><use href="#arrow"/></svg></span></a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© Televixo · Telegram Live Chat for WordPress</span><span>Telegram is a trademark of its respective owner. Televixo is not affiliated with Telegram.</span></div></footer>
+
+<script>
+/* Replace with your marketplace item URL. Until then the buttons scroll to the final call to action. */
+const BUY_URL = '';
+if (BUY_URL) document.querySelectorAll('a.buy').forEach((a) => { a.href = BUY_URL; a.target = '_blank'; a.rel = 'noopener'; });
+
+// Hero demo: replays the conversation in a loop (static when reduced motion is preferred).
+(function () {
+  const items = [...document.querySelectorAll('.stage [data-at]')];
+  const typing = document.getElementById('typing');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { items.forEach((el) => el.classList.add('show')); return; }
+  const SCALE = 1100, CYCLE = 9000;
+  const run = () => {
+    items.forEach((el) => el.classList.remove('show'));
+    typing.classList.remove('show');
+    items.forEach((el) => setTimeout(() => el.classList.add('show'), 400 + Number(el.dataset.at) * SCALE));
+    setTimeout(() => typing.classList.add('show'), 400 + 2.6 * SCALE);
+    setTimeout(() => typing.classList.remove('show'), 400 + 4 * SCALE);
+  };
+  run();
+  setInterval(run, CYCLE);
+})();
+
+// Reveal on scroll.
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  els.forEach((e) => io.observe(e));
+})();
+</script>
+</body>
+</html>

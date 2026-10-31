@@ -1,0 +1,59 @@
+/* Shared look for marketplace graphics (matches the plugin + promo video). */
+@font-face { font-family: "Hanken"; font-weight: 400; src: url(assets/hanken-400.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 500; src: url(assets/hanken-500.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 900; src: url(assets/hanken-900.woff2) format("woff2"); }
+@font-face { font-family: "Serif"; font-style: italic; src: url(assets/serif-italic.woff2) format("woff2"); }
+:root { --ink:#000; --dark:#1c1c1c; --chip:#f6f6f6; --pink:#e0385d; --cobalt:#2563eb; --sky:#2aabee; --amber:#efbc2f; --green:#109f55; --lime:#4ade80; --cream:#f6f4ef; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow: hidden; }
+body { font-family: "Hanken", "Noto Color Emoji", sans-serif; letter-spacing: -0.016em; -webkit-font-smoothing: antialiased; color: #000; background: var(--cream); }
+.serif { font-family: "Serif", "Noto Color Emoji", serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+.abs { position: absolute; }
+.hatch { background-image: repeating-linear-gradient(120deg, rgba(0,0,0,.045) 0 4.2px, transparent 4.2px 7.3px); }
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); }
+.btn-dark { background: linear-gradient(180deg,#333 0%,#111 100%); border: 1px solid #000; box-shadow: inset -2px -4px 4px #000, 0 1px 2px rgba(0,0,0,.08); color: #fff; }
+.arr { background: linear-gradient(180deg,#292929 0%,#393939 100%); border: .8px solid #000; box-shadow: inset -.64px -1.2px 0 rgba(255,255,255,.25), inset 2.4px 3.2px 3.2px rgba(0,0,0,.13), inset -1.6px 0 3.2px rgba(255,255,255,.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.glass { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); }
+.chip { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 19px; text-transform: uppercase; letter-spacing: 0; color: #222; white-space: nowrap; }
+.chip i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.eyebrow { font-size: 22px; font-weight: 500; text-transform: uppercase; letter-spacing: .02em; }
+.h1 { font-weight: 500; letter-spacing: -0.045em; line-height: .98; }
+.muted { color: #555; }
+/* widget */
+.panel { position: absolute; width: 380px; background: #fff; border: 1px solid #eee; border-radius: 24px; box-shadow: 0 32px 64px -24px rgba(0,0,0,.35); overflow: hidden; }
+.phead { background: #1c1c1c; color: #fff; padding: 16px 20px; border-radius: 0 0 24px 24px; display: flex; align-items: center; gap: 12px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#f8c9a0,#e0385d); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; color: #fff; flex: none; }
+.ptitle { font-size: 16px; font-weight: 500; } .psub { font-size: 12px; color: #a0a0a0; display: flex; align-items: center; gap: 5px; margin-top: 6px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+.plog { padding: 18px 16px 10px; display: flex; flex-direction: column; gap: 10px; }
+.b { max-width: 82%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 20.6px; }
+.b.them { background: #f6f6f6; border-bottom-left-radius: 6px; align-self: flex-start; }
+.b.me { background: #1c1c1c; color: #fff; border-bottom-right-radius: 6px; align-self: flex-end; }
+.meta { font-size: 11px; color: #6f6f6f; padding: 0 4px; margin-top: -4px; } .meta.r { align-self: flex-end; }
+.field { margin: 0 12px 12px; height: 48px; border: 1px solid #eee; border-radius: 32px; display: flex; align-items: center; padding: 0 8px 0 18px; gap: 8px; font-size: 14px; color: #8a8a8a; }
+.field span:first-child { flex: 1; }
+.send { height: 32px; padding: 0 16px; border-radius: 999px; font-size: 12px; font-weight: 500; display: flex; align-items: center; }
+.launcher { position: absolute; height: 56px; border-radius: 999px; display: flex; align-items: center; gap: 10px; padding: 0 6px 0 20px; font-size: 15px; font-weight: 500; }
+.launcher .arr { width: 42px; height: 42px; }
+/* phone */
+.phone { position: absolute; width: 430px; height: 880px; border-radius: 64px; background: #111; padding: 14px; box-shadow: 0 60px 120px -40px rgba(0,0,0,.55), inset 0 0 0 2px #333; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #e9eef3; }
+.tgbar { height: 132px; background: linear-gradient(135deg,#2563eb,#2aabee); color: #fff; padding: 62px 26px 0; display: flex; gap: 14px; align-items: center; }
+.tgav { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 20px; }
+.tgchat { position: absolute; top: 132px; left: 0; right: 0; bottom: 84px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; justify-content: flex-end; background-image: radial-gradient(circle at 20% 30%, rgba(37,99,235,.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(42,171,238,.10), transparent 40%); }
+.tgmsg { background: #fff; border-radius: 18px 18px 18px 6px; padding: 12px 14px; font-size: 15px; line-height: 21px; box-shadow: 0 1px 1px rgba(0,0,0,.08); max-width: 330px; align-self: flex-start; }
+.tgmsg .who { color: #2563eb; font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+.tgmsg.mine { background: #e5f9ea; border-radius: 18px 18px 6px 18px; align-self: flex-end; }
+.tgbtns { display: flex; gap: 6px; margin-top: 6px; max-width: 330px; } .tgbtns div { flex: 1; text-align: center; padding: 9px 0; border-radius: 12px; background: rgba(37,99,235,.12); color: #1e4fc7; font-size: 14px; font-weight: 500; }
+.tginput { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #fff; display: flex; align-items: center; padding: 0 18px 18px; gap: 12px; }
+.tginput .box { flex: 1; height: 46px; border-radius: 23px; background: #f1f3f5; display: flex; align-items: center; padding: 0 16px; color: #999; font-size: 16px; }
+.tgsend { width: 46px; height: 46px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; }
+/* browser */
+.browser { position: absolute; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 60px 120px -40px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.06); }
+.bbar { height: 52px; background: #f3f3f3; display: flex; align-items: center; gap: 9px; padding: 0 20px; border-bottom: 1px solid #e6e6e6; }
+.bbar i { width: 13px; height: 13px; border-radius: 50%; display: block; }
+.url { margin-left: 24px; height: 32px; flex: 1; max-width: 560px; border-radius: 10px; background: #fff; display: flex; align-items: center; padding: 0 14px; font-size: 15px; color: #555; }
+.shot { position: absolute; left: 0; right: 0; top: 52px; bottom: 0; background-size: cover; background-position: top left; }
+.card { position: absolute; background: #fff; border: 1px solid #eee; border-radius: 28px; box-shadow: 0 40px 80px -36px rgba(0,0,0,.35); }
+.tick { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex: none; font-size: 18px; }
+.ico-chat { display: block; }

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Televixo marketplace assets</title>
+<link rel="stylesheet" href="common.css">
+<style>
+section { position: relative; overflow: hidden; display: none; }
+section.on { display: block; }
+.slide { width: 1920px; height: 1080px; background: #fbfaf7; }
+.slide .num { position: absolute; left: 120px; top: 92px; display: flex; align-items: center; gap: 16px; }
+.slide .logo-sm { position: absolute; right: 120px; top: 84px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 500; letter-spacing: -0.04em; }
+.slide .logo-sm span:first-child { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step { position: absolute; width: 470px; }
+.step .n { width: 64px; height: 64px; border-radius: 50%; color: #fff; font-size: 28px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+.step h3 { font-size: 40px; font-weight: 500; letter-spacing: -0.035em; margin: 26px 0 12px; }
+.step p { font-size: 23px; line-height: 1.4; color: #555; }
+.feat-grid { position: absolute; left: 120px; right: 120px; top: 330px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.feat-grid div { background: #fff; border: 1px solid #ececec; border-radius: 22px; padding: 22px 24px; font-size: 22px; line-height: 1.3; display: flex; gap: 14px; align-items: flex-start; min-height: 108px; }
+.feat-grid div b { display: block; font-weight: 500; font-size: 23px; margin-bottom: 4px; }
+.feat-grid div small { color: #666; font-size: 17px; display: block; }
+.feat-grid i { width: 14px; height: 14px; border-radius: 50%; flex: none; margin-top: 7px; }
+.req { position: absolute; left: 120px; right: 120px; bottom: 80px; display: flex; gap: 14px; flex-wrap: wrap; }
+.list { display: flex; flex-direction: column; gap: 22px; font-size: 30px; }
+.list div { display: flex; align-items: center; gap: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="plane" viewBox="0 0 24 24"><path d="M3 11.5 20 4l-4.5 16-4-6.5z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<!-- ================= ICON (512 master; downscaled to 80) ================= -->
+<section id="icon" style="width:512px;height:512px;background:transparent">
+  <div class="abs" style="inset:0;border-radius:112px;background:linear-gradient(160deg,#3a3a3a 0%,#121212 70%);box-shadow:inset -10px -18px 22px rgba(0,0,0,.65), inset 6px 8px 14px rgba(255,255,255,.12);overflow:hidden">
+    <div class="abs" style="width:380px;height:380px;border-radius:50%;right:-130px;top:-150px;background:radial-gradient(circle,#2563eb 0%,rgba(37,99,235,0) 70%);opacity:.9"></div>
+    <div class="abs" style="width:320px;height:320px;border-radius:50%;left:-120px;bottom:-140px;background:radial-gradient(circle,#e0385d 0%,rgba(224,56,93,0) 70%);opacity:.75"></div>
+    <!-- main bubble -->
+    <svg class="abs" style="left:92px;top:104px;width:328px;height:300px;color:#fff" viewBox="0 0 24 22"><path d="M3 4.5A3.5 3.5 0 0 1 6.5 1h11A3.5 3.5 0 0 1 21 4.5v8a3.5 3.5 0 0 1-3.5 3.5H10l-5 4.5V16A2.5 2.5 0 0 1 3 13.5z" fill="#fff"/></svg>
+    <!-- typing dots in brand colours -->
+    <div class="abs" style="left:166px;top:212px;display:flex;gap:30px">
+      <span style="width:46px;height:46px;border-radius:50%;background:#e0385d;display:block"></span>
+      <span style="width:46px;height:46px;border-radius:50%;background:#efbc2f;display:block"></span>
+      <span style="width:46px;height:46px;border-radius:50%;background:#2563eb;display:block"></span>
+    </div>
+    <!-- live dot -->
+    <span class="abs" style="right:70px;top:70px;width:70px;height:70px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 14px #1a1a1a"></span>
+  </div>
+</section>
+
+<!-- ================= COVER / INLINE PREVIEW (1180x600 -> 590x300) ================= -->
+<section id="cover" class="hatch" style="width:1180px;height:600px;background-color:#fbfaf7">
+  <div class="blob" style="width:520px;height:520px;right:-120px;top:-180px;background:#2563eb;opacity:.35"></div>
+  <div class="blob" style="width:460px;height:460px;right:220px;bottom:-300px;background:#e0385d;opacity:.32"></div>
+  <div class="blob" style="width:360px;height:360px;left:-160px;top:-160px;background:#efbc2f;opacity:.3"></div>
+  <div class="abs" style="left:64px;top:70px;width:560px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <span class="btn-dark" style="width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="32" height="32" style="color:#fff"><use href="#chat"/></svg></span>
+      <span style="font-size:58px;font-weight:500;letter-spacing:-0.055em">Televixo</span>
+    </div>
+    <div class="h1" style="font-size:66px;margin-top:34px">Telegram <span class="serif" style="color:#e0385d;font-size:76px">live chat</span><br>for WordPress</div>
+    <div style="font-size:25px;line-height:1.38;color:#444;margin-top:22px;max-width:520px">Visitors chat on your site.<br>Your team answers in Telegram.</div>
+    <div style="display:flex;gap:10px;margin-top:30px;flex-wrap:wrap">
+      <span class="chip"><i style="background:#109f55"></i>Self-hosted</span>
+      <span class="chip"><i style="background:#2563eb"></i>Team inbox</span>
+      <span class="chip"><i style="background:#efbc2f"></i>RTL</span>
+    </div>
+  </div>
+  <!-- composition -->
+  <div class="panel" style="left:590px;top:110px;transform:rotate(-4deg) scale(.92);transform-origin:0 0">
+    <div class="phead"><div class="avatar">C</div><div><div class="ptitle">Chio care</div><div class="psub"><span class="dot"></span>Online now</div></div></div>
+    <div class="plog">
+      <div class="b them">Hi! Looking for a size? 👋</div>
+      <div class="b me">Which size am I? I’m 175 cm 🙂</div>
+      <div class="b them">You’re a perfect S — it runs relaxed! 💙</div>
+    </div>
+    <div class="field"><span>Type your message…</span><span class="send btn-dark">Send</span></div>
+  </div>
+  <div class="phone" style="left:965px;top:110px;transform:scale(.6) rotate(6deg);transform-origin:0 0">
+    <div class="screen">
+      <div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Chio Support Team</div><div style="font-size:15px;opacity:.85">Telegram group</div></div></div>
+      <div class="tgchat">
+        <div class="tgmsg"><div class="who">Chio care bot</div>💬 C-7K2M9Q · Anna<br>🌐 /product/sweatshirt<br><br>Which size am I? I’m 175 cm 🙂</div>
+        <div class="tgbtns"><div>Claim</div><div>Close</div></div>
+        <div class="tgmsg mine">You’re a perfect S — it runs relaxed! 💙</div>
+      </div>
+      <div class="tginput"><div class="box">Message</div><div class="tgsend"><svg width="22" height="22" style="color:#fff"><use href="#plane"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 1 — HERO ================= -->
+<section id="s1" class="slide hatch">
+  <div class="blob" style="width:900px;height:900px;left:-300px;top:-360px;background:#2563eb;opacity:.22"></div>
+  <div class="blob" style="width:800px;height:800px;right:-260px;bottom:-360px;background:#e0385d;opacity:.2"></div>
+  <div class="blob" style="width:520px;height:520px;right:520px;top:-240px;background:#efbc2f;opacity:.22"></div>
+  <div class="abs" style="left:120px;top:180px;width:780px">
+    <div style="display:flex;align-items:center;gap:20px"><span class="btn-dark" style="width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="40" height="40" style="color:#fff"><use href="#chat"/></svg></span><span style="font-size:70px;font-weight:500;letter-spacing:-0.055em">Televixo</span></div>
+    <div class="h1" style="font-size:86px;margin-top:56px;white-space:nowrap">Your website chat,<br>answered in <span class="serif" style="color:#2aabee;font-size:98px">Telegram.</span></div>
+    <div style="font-size:34px;line-height:1.4;color:#444;margin-top:36px">Visitors chat on your site — no Telegram account needed. Your team replies from Telegram or the WordPress inbox.</div>
+    <div style="display:flex;gap:12px;margin-top:44px;flex-wrap:wrap">
+      <span class="chip"><i style="background:#109f55"></i>Self-hosted</span><span class="chip"><i style="background:#2563eb"></i>Reply &amp; Topics Mode</span><span class="chip"><i style="background:#e0385d"></i>No monthly fees</span>
+    </div>
+  </div>
+  <div class="browser" style="left:1010px;top:200px;width:820px;height:560px">
+    <div class="bbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">🔒&nbsp; chio.store/product</div></div>
+    <div class="shot" style="background-image:url(assets/site-product.png)"></div>
+  </div>
+  <div class="panel" style="left:1210px;top:430px;transform:scale(.95);transform-origin:0 0">
+    <div class="phead"><div class="avatar">C</div><div><div class="ptitle">Chio care</div><div class="psub"><span class="dot"></span>Clara usually replies in minutes</div></div></div>
+    <div class="plog"><div class="b them">Hi! Looking for a size? 👋</div><div class="b me">Which size am I? I’m 175 cm 🙂</div><div class="b them">You’re a perfect S — it runs relaxed! 💙</div><div class="meta">Clara · now</div></div>
+    <div class="field"><span>Type your message…</span><span class="send btn-dark">Send</span></div>
+  </div>
+  <div class="phone" style="left:1590px;top:300px;transform:scale(.7);transform-origin:0 0">
+    <div class="screen"><div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Chio Support Team</div><div style="font-size:15px;opacity:.85">Telegram group · 4 operators</div></div></div>
+      <div class="tgchat"><div class="tgmsg"><div class="who">Chio care bot</div>💬 C-7K2M9Q · Anna<br>🌐 /product/sweatshirt<br><br>Which size am I? I’m 175 cm 🙂</div><div class="tgbtns"><div>Claim</div><div>Close</div></div><div class="tgmsg mine">You’re a perfect S — it runs relaxed! 💙</div></div>
+      <div class="tginput"><div class="box">Message</div><div class="tgsend"><svg width="22" height="22" style="color:#fff"><use href="#plane"/></svg></div></div></div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 2 — HOW IT WORKS ================= -->
+<section id="s2" class="slide hatch">
+  <div class="num"><span class="eyebrow" style="color:#2563eb">How it works</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="h1 abs" style="left:120px;top:170px;font-size:96px">Three steps. <span class="serif" style="color:#e0385d">Zero friction.</span></div>
+  <div class="step" style="left:120px;top:430px"><div class="n" style="background:#2563eb">1</div><h3>Visitor writes on your site</h3><p>A beautiful widget, no sign-up. Files, emoji, voice notes and pre-chat forms.</p></div>
+  <div class="step" style="left:725px;top:430px"><div class="n" style="background:#e0385d">2</div><h3>Your team gets it in Telegram</h3><p>In a group with Reply Mode, or one forum topic per conversation.</p></div>
+  <div class="step" style="left:1330px;top:430px"><div class="n" style="background:#109f55">3</div><h3>The reply reaches the visitor</h3><p>Instantly on the website — even across tabs and page reloads.</p></div>
+  <svg class="abs" style="left:520px;top:450px" width="180" height="40"><path d="M5 20h160m-18-14 18 14-18 14" stroke="#c9c9c9" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg class="abs" style="left:1125px;top:450px" width="180" height="40"><path d="M5 20h160m-18-14 18 14-18 14" stroke="#c9c9c9" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="abs" style="left:120px;right:120px;bottom:110px;height:150px;border-radius:30px;background:#1c1c1c;color:#fff;display:flex;align-items:center;padding:0 56px;gap:40px;font-size:30px">
+    <span style="font-size:38px;font-weight:500;letter-spacing:-0.03em">WordPress stays the source of truth.</span>
+    <span style="color:#a0a0a0;font-size:26px;line-height:1.35">Messages, files, routing and delivery status live in your own database. Telegram is just the conversation channel.</span>
+  </div>
+</section>
+
+<!-- ================= SLIDE 3 — REPLY & TOPICS ================= -->
+<section id="s3" class="slide hatch">
+  <div class="blob" style="width:900px;height:900px;right:-200px;top:40px;background:#2563eb;opacity:.22"></div>
+  <div class="num"><span class="eyebrow" style="color:#2563eb">01 — Routing</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="abs" style="left:120px;top:250px;width:700px">
+    <div class="h1" style="font-size:104px">Reply Mode<br>or <span class="serif" style="color:#2563eb">Topics.</span></div>
+    <div style="font-size:32px;line-height:1.42;color:#444;margin-top:36px">Reply to the bot’s message in any group — or give every conversation its own forum topic. Switch any time; existing conversations keep their routing.</div>
+    <div class="list" style="margin-top:44px;font-size:27px">
+      <div><span class="tick" style="background:#2563eb">✓</span>Replies matched exactly — never “last visitor”</div>
+      <div><span class="tick" style="background:#2563eb">✓</span>Operators enrolled individually</div>
+      <div><span class="tick" style="background:#2563eb">✓</span>Claim &amp; Close buttons, #note for internal notes</div>
+    </div>
+  </div>
+  <div class="phone" style="left:930px;top:110px">
+    <div class="screen"><div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Support · Reply Mode</div><div style="font-size:15px;opacity:.85">Telegram group</div></div></div>
+      <div class="tgchat">
+        <div class="tgmsg"><div class="who">Chio care bot</div>💬 C-9QX1 · Ben<br>🌐 /cart<br><br>Do you ship to Madrid?</div><div class="tgbtns"><div>Claim</div><div>Close</div></div>
+        <div class="tgmsg mine"><div style="font-size:12px;color:#2563eb;border-left:3px solid #2563eb;padding-left:8px;margin-bottom:6px">Ben · Do you ship to Madrid?</div>Yes — 2–3 days, free over $150 🚚</div>
+        <div class="tgmsg"><div class="who">Chio care bot</div>💬 C-9QX1 · Ben<br>Perfect, thanks!</div>
+      </div>
+      <div class="tginput"><div class="box">Message</div><div class="tgsend"><svg width="22" height="22" style="color:#fff"><use href="#plane"/></svg></div></div></div>
+  </div>
+  <div class="phone" style="left:1400px;top:170px">
+    <div class="screen"><div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Support · Topics</div><div style="font-size:15px;opacity:.85">Forum group</div></div></div>
+      <div class="abs" style="top:132px;left:0;right:0;bottom:0;background:#fff;padding:10px 18px">
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #f0f0f0;font-size:19px"><span style="width:44px;height:44px;border-radius:14px;background:#2563eb;display:block"></span><span style="flex:1">C-7K2M · Anna<br><small style="color:#888">Which size am I?</small></span><span style="background:#2563eb;color:#fff;border-radius:999px;min-width:28px;height:28px;font-size:15px;display:flex;align-items:center;justify-content:center">3</span></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #f0f0f0;font-size:19px"><span style="width:44px;height:44px;border-radius:14px;background:#e0385d;display:block"></span><span style="flex:1">C-9QX1 · Ben<br><small style="color:#888">Perfect, thanks!</small></span></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #f0f0f0;font-size:19px"><span style="width:44px;height:44px;border-radius:14px;background:#efbc2f;display:block"></span><span style="flex:1">C-4HD8 · Sara<br><small style="color:#888">Is the coat in stock?</small></span><span style="background:#2563eb;color:#fff;border-radius:999px;min-width:28px;height:28px;font-size:15px;display:flex;align-items:center;justify-content:center">1</span></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #f0f0f0;font-size:19px"><span style="width:44px;height:44px;border-radius:14px;background:#109f55;display:block"></span><span style="flex:1">C-2LMP · Omid<br><small style="color:#888">سلام، سفارش من کجاست؟</small></span></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 0;font-size:19px;opacity:.55"><span style="width:44px;height:44px;border-radius:14px;background:#999;display:block"></span><span style="flex:1">C-8TRV · Lea · closed</span></div>
+      </div></div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 4 — INBOX ================= -->
+<section id="s4" class="slide hatch">
+  <div class="blob" style="width:900px;height:900px;left:-300px;bottom:-400px;background:#109f55;opacity:.22"></div>
+  <div class="num"><span class="eyebrow" style="color:#109f55">02 — Team inbox</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="h1 abs" style="left:120px;top:170px;font-size:96px">A real inbox in <span class="serif" style="color:#109f55">WordPress.</span></div>
+  <div class="browser" style="left:120px;top:360px;width:1180px;height:640px"><div class="bbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">yoursite.com/wp-admin › Televixo › Inbox</div></div><div class="shot" style="background-image:url(assets/admin-inbox.png)"></div></div>
+  <div class="abs list" style="left:1380px;top:400px;font-size:28px">
+    <div><span class="tick" style="background:#109f55">✓</span>Claim &amp; transfer — atomic</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Teams &amp; separate groups</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Round-robin / least busy</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Internal notes &amp; tags</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Canned replies with /</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Visitor context &amp; history</div>
+    <div><span class="tick" style="background:#109f55">✓</span>Block &amp; spam handling</div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 5 — TARGETING ================= -->
+<section id="s5" class="slide hatch">
+  <div class="blob" style="width:900px;height:900px;right:-300px;top:-200px;background:#efbc2f;opacity:.3"></div>
+  <div class="num"><span class="eyebrow" style="color:#c48a00">03 — Targeting &amp; automation</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="abs" style="left:120px;top:250px;width:700px">
+    <div class="h1" style="font-size:104px">Say hello at the <span class="serif" style="color:#e0a400">right moment.</span></div>
+    <div style="font-size:31px;line-height:1.42;color:#444;margin-top:36px">A visual rule builder with AND/OR groups, exclusions, priorities and frequency caps — plus a “why did this match?” preview.</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:40px">
+      <span class="chip">Pages &amp; post types</span><span class="chip">URL wildcards</span><span class="chip">WooCommerce cart</span><span class="chip">UTM &amp; referrer</span><span class="chip">Time on page</span><span class="chip">Scroll depth</span><span class="chip">Exit intent</span><span class="chip">Business hours</span>
+    </div>
+  </div>
+  <div class="card" style="left:960px;top:250px;width:820px;padding:40px;display:flex;flex-direction:column;gap:18px">
+    <div style="font-size:20px;text-transform:uppercase;color:#6f6f6f">When</div>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:18px;background:#fafafa;border:1px solid #eee;font-size:27px"><span class="tick" style="background:#efbc2f">✓</span>URL matches <b style="font-weight:500">&nbsp;/pricing*</b></div>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:18px;background:#fafafa;border:1px solid #eee;font-size:27px"><span class="tick" style="background:#efbc2f">✓</span>Visible for <b style="font-weight:500">&nbsp;15 seconds</b></div>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:18px;background:#fafafa;border:1px solid #eee;font-size:27px"><span class="tick" style="background:#efbc2f">✓</span>Not shown in the last 24 hours</div>
+    <div style="font-size:20px;text-transform:uppercase;color:#6f6f6f;margin-top:10px">Then</div>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:18px;background:#fff7e0;border:1px solid #f0dca0;font-size:27px">💬 Show a teaser — once</div>
+  </div>
+  <div class="abs" style="left:1260px;top:830px;background:#fff;border:1px solid #eee;border-radius:24px 24px 8px 24px;padding:22px 28px;font-size:28px;box-shadow:0 40px 80px -30px rgba(0,0,0,.35)">Questions about our plans? 👋</div>
+  <div class="launcher btn-dark" style="left:1640px;top:950px"><span>Chat with us</span><span class="arr"><svg width="22" height="22" style="color:#fff"><use href="#chat"/></svg></span></div>
+</section>
+
+<!-- ================= SLIDE 6 — DESIGN & LANGUAGES ================= -->
+<section id="s6" class="slide hatch">
+  <div class="blob" style="width:900px;height:900px;left:-200px;top:-300px;background:#e0385d;opacity:.2"></div>
+  <div class="num"><span class="eyebrow" style="color:#e0385d">04 — Design</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="h1 abs" style="left:120px;top:170px;font-size:96px">Looks <span class="serif" style="color:#e0385d">premium</span> on every theme.</div>
+  <div class="abs" style="left:120px;top:330px;font-size:30px;line-height:1.4;color:#444;width:760px">Shadow-DOM isolated, so your theme can’t break it. Live preview, logical left/right positions, mobile full screen, RTL and translation-ready.</div>
+  <div class="browser" style="left:120px;top:500px;width:900px;height:520px"><div class="bbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">Televixo › Widget — live preview</div></div><div class="shot" style="background-image:url(assets/admin-appearance.png)"></div></div>
+  <div class="browser" style="left:1080px;top:330px;width:720px;height:470px"><div class="bbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">فارسی · RTL</div></div><div class="shot" style="background-image:url(assets/e2e-desktop-rtl-fa.png);background-position:right bottom"></div></div>
+  <div class="abs" style="left:1080px;top:850px;display:flex;gap:18px;align-items:center">
+    <div class="launcher btn-dark" style="position:relative"><span>Chat with us</span><span class="arr"><svg width="22" height="22" style="color:#fff"><use href="#chat"/></svg></span></div>
+    <div class="btn-dark" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" style="color:#fff"><use href="#chat"/></svg></div>
+    <span class="chip"><i style="background:#4ade80"></i>Online dot</span><span class="chip"><i style="background:#e0385d"></i>Unread badge</span>
+  </div>
+  <div class="abs" style="left:1080px;top:940px;display:flex;gap:10px"><span class="chip">Pill or circle</span><span class="chip">Custom SVG</span><span class="chip">Reduced motion</span><span class="chip">WCAG 2.2 AA</span></div>
+</section>
+
+<!-- ================= SLIDE 7 — RELIABLE & SECURE ================= -->
+<section id="s7" class="slide" style="background:#0b0b0b;color:#fff">
+  <div class="blob" style="width:900px;height:900px;right:-200px;top:-200px;background:#2563eb;opacity:.35"></div>
+  <div class="blob" style="width:700px;height:700px;left:-200px;bottom:-300px;background:#2aabee;opacity:.25"></div>
+  <div class="num"><span class="eyebrow" style="color:#2aabee">05 — Reliability &amp; security</span></div>
+  <div class="logo-sm"><span class="btn-dark" style="border-color:#444"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="h1 abs" style="left:120px;top:170px;font-size:96px">Built for <span class="serif" style="color:#2aabee">reliable</span> delivery.</div>
+  <div class="abs" style="left:120px;top:380px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:1680px">
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Durable queue</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">Messages are saved first, then delivered with retries, back-off and Telegram rate-limit handling.</div></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Order preserved</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">Per-conversation ordering, crash recovery and a dead-letter screen with one-click retry.</div></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Works on shared hosting</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">No Node, Redis or WebSockets. WP-Cron or a real cron job, with health warnings.</div></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Encrypted bot token</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">Authenticated encryption at rest, key rotation, wp-config overrides.</div></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Signed webhooks</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">Secret-token verification, operator allowlists, rate limits and safe file handling.</div></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:36px"><div style="font-size:34px;font-weight:500">Privacy tools</div><div style="font-size:23px;color:#b8b8b8;line-height:1.4;margin-top:12px">Retention, WordPress export &amp; erase, consent text. No tracking, no external fonts.</div></div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 8 — EVERYTHING INCLUDED ================= -->
+<section id="s8" class="slide hatch">
+  <div class="num"><span class="eyebrow">Everything included</span></div>
+  <div class="logo-sm"><span class="btn-dark"><svg width="26" height="26" style="color:#fff"><use href="#chat"/></svg></span><span>Televixo</span></div>
+  <div class="h1 abs" style="left:120px;top:170px;font-size:92px">One plugin. <span class="serif" style="color:#e0385d">No monthly fees.</span></div>
+  <div class="feat-grid">
+    <div><i style="background:#2563eb"></i><span><b>Reply &amp; Topics Mode</b><small>Exact reply matching</small></span></div>
+    <div><i style="background:#109f55"></i><span><b>WordPress inbox</b><small>Notes, tags, priority</small></span></div>
+    <div><i style="background:#e0385d"></i><span><b>Teams &amp; routing</b><small>Round-robin, least busy</small></span></div>
+    <div><i style="background:#efbc2f"></i><span><b>Targeting rules</b><small>Behaviour, pages, Woo</small></span></div>
+    <div><i style="background:#2aabee"></i><span><b>Pre-chat &amp; offline forms</b><small>Custom fields, consent</small></span></div>
+    <div><i style="background:#2563eb"></i><span><b>Files &amp; voice notes</b><small>Server-side file checks</small></span></div>
+    <div><i style="background:#109f55"></i><span><b>Business hours</b><small>Holidays, away mode</small></span></div>
+    <div><i style="background:#e0385d"></i><span><b>Welcome flows</b><small>Hand-off to a human</small></span></div>
+    <div><i style="background:#efbc2f"></i><span><b>Help articles</b><small>Searchable FAQ cards</small></span></div>
+    <div><i style="background:#2aabee"></i><span><b>Ratings &amp; transcripts</b><small>CSAT with comments</small></span></div>
+    <div><i style="background:#2563eb"></i><span><b>Reports</b><small>Response &amp; resolution times</small></span></div>
+    <div><i style="background:#109f55"></i><span><b>Privacy tools</b><small>Export, erase, retention</small></span></div>
+    <div><i style="background:#e0385d"></i><span><b>RTL &amp; translations</b><small>POT + Persian included</small></span></div>
+    <div><i style="background:#efbc2f"></i><span><b>Cache-friendly</b><small>Works with page caching</small></span></div>
+    <div><i style="background:#2aabee"></i><span><b>WP-CLI commands</b><small>Worker, queue, secrets</small></span></div>
+    <div><i style="background:#2563eb"></i><span><b>Diagnostics</b><small>Redacted health report</small></span></div>
+  </div>
+  <div class="req">
+    <span class="chip"><i style="background:#1c1c1c"></i>WordPress 6.7+</span><span class="chip"><i style="background:#1c1c1c"></i>PHP 8.2+</span><span class="chip"><i style="background:#1c1c1c"></i>MySQL 5.7+ / MariaDB 10.4+</span><span class="chip"><i style="background:#1c1c1c"></i>HTTPS</span><span class="chip"><i style="background:#1c1c1c"></i>A Telegram bot (free)</span>
+  </div>
+</section>
+
+<script>
+const id = (location.hash || '#s1').slice(1);
+document.getElementById(id).classList.add('on');
+window.ready = document.fonts.ready.then(() => new Promise((r) => setTimeout(r, 300)));
+</script>
+</body>
+</html>
