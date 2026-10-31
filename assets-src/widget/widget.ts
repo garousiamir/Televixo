@@ -219,7 +219,7 @@ export class Widget {
 			h('div', { class: 'tvx-head__id' },
 				ap.avatar ? h('span', { class: 'tvx-head__avatar' }, h('img', { src: ap.avatar, alt: '' })) : h('span', { class: 'tvx-head__avatar tvx-head__avatar--icon' }, icon(ap.icon === 'custom' ? 'chat' : ap.icon)),
 				h('div', { class: 'tvx-head__text' }, this.el.title, h('span', { class: 'tvx-status' }, this.el.statusDot, this.el.statusText))),
-			h('div', { class: 'tvx-head__actions' }, this.el.moreBtn, this.el.expand,
+			h('div', { class: 'tvx-head__actions' }, this.el.moreBtn,
 				h('button', { type: 'button', class: 'tvx-iconbtn tvx-glass', 'aria-label': t.t('close'), onclick: () => this.close(true) }, icon('x'))));
 
 		this.el.menu = h('div', { class: 'tvx-menu', role: 'menu', hidden: true });
@@ -450,6 +450,7 @@ export class Widget {
 		this.renderAll();
 		requestAnimationFrame(() => this.focusFirst());
 		this.emit('open');
+		if (this.boot.preview) return;
 		try {
 			await this.ensureSession();
 			this.chooseView();
@@ -777,7 +778,7 @@ export class Widget {
 			const d = new Date(m.created_at);
 			const day = d.toDateString();
 			if (day !== lastDay) {
-				log.appendChild(h('li', { class: 'tvx-day', role: 'separator' }, this.dayLabel(d)));
+				log.appendChild(h('li', { class: 'tvx-day' }, h('span', {}, this.dayLabel(d))));
 				lastDay = day; prev = null;
 			}
 			const mine = m.author === 'visitor';
@@ -1274,6 +1275,7 @@ export class Widget {
 		clear(m);
 		const item = (label: string, fn: () => void, ic: string) => h('button', { type: 'button', role: 'menuitem', class: 'tvx-menu__item', onclick: () => { this.toggleMenu(false); fn(); } }, icon(ic), label);
 		append(m, [
+			item(this.expanded ? t.t('collapse') : t.t('expand'), () => this.toggleExpand(), this.expanded ? 'collapse' : 'expand'),
 			item(this.sound ? t.t('sound_off') : t.t('sound_on'), () => { this.sound = !this.sound; this.local.set('sound', this.sound); this.interacted = true; }, this.sound ? 'mute' : 'sound'),
 			this.cfg.kb_search ? item(t.t('help'), () => { this.view = 'kb'; this.renderAll(); this.focusFirst(); }, 'search') : null,
 			this.conversation && this.cfg.transcript ? h('a', { role: 'menuitem', class: 'tvx-menu__item', href: this.cfg.rest + `conversations/${this.conversation.id}/transcript`, download: '' }, icon('file'), t.t('transcript')) : null,
@@ -1542,11 +1544,12 @@ export class Widget {
 		const now = new Date();
 		const ago = (m: number) => new Date(now.getTime() - m * 60000).toISOString();
 		this.availability = { state: 'online' };
-		this.conversation = { id: 'preview', active: true, human_engaged: true, operator_typing: true, visitor_read: 3 };
+		const sample = (this.boot as any).sample || {};
+		this.conversation = { id: 'preview', active: true, human_engaged: true, operator_typing: sample.typing ?? true, visitor_read: 3 };
 		[
 			{ cursor: 1, author: 'operator', author_name: 'Clara', body: this.greeting || 'Hi! How can we help you today?', created_at: ago(6) },
-			{ cursor: 2, author: 'visitor', body: 'Which size am I?', created_at: ago(5), state: 'read' },
-			{ cursor: 3, author: 'operator', author_name: 'Clara', body: 'Tell me your height and the size you usually wear.', created_at: ago(4) },
+			{ cursor: 2, author: 'visitor', body: sample.question || 'Which size am I?', created_at: ago(5), state: 'read' },
+			{ cursor: 3, author: 'operator', author_name: 'Clara', body: sample.answer || 'Tell me your height and the size you usually wear.', created_at: ago(4) },
 		].forEach((m: any) => this.messages.set('c' + m.cursor, { key: 'c' + m.cursor, ...m }));
 		this.renderStatus();
 		this.openPanel();

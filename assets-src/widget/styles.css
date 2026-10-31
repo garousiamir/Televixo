@@ -52,15 +52,21 @@
 }
 .tvx[data-pos="right"] { right: calc(var(--tvx-ox) + env(safe-area-inset-right, 0px)); }
 .tvx[data-pos="left"] { left: calc(var(--tvx-ox) + env(safe-area-inset-left, 0px)); align-items: flex-start; }
+/* Physical alignment: flex-start/end flip in RTL, the screen side must not. */
+.tvx[dir="rtl"][data-pos="right"] { align-items: flex-start; }
+.tvx[dir="rtl"][data-pos="left"] { align-items: flex-end; }
 .tvx--preview { position: absolute; }
 .tvx > * { pointer-events: auto; }
 .tvx *, .tvx *::before, .tvx *::after { box-sizing: border-box; }
 .tvx [hidden] { display: none !important; }
 .tvx--hidden .tvx-launcher, .tvx--hidden .tvx-teaser { display: none !important; }
-.tvx button, .tvx input, .tvx textarea, .tvx select { font: inherit; letter-spacing: inherit; color: inherit; margin: 0; }
-.tvx button { cursor: pointer; background: none; border: 0; padding: 0; }
+/* Zero-specificity resets so single-class component rules always win. */
+:where(.tvx) :where(button, input, textarea, select) { font: inherit; letter-spacing: inherit; color: inherit; margin: 0; }
+:where(.tvx) :where(button) { cursor: pointer; background: none; border: 0; padding: 0; }
 .tvx a { color: inherit; }
 .tvx :where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+/* Inside the composer pill the field border is the focus indicator (reference .field:focus-within). */
+.tvx .tvx-composer .tvx-input:focus-visible { outline: none; }
 .tvx .tvx-head :where(a, button):focus-visible, .tvx .tvx-btn-dark:focus-visible, .tvx .tvx-launcher:focus-visible { outline-color: #fff; box-shadow: 0 0 0 4px #000; }
 .tvx-sr, .tvx-hp { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .tvx-ico { display: inline-flex; width: 20px; height: 20px; flex: none; }
@@ -82,7 +88,8 @@
 }
 .tvx-btn-dark:hover:not(:disabled) { filter: brightness(1.25); }
 .tvx-btn-dark:active:not(:disabled) { transform: translateY(1px); }
-.tvx-btn-dark:disabled { opacity: .45; cursor: not-allowed; }
+/* Reference keeps the dark pill look when disabled; only the cursor changes. */
+.tvx-btn-dark:disabled { cursor: not-allowed; filter: none; }
 .tvx-btn-block { width: 100%; height: 44px; font-size: 14px; }
 
 /* Glass icon button on the dark header (reference .glass) */
@@ -140,8 +147,9 @@
 @keyframes tvx-nudge { 0%, 100% { transform: none; } 30% { transform: translateY(-4px); } 60% { transform: translateY(0); } 80% { transform: translateY(-2px); } }
 
 /* ------------------------------------------------------------------ teaser */
-.tvx-teaser { display: flex; align-items: flex-start; gap: 4px; max-width: min(300px, calc(100vw - 32px)); background: #fff; border: 1px solid var(--tvx-line); border-radius: var(--tvx-radius-bubble); border-end-end-radius: var(--tvx-radius-tail); box-shadow: var(--tvx-shadow); padding: 4px; animation: tvx-in 240ms var(--tvx-ease) both; }
-.tvx[data-pos="left"] .tvx-teaser { border-end-end-radius: var(--tvx-radius-bubble); border-end-start-radius: var(--tvx-radius-tail); }
+.tvx-teaser { display: flex; align-items: flex-start; gap: 4px; max-width: min(300px, calc(100vw - 32px)); background: #fff; border: 1px solid var(--tvx-line); border-radius: var(--tvx-radius-bubble); box-shadow: var(--tvx-shadow); padding: 4px; animation: tvx-in 240ms var(--tvx-ease) both; }
+.tvx[data-pos="right"] .tvx-teaser { border-bottom-right-radius: var(--tvx-radius-tail); }
+.tvx[data-pos="left"] .tvx-teaser { border-bottom-left-radius: var(--tvx-radius-tail); }
 .tvx-teaser__body { flex: 1; text-align: start; padding: 10px 12px; font-size: 14px; line-height: 20.6px; border-radius: 12px; }
 .tvx-teaser__body:hover { background: var(--tvx-chip); }
 .tvx-teaser__close { width: 32px; height: 32px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; color: var(--tvx-mute-on-light); }
@@ -158,7 +166,9 @@
 	flex-direction: column;
 	width: 380px;
 	max-width: calc(100vw - 24px);
-	height: min(560px, calc(100vh - 140px - var(--tvx-lift)));
+	/* Content-sized like the reference, up to min(560px, 100vh - 140px). */
+	height: auto;
+	min-height: 320px;
 	max-height: min(560px, calc(100vh - 140px - var(--tvx-lift)));
 	overflow: hidden;
 	background: #fff;
@@ -179,7 +189,8 @@
 .tvx-head__avatar .tvx-ico { width: 20px; height: 20px; }
 .tvx-head__text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .tvx-head__title { font-size: 16px; font-weight: 500; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tvx-status { display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 1.3; color: var(--tvx-mute); }
+.tvx-status { display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 1.3; color: var(--tvx-mute); min-width: 0; }
+.tvx-status__text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tvx-status__dot { width: 6px; height: 6px; border-radius: 50%; background: #6b6b6b; flex: none; }
 .tvx-status__dot.is-online { background: var(--tvx-green); }
 .tvx-status__dot.is-away, .tvx-status__dot.is-scheduled { background: var(--tvx-amber); }
@@ -193,8 +204,8 @@
 .tvx-conn { font-size: 12px; text-align: center; padding: 6px 12px; background: #fff7e0; color: #5c4400; flex: none; }
 .tvx-notify { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 12px 8px; padding: 8px 12px; border-radius: 12px; background: var(--tvx-chip); font-size: 12px; line-height: 1.4; }
 
-.tvx-body { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; }
-.tvx-scroll, .tvx-alt { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.tvx-body { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.tvx-scroll, .tvx-alt { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 .tvx-thin { scrollbar-width: thin; scrollbar-color: var(--tvx-line-2) transparent; }
 .tvx-noscroll { scrollbar-width: none; }
 .tvx-noscroll::-webkit-scrollbar { display: none; }
@@ -214,7 +225,7 @@
 .tvx-auto { font-size: 11px; text-transform: uppercase; letter-spacing: .02em; color: var(--tvx-mute-on-light); }
 .tvx-meta { font-size: 11px; line-height: 1.3; color: var(--tvx-mute-on-light); padding: 0 4px; display: flex; gap: 2px; align-items: center; flex-wrap: wrap; }
 .tvx-retry { margin-inline-start: 6px; }
-.tvx-day { align-self: center; font-size: 11px; text-transform: uppercase; color: var(--tvx-mute-on-light); padding: 2px 10px; border-radius: 9999px; background: #fafafa; }
+.tvx-day { list-style: none; align-self: center; font-size: 11px; text-transform: uppercase; color: var(--tvx-mute-on-light); padding: 2px 10px; border-radius: 9999px; background: #fafafa; }
 .tvx-sys { align-self: stretch; text-align: center; font-size: 12px; line-height: 1.5; color: var(--tvx-mute-on-light); }
 .tvx-options { display: flex; flex-wrap: wrap; gap: 8px; }
 .tvx-older { align-self: center; margin: 12px auto 0; display: block; font-size: 12px; text-decoration: underline; color: var(--tvx-mute-on-light); }
@@ -243,8 +254,10 @@
 
 /* Composer: .field m-3 mt-0 h-12 gap-2 rounded-[32px] pl-4 pr-2 */
 .tvx-field { display: flex; align-items: flex-end; border: 1px solid var(--tvx-line); background: #fff; transition: border-color .15s ease; }
-.tvx-field:focus-within { border-color: var(--tvx-focus-line); }
-.tvx-composer { margin: 0 12px 12px; min-height: 48px; gap: 4px; border-radius: var(--tvx-radius-field); padding: 7px 8px 7px 8px; flex: none; }
+/* a11y deviation: reference focus border #a3a3a3 is 2.5:1; #767676 meets 3:1 for focus indicators. */
+.tvx-field:focus-within { border-color: #767676; }
+.tvx-composer { margin: 0 12px 12px; min-height: 48px; gap: 4px; border-radius: var(--tvx-radius-field); padding: 7px 8px 7px 8px; flex: none; align-items: center; }
+.tvx-composer:has(.tvx-input[style*="height"]) { align-items: flex-end; }
 .tvx-input { flex: 1; min-width: 0; border: 0; outline: none; resize: none; background: transparent; font-size: 14px; line-height: 20px; padding: 6px 4px; max-height: 120px; }
 .tvx-input::placeholder { color: var(--tvx-mute-on-light); opacity: 1; }
 .tvx-tool { width: 32px; height: 32px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; color: var(--tvx-mute-on-light); flex: none; }

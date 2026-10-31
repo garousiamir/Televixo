@@ -1,0 +1,104 @@
+[
+  {
+    "size": "desktop",
+    "dir": "ltr",
+    "reference": {
+      "w": 380,
+      "h": 446,
+      "x": 1036
+    },
+    "televixo": {
+      "w": 380,
+      "h": 530,
+      "x": 1036
+    },
+    "diff_pixels": 19737,
+    "diff_ratio": 0.098,
+    "image": "compare-desktop-ltr.png"
+  },
+  {
+    "size": "desktop",
+    "dir": "rtl",
+    "reference": {
+      "w": 380,
+      "h": 446,
+      "x": 1036
+    },
+    "televixo": {
+      "w": 380,
+      "h": 530,
+      "x": 24
+    },
+    "diff_pixels": 20405,
+    "diff_ratio": 0.1013,
+    "image": "compare-desktop-rtl.png"
+  },
+  {
+    "size": "tablet",
+    "dir": "ltr",
+    "reference": {
+      "w": 380,
+      "h": 446,
+      "x": 416
+    },
+    "televixo": {
+      "w": 380,
+      "h": 530,
+      "x": 416
+    },
+    "diff_pixels": 19503,
+    "diff_ratio": 0.0968,
+    "image": "compare-tablet-ltr.png"
+  },
+  {
+    "size": "tablet",
+    "dir": "rtl",
+    "reference": {
+      "w": 380,
+      "h": 446,
+      "x": 416
+    },
+    "televixo": {
+      "w": 380,
+      "h": 530,
+      "x": 24
+    },
+    "diff_pixels": 19655,
+    "diff_ratio": 0.0976,
+    "image": "compare-tablet-rtl.png"
+  },
+  {
+    "size": "mobile",
+    "dir": "ltr",
+    "reference": {
+      "w": 366,
+      "h": 446,
+      "x": 12
+    },
+    "televixo": {
+      "w": 366,
+      "h": 560,
+      "x": 12
+    },
+    "diff_pixels": 21408,
+    "diff_ratio": 0.1044,
+    "image": "compare-mobile-ltr.png"
+  },
+  {
+    "size": "mobile",
+    "dir": "rtl",
+    "reference": {
+      "w": 366,
+      "h": 446,
+      "x": 12
+    },
+    "televixo": {
+      "w": 366,
+      "h": 560,
+      "x": 12
+    },
+    "diff_pixels": 20933,
+    "diff_ratio": 0.1021,
+    "image": "compare-mobile-rtl.png"
+  }
+]

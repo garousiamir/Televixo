@@ -77,6 +77,7 @@ final class Admin {
 				array(
 					'adminUrl'   => admin_url( 'admin.php' ),
 					'restUrl'    => esc_url_raw( rest_url( 'televixo/v1/' ) ),
+					'nonce'      => wp_create_nonce( 'wp_rest' ),
 					'webhookUrl' => esc_url_raw( rest_url( 'televixo/v1/telegram/webhook' ) ),
 					'version'    => TELEVIXO_VERSION,
 					'caps'       => array_values( array_filter( Caps::ALL, 'current_user_can' ) ),

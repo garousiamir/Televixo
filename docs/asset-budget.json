@@ -1,10 +1,18 @@
 {
   "widget.js": {
-    "bytes": 67225,
-    "gzip": 21862
+    "bytes": 67407,
+    "gzip": 21916
   },
   "widget.css": {
-    "bytes": 19818,
-    "gzip": 4843
+    "bytes": 20150,
+    "gzip": 4940
+  },
+  "admin.js": {
+    "bytes": 89406,
+    "gzip": 24479
+  },
+  "admin.css": {
+    "bytes": 13056,
+    "gzip": 3155
   }
 }

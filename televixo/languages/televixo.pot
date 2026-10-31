@@ -1,0 +1,3172 @@
+# Copyright (C) 2026 Televixo
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Televixo – Telegram Live Chat for WordPress 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-31T06:43:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: televixo\n"
+
+#. Plugin Name of the plugin
+#: televixo.php:3
+msgid "Televixo – Telegram Live Chat for WordPress"
+msgstr ""
+
+#. Description of the plugin
+#: televixo.php:4
+msgid "Self-hosted live chat. Visitors chat on your site; operators answer in Telegram or the WordPress inbox."
+msgstr ""
+
+#. Author of the plugin
+#: televixo.php:8
+#: includes/Admin/Admin.php:49
+msgid "Televixo"
+msgstr ""
+
+#: includes/Admin/Admin.php:35
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Inbox"
+msgstr ""
+
+#: includes/Admin/Admin.php:36
+#: includes/Admin/Admin.php:134
+msgid "Setup"
+msgstr ""
+
+#: includes/Admin/Admin.php:37
+#: assets/build/admin.js:16
+msgid "Operators & teams"
+msgstr ""
+
+#: includes/Admin/Admin.php:38
+#: assets/build/admin.js:16
+msgid "Widget"
+msgstr ""
+
+#: includes/Admin/Admin.php:39
+#: assets/build/admin.js:16
+msgid "Targeting"
+msgstr ""
+
+#: includes/Admin/Admin.php:40
+#: assets/build/admin.js:16
+msgid "Replies & FAQ"
+msgstr ""
+
+#: includes/Admin/Admin.php:41
+#: assets/build/admin.js:16
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/Admin.php:42
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Reports"
+msgstr ""
+
+#: includes/Admin/Admin.php:43
+#: assets/build/admin.js:16
+msgid "Delivery & health"
+msgstr ""
+
+#: includes/Admin/Admin.php:60
+#: assets/build/admin.js:1
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Loading…"
+msgstr ""
+
+#: includes/Admin/Admin.php:60
+msgid "Televixo needs JavaScript in the admin area."
+msgstr ""
+
+#: includes/Admin/Admin.php:113
+msgid "Televixo is installed. Connect a Telegram bot to start receiving chats."
+msgstr ""
+
+#: includes/Admin/Admin.php:115
+msgid "Open setup"
+msgstr ""
+
+#: includes/Admin/Admin.php:122
+msgid "Televixo cannot deliver chats to Telegram right now (the bot token or destination needs attention)."
+msgstr ""
+
+#: includes/Admin/Admin.php:124
+msgid "View diagnostics"
+msgstr ""
+
+#: includes/Automation/KnowledgeBase.php:75
+msgid "Title is required."
+msgstr ""
+
+#: includes/Automation/Welcome.php:37
+#: includes/Automation/Welcome.php:68
+msgid "Automated assistant"
+msgstr ""
+
+#: includes/Automation/Welcome.php:62
+msgid "Invalid option."
+msgstr ""
+
+#: includes/Core/Lifecycle.php:27
+msgid "Televixo cannot be activated"
+msgstr ""
+
+#. translators: %s: PHP version
+#: includes/Core/Requirements.php:24
+#, php-format
+msgid "PHP %s or newer is required."
+msgstr ""
+
+#. translators: %s: PHP extension name
+#: includes/Core/Requirements.php:29
+#, php-format
+msgid "The PHP extension \"%s\" is required."
+msgstr ""
+
+#. translators: %s: database server version
+#: includes/Core/Requirements.php:35
+#, php-format
+msgid "MySQL 5.7+ or MariaDB 10.4+ with InnoDB is required (found %s)."
+msgstr ""
+
+#: includes/Core/Requirements.php:38
+msgid "The database connection must use the utf8mb4 character set."
+msgstr ""
+
+#: includes/Domain/Assignment.php:36
+#: includes/REST/AdminController.php:541
+#: includes/REST/AdminController.php:576
+msgid "Operator not found."
+msgstr ""
+
+#: includes/Domain/Assignment.php:56
+msgid "The assignment changed. Reload and try again."
+msgstr ""
+
+#: includes/Domain/Assignment.php:68
+msgid "This conversation is closed."
+msgstr ""
+
+#: includes/Domain/Assignment.php:92
+msgid "Another operator already took this conversation."
+msgstr ""
+
+#: includes/Domain/Attachments.php:89
+msgid "Upload quota for this conversation is used up."
+msgstr ""
+
+#: includes/Domain/Attachments.php:95
+msgid "The file could not be stored."
+msgstr ""
+
+#: includes/Domain/Attachments.php:164
+#: includes/REST/AdminController.php:319
+msgid "Attachment not found."
+msgstr ""
+
+#: includes/Domain/Attachments.php:222
+#: includes/Widget/Strings.php:135
+msgid "The file is too large."
+msgstr ""
+
+#: includes/Domain/Attachments.php:223
+#: includes/Domain/Attachments.php:224
+#: includes/Widget/Strings.php:136
+msgid "This file type is not allowed."
+msgstr ""
+
+#: includes/Domain/Attachments.php:225
+msgid "The file content does not match its type."
+msgstr ""
+
+#: includes/Domain/Attachments.php:226
+msgid "The file contains blocked content."
+msgstr ""
+
+#: includes/Domain/Attachments.php:227
+msgid "The image could not be read."
+msgstr ""
+
+#: includes/Domain/Attachments.php:228
+msgid "The file is empty."
+msgstr ""
+
+#: includes/Domain/Attachments.php:230
+msgid "The file could not be accepted."
+msgstr ""
+
+#: includes/Domain/Conversations.php:43
+#: includes/Domain/Messages.php:54
+#: includes/REST/AdminController.php:131
+#: includes/Telegram/UpdateProcessor.php:420
+msgid "Conversation not found."
+msgstr ""
+
+#: includes/Domain/Conversations.php:211
+msgid "The conversation was changed by someone else. Reload and try again."
+msgstr ""
+
+#: includes/Domain/Messages.php:34
+#: includes/Domain/Messages.php:121
+msgid "Message is empty."
+msgstr ""
+
+#: includes/Domain/Messages.php:37
+msgid "Message is too long."
+msgstr ""
+
+#: includes/Domain/Messages.php:40
+msgid "Invalid message identifier."
+msgstr ""
+
+#: includes/Domain/Messages.php:124
+msgid "This conversation is marked as spam."
+msgstr ""
+
+#: includes/Domain/Messages.php:220
+msgid "Note is empty."
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:30
+#: includes/Privacy/PersonalData.php:39
+msgid "Televixo chat conversations"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:65
+msgid "Reference"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:66
+msgid "Started"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:67
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Status"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:68
+msgid "Transcript"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:70
+msgid "Chat conversations"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:78
+msgid "Chat profile"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:81
+#: includes/Widget/Strings.php:99
+#: assets/build/admin.js:3
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Name"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:82
+#: includes/Widget/Strings.php:100
+#: assets/build/admin.js:3
+#: assets/build/admin.js:10
+msgid "Email"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:83
+#: includes/Widget/Strings.php:101
+#: assets/build/admin.js:3
+#: assets/build/admin.js:10
+msgid "Phone"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:84
+#: assets/build/admin.js:10
+msgid "First seen"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:85
+msgid "Consent given"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:106
+msgid "Chat messages already delivered to Telegram are not removed from Telegram. Delete them there if required."
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:134
+msgid "Televixo live chat"
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:136
+msgid "When you use the chat, we store your messages, any files you send, the name, email and phone number you choose to give, the page you started the chat on and the referring website (domain only). A random session cookie (televixo_session) keeps your conversation available across pages; it is not used for tracking. The chat may also store, in your browser, a first-visit date, message drafts and which chat prompts you have seen, so prompts are not repeated."
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:137
+msgid "Chat messages are relayed to our support team through Telegram (Telegram Messenger Inc.). Copies delivered to Telegram are subject to Telegram's privacy policy and are not removed when we delete your conversation from this website."
+msgstr ""
+
+#: includes/Privacy/PersonalData.php:138
+msgid "Conversations are deleted automatically after the retention period set by the site owner. You can request an export or deletion of your chat data."
+msgstr ""
+
+#. translators: %s: conversation reference
+#: includes/Privacy/Transcript.php:19
+#, php-format
+msgid "Conversation %s"
+msgstr ""
+
+#: includes/Privacy/Transcript.php:29
+#: includes/Widget/Strings.php:96
+msgid "You"
+msgstr ""
+
+#: includes/Privacy/Transcript.php:31
+#: includes/Widget/Strings.php:95
+msgid "Automated message"
+msgstr ""
+
+#: includes/Privacy/Transcript.php:32
+msgid "System"
+msgstr ""
+
+#: includes/Privacy/Transcript.php:36
+msgid "(removed)"
+msgstr ""
+
+#: includes/Queue/Scheduler.php:47
+msgid "Every minute (Televixo queue)"
+msgstr ""
+
+#: includes/REST/AdminController.php:112
+#: includes/REST/SetupController.php:32
+msgid "You do not have permission to do this."
+msgstr ""
+
+#: includes/REST/AdminController.php:119
+msgid "Your operator account is disabled."
+msgstr ""
+
+#: includes/REST/AdminController.php:336
+#: includes/REST/PublicController.php:290
+msgid "No file received."
+msgstr ""
+
+#: includes/REST/AdminController.php:367
+msgid "Only the assignee or a supervisor can transfer."
+msgstr ""
+
+#: includes/REST/AdminController.php:396
+msgid "Invalid status."
+msgstr ""
+
+#: includes/REST/AdminController.php:452
+#: includes/REST/AdminController.php:464
+msgid "Visitor not found."
+msgstr ""
+
+#: includes/REST/AdminController.php:491
+msgid "Shortcut and text are required."
+msgstr ""
+
+#: includes/REST/AdminController.php:501
+msgid "That shortcut already exists."
+msgstr ""
+
+#: includes/REST/AdminController.php:531
+msgid "That user cannot handle chats. Give them the Chat Operator role first."
+msgstr ""
+
+#: includes/REST/AdminController.php:573
+msgid "You can only link your own Telegram account."
+msgstr ""
+
+#: includes/REST/AdminController.php:586
+msgid "You can only unlink your own Telegram account."
+msgstr ""
+
+#: includes/REST/AdminController.php:603
+msgid "Team name is required."
+msgstr ""
+
+#: includes/REST/AdminController.php:618
+msgid "A team with that slug exists."
+msgstr ""
+
+#: includes/REST/AdminController.php:743
+msgid "This is not a Televixo settings export."
+msgstr ""
+
+#: includes/REST/Controller.php:40
+#: includes/Widget/Strings.php:140
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/REST/Controller.php:66
+#: includes/Widget/Strings.php:142
+msgid "Your chat session has expired. Please reload the page."
+msgstr ""
+
+#: includes/REST/Controller.php:69
+#: includes/REST/Controller.php:92
+#: includes/REST/PublicController.php:69
+#: includes/REST/PublicController.php:86
+#: includes/REST/PublicController.php:92
+#: includes/Widget/Strings.php:143
+msgid "Chat is not available."
+msgstr ""
+
+#: includes/REST/Controller.php:86
+msgid "Your chat session needs to be refreshed. Please reload the page."
+msgstr ""
+
+#: includes/REST/Controller.php:89
+#: includes/REST/PublicController.php:72
+msgid "Request is too large."
+msgstr ""
+
+#: includes/REST/PublicController.php:77
+msgid "JSON body required."
+msgstr ""
+
+#: includes/REST/PublicController.php:95
+msgid "Too many requests. Please wait a moment."
+msgstr ""
+
+#: includes/REST/PublicController.php:129
+#: includes/REST/PublicController.php:404
+msgid "Your message could not be sent."
+msgstr ""
+
+#: includes/REST/PublicController.php:132
+#: includes/REST/PublicController.php:410
+msgid "Please complete the verification."
+msgstr ""
+
+#: includes/REST/PublicController.php:160
+msgid "Please enter your name."
+msgstr ""
+
+#: includes/REST/PublicController.php:167
+#: includes/REST/PublicController.php:416
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: includes/REST/PublicController.php:169
+msgid "Please enter your email address."
+msgstr ""
+
+#: includes/REST/PublicController.php:176
+msgid "Please enter your phone number."
+msgstr ""
+
+#: includes/REST/PublicController.php:184
+#: includes/REST/PublicController.php:186
+msgid "Please choose a department."
+msgstr ""
+
+#: includes/REST/PublicController.php:193
+msgid "Please accept the privacy terms to start the chat."
+msgstr ""
+
+#. translators: %s: field label
+#: includes/REST/PublicController.php:206
+#, php-format
+msgid "%s is required."
+msgstr ""
+
+#: includes/REST/PublicController.php:211
+#: includes/REST/PublicController.php:422
+msgid "Please check the highlighted fields."
+msgstr ""
+
+#: includes/REST/PublicController.php:254
+#: includes/Widget/Strings.php:141
+msgid "You are sending messages too quickly. Please wait a moment."
+msgstr ""
+
+#: includes/REST/PublicController.php:259
+msgid "Invalid message."
+msgstr ""
+
+#: includes/REST/PublicController.php:279
+msgid "File uploads are disabled."
+msgstr ""
+
+#: includes/REST/PublicController.php:283
+msgid "Too many uploads. Please wait."
+msgstr ""
+
+#: includes/REST/PublicController.php:317
+msgid "File not found."
+msgstr ""
+
+#: includes/REST/PublicController.php:350
+msgid "Ratings are disabled."
+msgstr ""
+
+#: includes/REST/PublicController.php:355
+msgid "Please choose a rating from 1 to 5."
+msgstr ""
+
+#: includes/REST/PublicController.php:369
+msgid "You already rated this conversation."
+msgstr ""
+
+#: includes/REST/PublicController.php:386
+msgid "Transcripts are disabled."
+msgstr ""
+
+#: includes/REST/PublicController.php:407
+msgid "Too many requests. Please try again later."
+msgstr ""
+
+#: includes/REST/PublicController.php:419
+msgid "Please enter a message."
+msgstr ""
+
+#. translators: %s: conversation reference
+#: includes/REST/PublicController.php:432
+#, php-format
+msgid "New offline message %s"
+msgstr ""
+
+#. translators: 1: visitor email, 2: message
+#: includes/REST/PublicController.php:434
+#, php-format
+msgid ""
+"From: %1$s\n"
+"\n"
+"%2$s\n"
+"\n"
+"Reply from the Televixo inbox in WordPress."
+msgstr ""
+
+#: includes/REST/PublicController.php:447
+msgid "Too many requests."
+msgstr ""
+
+#: includes/REST/SetupController.php:69
+msgid "The bot token is defined in wp-config.php and cannot be changed here."
+msgstr ""
+
+#: includes/REST/SetupController.php:73
+msgid "That does not look like a bot token from @BotFather."
+msgstr ""
+
+#: includes/REST/SetupController.php:78
+msgid "Telegram rejected this token."
+msgstr ""
+
+#: includes/REST/SetupController.php:78
+msgid "Could not reach Telegram. Check that the server can make outbound HTTPS requests to api.telegram.org."
+msgstr ""
+
+#. translators: %d: number of active conversations
+#: includes/REST/SetupController.php:87
+#, php-format
+msgid "This is a different bot. %d active conversations are routed through the current bot and will stop relaying to Telegram (they remain available in the WordPress inbox). Confirm to continue."
+msgstr ""
+
+#: includes/REST/SetupController.php:142
+msgid "Enter a numeric chat ID (groups start with -100)."
+msgstr ""
+
+#: includes/REST/SetupController.php:147
+msgid "The bot cannot access that chat. Add the bot to the group (or send /start to the bot for a private chat) and try again."
+msgstr ""
+
+#: includes/REST/SetupController.php:153
+msgid "Channels are not supported because operator replies cannot be attributed to individual people. Use a group."
+msgstr ""
+
+#: includes/REST/SetupController.php:157
+msgid "Topics Mode needs a supergroup with Topics enabled."
+msgstr ""
+
+#: includes/REST/SetupController.php:159
+msgid "Private chat: only this person will see visitor messages. They must keep the bot unblocked."
+msgstr ""
+
+#: includes/REST/SetupController.php:166
+msgid "The bot is a member of the group."
+msgstr ""
+
+#: includes/REST/SetupController.php:167
+msgid "Every member of this group can read relayed visitor messages. Use separate groups per team (or the WordPress inbox) when visitors must be isolated between teams."
+msgstr ""
+
+#: includes/REST/SetupController.php:169
+msgid "The bot can read group messages."
+msgstr ""
+
+#: includes/REST/SetupController.php:169
+msgid "Privacy mode is on: the bot only receives replies to its own messages and commands, which is all Reply Mode needs."
+msgstr ""
+
+#: includes/REST/SetupController.php:173
+msgid "Topics are enabled."
+msgstr ""
+
+#: includes/REST/SetupController.php:173
+msgid "Enable Topics in the group settings (requires a supergroup)."
+msgstr ""
+
+#: includes/REST/SetupController.php:174
+msgid "The bot can create and close topics."
+msgstr ""
+
+#: includes/REST/SetupController.php:174
+msgid "Make the bot an administrator with the \"Manage topics\" right."
+msgstr ""
+
+#: includes/REST/SetupController.php:175
+msgid "The bot receives messages inside topics."
+msgstr ""
+
+#: includes/REST/SetupController.php:175
+msgid "The bot must be an administrator (or have privacy mode disabled in @BotFather) to receive messages typed inside topics."
+msgstr ""
+
+#: includes/REST/SetupController.php:190
+msgid "New conversations use this destination. Existing conversations keep the routing they started with."
+msgstr ""
+
+#: includes/REST/SetupController.php:196
+msgid "Choose a destination first."
+msgstr ""
+
+#: includes/REST/SetupController.php:198
+msgid "✅ Televixo test message. Visitor chats from your website will appear here."
+msgstr ""
+
+#: includes/REST/SetupController.php:200
+msgid "Telegram did not accept the message."
+msgstr ""
+
+#: includes/REST/SetupController.php:202
+msgid "Telegram accepted the message. That confirms delivery to the chat, not that someone has read it."
+msgstr ""
+
+#: includes/REST/SetupController.php:208
+msgid "Could not read the webhook status from Telegram."
+msgstr ""
+
+#: includes/REST/SetupController.php:230
+msgid "Telegram webhooks require HTTPS. Enable HTTPS on this site first."
+msgstr ""
+
+#. translators: %s: host name of the other webhook
+#: includes/REST/SetupController.php:239
+#, php-format
+msgid "This bot already sends updates to %s. Replacing it will stop that integration. Use a dedicated bot for this site, or confirm to replace."
+msgstr ""
+
+#: includes/REST/SetupController.php:254
+msgid "Telegram did not accept the webhook."
+msgstr ""
+
+#: includes/REST/SetupController.php:268
+msgid "The registered webhook belongs to another site, so it was left unchanged."
+msgstr ""
+
+#: includes/Rules/Repository.php:59
+msgid "Rule name is required."
+msgstr ""
+
+#: includes/Rules/Repository.php:70
+msgid "Rule not found."
+msgstr ""
+
+#: includes/Rules/Repository.php:105
+msgid "This is not a Televixo rules export."
+msgstr ""
+
+#: includes/Security/Capabilities.php:44
+msgid "Chat Operator"
+msgstr ""
+
+#: includes/Telegram/Formatter.php:78
+#: includes/Telegram/Formatter.php:109
+#: includes/Telegram/TelegramProvider.php:160
+#: assets/build/admin.js:10
+msgid "Visitor"
+msgstr ""
+
+#: includes/Telegram/TelegramProvider.php:158
+msgid "via website inbox"
+msgstr ""
+
+#: includes/Telegram/TelegramProvider.php:213
+#: assets/build/admin.js:10
+msgid "Claim"
+msgstr ""
+
+#: includes/Telegram/TelegramProvider.php:217
+#: assets/build/admin.js:10
+msgid "Close"
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:161
+msgid "Anonymous admin messages cannot be sent to visitors because the sender cannot be identified. Turn off \"Remain anonymous\" to reply."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:176
+msgid "That reply points to a different conversation than this topic, so it was not sent."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:188
+msgid "This reply is not linked to a website conversation, so it was not sent. Reply directly to a visitor message from the bot."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:196
+msgid "You are not an enrolled Televixo operator, so your message was not sent to the visitor. Ask an administrator for an enrollment code."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:212
+msgid "This conversation is assigned to another operator. Your message was not sent."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:222
+msgid "This conversation is marked as spam; replies are not delivered."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:230
+msgid "Another operator claimed this conversation a moment ago. Your message was not sent."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:247
+msgid "The file could not be delivered (type or size not allowed)."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:255
+msgid "Your text was delivered, but an attachment was refused (type or size not allowed)."
+msgstr ""
+
+#. translators: %s: operator display name
+#: includes/Telegram/UpdateProcessor.php:323
+#, php-format
+msgid "Linked to Televixo operator %s. You can now reply to visitor messages in the support group."
+msgstr ""
+
+#. translators: %s: operator display name
+#: includes/Telegram/UpdateProcessor.php:324
+msgid "That code is invalid or expired. Create a new code in WordPress → Televixo → Operators."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:328
+msgid "Hello! This bot relays website chats. To become an operator, open WordPress → Televixo → Operators, create an enrollment code and send it here as: /link CODE"
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:344
+msgid "You are marked available for the next 8 hours (or until you send /away or /offline)."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:345
+msgid "You are marked away."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:346
+msgid "You are marked offline."
+msgstr ""
+
+#. translators: %s: conversation reference
+#: includes/Telegram/UpdateProcessor.php:357
+#: includes/Telegram/UpdateProcessor.php:426
+#, php-format
+msgid "You claimed %s."
+msgstr ""
+
+#. translators: %s: conversation reference
+#: includes/Telegram/UpdateProcessor.php:364
+#, php-format
+msgid "%s closed."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:377
+msgid "Marked as spam. Further visitor messages will not be relayed."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:384
+msgid "Commands: /claim, /close, /note text, /spam, /online, /away. Messages starting with \"/\" are never sent to visitors."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:391
+msgid "You do not have access to this conversation."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:406
+msgid "Unsupported action."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:415
+msgid "You are not an enrolled operator."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:430
+msgid "This conversation is assigned to another operator."
+msgstr ""
+
+#: includes/Telegram/UpdateProcessor.php:434
+msgid "Conversation closed."
+msgstr ""
+
+#: includes/Widget/Config.php:61
+#: assets/build/admin.js:6
+msgid "Chat with us"
+msgstr ""
+
+#: includes/Widget/Config.php:65
+msgid "We are offline right now. Leave a message and we will get back to you by email."
+msgstr ""
+
+#: includes/Widget/Config.php:66
+msgid "We are away for a moment. Your message will be answered as soon as possible."
+msgstr ""
+
+#. translators: %d: number of unread messages
+#: includes/Widget/Strings.php:25
+#, php-format
+msgid "%d new message"
+msgid_plural "%d new messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of minutes
+#: includes/Widget/Strings.php:27
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Widget/Strings.php:61
+msgid "Open chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:62
+msgid "Close chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:63
+msgid "Minimize chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:64
+msgid "Expand chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:65
+msgid "Collapse chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:66
+#: assets/build/admin.js:10
+msgid "Send"
+msgstr ""
+
+#: includes/Widget/Strings.php:67
+msgid "Type your message…"
+msgstr ""
+
+#: includes/Widget/Strings.php:68
+msgid "Type your message"
+msgstr ""
+
+#: includes/Widget/Strings.php:69
+msgid "Attach a file"
+msgstr ""
+
+#: includes/Widget/Strings.php:70
+msgid "Record a voice message"
+msgstr ""
+
+#: includes/Widget/Strings.php:71
+msgid "Stop recording"
+msgstr ""
+
+#: includes/Widget/Strings.php:72
+#: assets/build/admin.js:16
+msgid "Cancel"
+msgstr ""
+
+#: includes/Widget/Strings.php:73
+#: assets/build/admin.js:10
+msgid "Retry"
+msgstr ""
+
+#: includes/Widget/Strings.php:74
+msgid "Remove"
+msgstr ""
+
+#: includes/Widget/Strings.php:75
+msgid "Online now"
+msgstr ""
+
+#: includes/Widget/Strings.php:76
+#: assets/build/admin.js:10
+msgid "Offline"
+msgstr ""
+
+#: includes/Widget/Strings.php:77
+#: assets/build/admin.js:10
+msgid "Away"
+msgstr ""
+
+#: includes/Widget/Strings.php:78
+msgid "Closed now"
+msgstr ""
+
+#. translators: %s: localized date and time
+#: includes/Widget/Strings.php:80
+#, php-format
+msgid "Opens %s"
+msgstr ""
+
+#: includes/Widget/Strings.php:81
+msgid "Within business hours"
+msgstr ""
+
+#: includes/Widget/Strings.php:82
+msgid "Connecting…"
+msgstr ""
+
+#: includes/Widget/Strings.php:83
+msgid "Connection lost. Reconnecting…"
+msgstr ""
+
+#: includes/Widget/Strings.php:84
+#: assets/build/admin.js:16
+msgid "Connected"
+msgstr ""
+
+#: includes/Widget/Strings.php:85
+msgid "Sending…"
+msgstr ""
+
+#: includes/Widget/Strings.php:86
+msgid "Sent"
+msgstr ""
+
+#: includes/Widget/Strings.php:87
+msgid "Delivered to the team"
+msgstr ""
+
+#: includes/Widget/Strings.php:88
+msgid "Seen"
+msgstr ""
+
+#: includes/Widget/Strings.php:89
+msgid "Not sent"
+msgstr ""
+
+#: includes/Widget/Strings.php:90
+msgid "An operator is typing…"
+msgstr ""
+
+#: includes/Widget/Strings.php:91
+msgid "Today"
+msgstr ""
+
+#: includes/Widget/Strings.php:92
+msgid "Yesterday"
+msgstr ""
+
+#: includes/Widget/Strings.php:93
+#: assets/build/admin.js:10
+msgid "Load earlier messages"
+msgstr ""
+
+#: includes/Widget/Strings.php:94
+msgid "Scroll to latest"
+msgstr ""
+
+#: includes/Widget/Strings.php:97
+msgid "Support"
+msgstr ""
+
+#: includes/Widget/Strings.php:98
+msgid "Start chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:102
+#: assets/build/admin.js:3
+msgid "Department"
+msgstr ""
+
+#: includes/Widget/Strings.php:103
+msgid "Choose…"
+msgstr ""
+
+#: includes/Widget/Strings.php:104
+msgid "(optional)"
+msgstr ""
+
+#: includes/Widget/Strings.php:105
+#: assets/build/admin.js:1
+msgid "Required"
+msgstr ""
+
+#: includes/Widget/Strings.php:106
+msgid "Message"
+msgstr ""
+
+#: includes/Widget/Strings.php:107
+msgid "Leave a message"
+msgstr ""
+
+#: includes/Widget/Strings.php:108
+msgid "Thanks! We received your message and will reply by email."
+msgstr ""
+
+#: includes/Widget/Strings.php:109
+msgid "End chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:110
+msgid "End this conversation?"
+msgstr ""
+
+#: includes/Widget/Strings.php:111
+msgid "This conversation has ended."
+msgstr ""
+
+#: includes/Widget/Strings.php:112
+msgid "Start a new conversation"
+msgstr ""
+
+#: includes/Widget/Strings.php:113
+msgid "How was this conversation?"
+msgstr ""
+
+#. translators: %d: star rating 1-5
+#: includes/Widget/Strings.php:115
+#, php-format
+msgid "Rate %d out of 5"
+msgstr ""
+
+#: includes/Widget/Strings.php:116
+msgid "Anything we could do better? (optional)"
+msgstr ""
+
+#: includes/Widget/Strings.php:117
+msgid "Send rating"
+msgstr ""
+
+#: includes/Widget/Strings.php:118
+msgid "Thank you for your feedback!"
+msgstr ""
+
+#: includes/Widget/Strings.php:119
+msgid "Download transcript"
+msgstr ""
+
+#: includes/Widget/Strings.php:120
+msgid "Report abuse"
+msgstr ""
+
+#: includes/Widget/Strings.php:121
+msgid "Thanks, the team has been notified."
+msgstr ""
+
+#: includes/Widget/Strings.php:122
+msgid "Search help articles"
+msgstr ""
+
+#: includes/Widget/Strings.php:123
+msgid "No articles found."
+msgstr ""
+
+#: includes/Widget/Strings.php:124
+msgid "Back"
+msgstr ""
+
+#: includes/Widget/Strings.php:125
+msgid "Help articles"
+msgstr ""
+
+#: includes/Widget/Strings.php:126
+msgid "Talk to a person"
+msgstr ""
+
+#: includes/Widget/Strings.php:127
+msgid "You are in the queue. A team member will reply as soon as possible."
+msgstr ""
+
+#: includes/Widget/Strings.php:128
+msgid "Turn sound on"
+msgstr ""
+
+#: includes/Widget/Strings.php:129
+msgid "Turn sound off"
+msgstr ""
+
+#: includes/Widget/Strings.php:130
+msgid "Get a browser notification when we reply?"
+msgstr ""
+
+#: includes/Widget/Strings.php:131
+msgid "Notify me"
+msgstr ""
+
+#: includes/Widget/Strings.php:132
+msgid "No thanks"
+msgstr ""
+
+#. translators: %s: site name
+#: includes/Widget/Strings.php:134
+#, php-format
+msgid "New reply from %s"
+msgstr ""
+
+#: includes/Widget/Strings.php:137
+msgid "Upload failed."
+msgstr ""
+
+#: includes/Widget/Strings.php:138
+#: assets/build/admin.js:10
+msgid "Uploading…"
+msgstr ""
+
+#: includes/Widget/Strings.php:139
+msgid "Microphone access was denied. You can attach a file or type instead."
+msgstr ""
+
+#: includes/Widget/Strings.php:144
+#: assets/build/admin.js:1
+msgid "Dismiss"
+msgstr ""
+
+#: includes/Widget/Strings.php:145
+msgid "Chat"
+msgstr ""
+
+#: includes/Widget/Strings.php:146
+#: assets/build/admin.js:10
+msgid "Messages"
+msgstr ""
+
+#: includes/Widget/Strings.php:147
+msgid "Image"
+msgstr ""
+
+#: includes/Widget/Strings.php:148
+msgid "File"
+msgstr ""
+
+#: includes/Widget/Strings.php:149
+msgid "Voice message"
+msgstr ""
+
+#: includes/Widget/Strings.php:150
+msgid "Insert emoji"
+msgstr ""
+
+#: includes/Widget/Strings.php:151
+msgid "New message"
+msgstr ""
+
+#: includes/Widget/Strings.php:152
+msgid "I agree to the processing of my data for this chat."
+msgstr ""
+
+#: includes/Widget/Strings.php:153
+msgid "More options"
+msgstr ""
+
+#. translators: 1: required PHP version, 2: required WordPress version, 3: current PHP version, 4: current WordPress version.
+#: televixo.php:42
+#, php-format
+msgid "Televixo requires PHP %1$s+ and WordPress %2$s+. This site runs PHP %3$s and WordPress %4$s. Televixo is inactive until the server is upgraded."
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Copied"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Copy"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Settings saved."
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Hidden"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Optional"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Monday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Tuesday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Wednesday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Thursday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Friday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Saturday"
+msgstr ""
+
+#: assets/build/admin.js:1
+msgid "Sunday"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Settings sections"
+msgstr ""
+
+#: assets/build/admin.js:3
+#: assets/build/admin.js:10
+msgid "Routing"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Pre-chat"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Hours & offline"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Files & ratings"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Privacy & security"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Import / export"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Routing & Telegram behaviour"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Automatic assignment"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Manual – operators claim"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Round robin among online operators"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Least busy online operator"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Default team"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "None"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Topics Mode forwarding"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Every message from an enrolled operator"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Only explicit replies to visitor messages"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Messages from group members who are not enrolled operators are never forwarded."
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Internal note prefix"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Telegram messages starting with this become internal notes."
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "When a send times out"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Hold for review (no duplicates)"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Retry automatically (may duplicate)"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Replying in Telegram claims an unassigned conversation"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Recreate a topic if it was deleted"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Context sent to Telegram with each new conversation"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Page path"
+msgstr ""
+
+#: assets/build/admin.js:3
+#: assets/build/admin.js:10
+msgid "Referring site"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Send only what operators need: everything relayed is stored by Telegram and visible to every group member."
+msgstr ""
+
+#: assets/build/admin.js:3
+#: assets/build/admin.js:5
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+msgid "Save"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Pre-chat form"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Ask for details before the chat starts"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Consent checkbox"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Consent text (links allowed)"
+msgstr ""
+
+#: assets/build/admin.js:3
+msgid "Departments (one per line: key|Label|team ID)"
+msgstr ""
+
+#: assets/build/admin.js:4
+msgid "Custom fields (one per line: key|Label|text, textarea or select|required|option1,option2)"
+msgstr ""
+
+#: assets/build/admin.js:5
+msgid "Business hours & offline behaviour"
+msgstr ""
+
+#: assets/build/admin.js:5
+msgid "The widget shows \"online\" only when an operator is actually available. Hours only control when chat is open."
+msgstr ""
+
+#: assets/build/admin.js:5
+msgid "Use business hours"
+msgstr ""
+
+#: assets/build/admin.js:5
+msgid "Time zone (IANA name, empty = site time zone)"
+msgstr ""
+
+#: assets/build/admin.js:5
+msgid "Holidays (one per line: YYYY-MM-DD Label)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Temporarily away (overrides everything)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Away message"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Require an online operator to show \"online\""
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "When off, the widget shows \"Within business hours\" instead of claiming someone is online."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "When nobody is available"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Show an offline message form"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Accept chat messages anyway"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Hide the chat"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Offline message"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Email offline messages to"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Files, voice & ratings"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Allow visitors to send files"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Allowed types (content is verified on the server; SVG and executables are always refused)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Maximum file size (MB, ≤ 20)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Storage quota per conversation (MB)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Voice messages"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Recording asks for microphone permission when the visitor presses the button. Only browsers that record OGG/Opus or M4A (Telegram voice formats) show the button; others can still attach a file."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Ask for a rating when a chat ends"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Allow a comment with the rating"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Privacy, retention & security"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Delete closed conversations after (days, 0 = keep)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Keep audit events for (days)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Let visitors download a transcript"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Trusted reverse proxies (one IP or CIDR per line)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Only requests from these addresses may set X-Forwarded-For. Leave empty unless you use a proxy or CDN."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Messages per visitor per minute"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "New sessions per network per hour"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Uploads per visitor per hour"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Maximum message length (characters)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Messages already delivered to Telegram are not deleted from Telegram when they are deleted here."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Delete all Televixo data when the plugin is deleted"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Off by default. Deactivating never deletes data."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Run retention cleanup now"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Import / export settings"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Exports never include the bot token or webhook secret."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Download export"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Paste an export to import"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Imported. Rules were imported disabled."
+msgstr ""
+
+#: assets/build/admin.js:6
+#: assets/build/admin.js:16
+msgid "Import"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Launcher"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Show the chat widget on the site"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Style"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Pill with label"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Circle"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Position"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "End (right in LTR, left in RTL)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Start (left in LTR, right in RTL)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Always right"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Always left"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Label"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Icon"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Chat bubble"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Discussion"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Help"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Mail"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Custom SVG"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Custom SVG icon"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Only basic shapes are kept; scripts, links and styles are removed on save."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Desktop side offset (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Desktop bottom offset (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Mobile side offset (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Mobile bottom offset (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Desktop size (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Mobile size (px)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Stacking order (z-index)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Header & bubble colour"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Entrance animation"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Gentle attention nudge when a message is shown (once, never looping)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Animations are always disabled for visitors who prefer reduced motion."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Move the launcher above these elements (CSS selectors, one per line)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Common cookie banners and WooCommerce checkout buttons are avoided automatically."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Chat window"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Title"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Subtitle (e.g. typical reply time)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Greeting"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Show the greeting as a bubble next to the launcher"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Greeting bubble delay (seconds of visible time)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Show help articles"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Allow sound notifications (visitors can turn them off)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Offer browser notifications after the visitor writes"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Hide on these paths (one per line, * wildcard)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "On excluded paths no widget code is loaded at all."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Save widget settings"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Preview size"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Desktop"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Tablet"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Mobile"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Right-to-left preview"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Live preview"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "The preview uses sample messages and does not contact your site or Telegram. Unsaved changes are shown immediately."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Saved."
+msgstr ""
+
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+msgid "Canned replies"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Type / followed by the shortcut in the inbox composer."
+msgstr ""
+
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Edit"
+msgstr ""
+
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Delete"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "No canned replies yet."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Shortcut"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Reply text"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Update"
+msgstr ""
+
+#: assets/build/admin.js:6
+#: assets/build/admin.js:10
+msgid "Add"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Help articles (FAQ)"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Shown in the widget as searchable cards. Suggested articles appear before the visitor writes."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Suggested"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "No articles yet."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Answer"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Search keywords"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Suggest before the visitor writes"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Welcome flow"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "An automated first message with buttons. Automated messages are labelled in the widget and never count as human responses. “Talk to a person” options hand over to your team."
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Enable welcome flow"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Welcome message"
+msgstr ""
+
+#: assets/build/admin.js:6
+msgid "Options (one per line: Button label|Automated answer|handoff)"
+msgstr ""
+
+#: assets/build/admin.js:8
+msgid "Suggested questions (one per line)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Pending"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Queued"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Assigned"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Open"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Waiting for visitor"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Closed"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reopened"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Spam"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Saved"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Queued for Telegram"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Accepted by Telegram"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Partially sent"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Delivery uncertain"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Not delivered"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Conversations"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "My availability"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Available"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Shown as online"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Not shown as online"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Filter conversations"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Active"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Mine"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Unassigned"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Search name, email or reference"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Search conversations"
+msgstr ""
+
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Priority"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "%d unread message"
+msgid_plural "%d unread messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: assets/build/admin.js:10
+msgid "No conversations here."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Load more"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Select a conversation."
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Assigned to %s"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Topics Mode"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reply Mode"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Transfer to"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Transfer to…"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reopen"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Mark as spam? Visitor messages will no longer be relayed."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Automated"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Seen by visitor"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Visitor is typing…"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Composer mode"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reply to visitor"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Internal note"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Notes are visible only to your team, never to the visitor."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reply"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Write a note for your team…"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Type a reply… (type / for canned replies)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Attach"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Add note"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Ready"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Ctrl/⌘ + Enter to send. Replies are also posted to Telegram so the team sees them."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Conversation details"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Account"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Page"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Referrer"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Campaign"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Device"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Consent"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Rated %d/5"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Low"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Normal"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "High"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Urgent"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Tags (comma separated)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Internal notes"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "No notes yet."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Earlier conversations"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Reason for blocking this visitor (internal):"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Also block their network address (hashed)?"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Block visitor"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Blocked"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Export JSON"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Delete this conversation and its files permanently? Copies in Telegram are not deleted."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Operators"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Operators are WordPress users with the Chat Operator role (or administrators). Their Telegram account must be linked before their Telegram replies are delivered."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Telegram"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Availability"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Open chats / max"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Teams"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Status of %s"
+msgstr ""
+
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Disabled"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Linked"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Unlink this Telegram account?"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Unlink"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Not linked"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Online"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Maximum chats for %s"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Enrollment code"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "No operators yet."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Add operator"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Choose a user…"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Operator added."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Enrollment codes expire after 10 minutes and work once. The operator sends “/link CODE” to the bot in a private chat."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Teams scope which unassigned conversations an operator sees, and can route to their own Telegram group for isolation."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Team"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Telegram destination"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Members"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Default destination"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Delete this team?"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Team name"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Assignment"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Manual (claim)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Round robin"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Least busy"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Separate Telegram chat ID (optional)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Team saved."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Update team"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Add team"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Automatic assignment only picks operators who are currently online (explicit availability plus a recent inbox heartbeat or a Telegram /online). Telegram does not report online status by itself."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "The queue worker has not run in the last 10 minutes. WP-Cron only runs when the site gets traffic; set up a real cron job (below)."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Messages have been waiting more than 5 minutes. Check the errors below and the worker schedule."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "DISABLE_WP_CRON is set but no worker has run recently. Add the system cron job below."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Private attachments are reachable over HTTP. Your server ignores the protective rules (common on Nginx). Add this rule or define TELEVIXO_STORAGE_DIR outside the web root:"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Some secrets can no longer be decrypted (were the WordPress salts changed?). Re-enter the bot token in Setup."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Delivery queue"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Processed %1$d jobs and %2$d updates."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Run worker now"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Waiting"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Uncertain"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Failed"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Incoming updates pending"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Worker last ran"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Job status"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Delivered"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "The request timed out after it may have reached Telegram. Telegram has no idempotent send, so retrying could post a duplicate. Check the Telegram chat first, then retry or discard."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Type"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Conversation"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Attempts"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Error"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Updated"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Discard"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Nothing here."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Background processing"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Messages are processed right after each request when possible and every minute by WP-Cron. WP-Cron depends on site traffic, so on low-traffic sites add a real cron job:"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Without WP-CLI, request wp-cron.php every minute instead (and set DISABLE_WP_CRON to true in wp-config.php):"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Diagnostics"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Redacted: contains no tokens, secrets or message content. Safe to share with support."
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "Dates use the site time zone (%s). Automated messages never count as responses; spam is excluded."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "From"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "To"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Unanswered"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Median first human response"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Median resolution time"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Median queue wait"
+msgstr ""
+
+#: assets/build/admin.js:10
+#, js-format
+msgid "CSAT (%d ratings)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Conversations per day"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Daily table"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Operator"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Assignments"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Replies"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Median first response"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "CSAT"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "No data."
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "No team"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Automation conversion"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Visitors shown a proactive message who started a conversation within 30 minutes. Counts only visitors who already had a chat session."
+msgstr ""
+
+#: assets/build/admin.js:10
+#: assets/build/admin.js:16
+msgid "Rule"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Shown"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Rate"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Entire site"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Page/post IDs"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Content type"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Template"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Taxonomy term (taxonomy:ID)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Page kind"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "URL path"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Query parameter"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Logged in"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "User role"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Viewport width (px)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Site language"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "New or returning visitor"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "UTM source"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "UTM medium"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "UTM campaign"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Business hours"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "WooCommerce page"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "WooCommerce product IDs"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Product category IDs"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Cart value"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Cart item count"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Visible time on page (s)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Scroll depth (%)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Inactivity (s)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Exit intent (desktop only)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Rule shown before"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Conversation state"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Chat opened this session"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "is"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "is any of"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "is none of"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "equals"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "contains"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "matches (* wildcard)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "does not match"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "exists"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "does not exist"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "at least"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "at most"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "is empty"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "within the last"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "not within the last"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Show/hide launcher"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Show a teaser message"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Open the chat"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Show an automated message"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Select department"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Change greeting"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "yes"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "no"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Parameter"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Value"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Hours"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "hours (rule ID, 0 = this rule)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Rule ID"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Group logic"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "All of these (AND)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Any of these (OR)"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "NOT"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Remove group"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Condition"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Remove condition"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Add condition"
+msgstr ""
+
+#: assets/build/admin.js:10
+msgid "Add group"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Rule saved."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Targeting & proactive messages"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Rules run in the visitor’s browser (so they work with page caching). Higher priority wins each action slot; exclusions always win; one proactive message per page view; dismissing the chat stops further prompts for the session."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "New rule"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Export"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Actions"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Enabled"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Delete this rule?"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "No rules yet. Example: on /pricing*, after 15 visible seconds, if the chat was not opened and the rule was not shown in 24 hours, show a teaser once."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Import rules"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Paste a rules export"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Imported %d rules (disabled)."
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Edit rule #%d"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Priority (higher wins)"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "When"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Except when (exclusions)"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Add exclusions"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Then"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Action"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Text"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Visibility"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "show"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "hide"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Department key"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Remove action"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Add action"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Frequency & stopping"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Max per page view"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Max per session"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Max per visitor"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Cooldown (hours)"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Expires on"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Stop after the visitor sends a message"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Stop when the visitor starts typing"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Stop after the visitor closes the chat or dismisses a prompt"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Stop once a person has replied"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Skip if the chat was already opened this session"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Save rule"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Why does a rule match?"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Simulate a page view (JSON context). Keys: path, query, device, viewport_width, time_on_page, scroll_depth, logged_in, roles, post_type, woo_page, cart_value, utm, seen {ruleId: unixTime}, now…"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Context"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Test this rule"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Test all enabled rules"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Effective actions:"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "none"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "matched"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "no match"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Rule #%d"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "actual"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Exit intent is detected only on desktop (mouse leaves the top of the window). There is no reliable exit intent on mobile, so it never fires there. Visitors are never fingerprinted; \"returning\" uses a first-party browser flag disclosed in the privacy policy text."
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Connected to @%s."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Some checks failed. Fix them in Telegram and check again, or save anyway."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Webhook registered. Telegram will now deliver operator replies to this site."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "1. Connect your bot"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Create a bot with @BotFather in Telegram, then paste its token. Use a dedicated bot for this website: a bot can only send updates to one webhook."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Token set in wp-config.php"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Not connected"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Bot token"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Stored encrypted. It is never shown again or sent to the browser."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Replace token"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Test & save"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "2. Choose where chats appear"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Add the bot to a Telegram group for your team (or use a private chat with one operator). Then send any message in that group so it appears below, or enter its chat ID."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Everyone in the chosen group can read the visitor messages relayed there. If teams must not see each other’s chats, use a separate group per team (Operators & teams) or answer only in the WordPress inbox."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Chats the bot has seen recently"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "topics"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Chat ID"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Group IDs start with -100."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Routing mode for new conversations"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Reply Mode – operators reply to the bot’s message"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Topics Mode – one forum topic per conversation"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Existing conversations keep the mode they started with."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Reply Mode works with privacy mode on: the bot receives replies to its own messages. Operators must use Telegram’s Reply on a visitor message; plain group messages are ignored."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Topics Mode needs a supergroup with Topics enabled and the bot as administrator with “Manage topics”. Every message an enrolled operator writes inside a conversation topic is sent to the visitor, except lines starting with the note prefix."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Check & save"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "OK"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Action needed"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Save anyway"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Current destination: %1$s (%2$s)"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "3. Receive replies (webhook)"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Telegram sends operator replies to this address. HTTPS is required."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "This site is not served over HTTPS, so Telegram cannot deliver webhooks."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Registered to this site"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Registered to another host: %s"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Not registered"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "%d updates waiting at Telegram"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Last error"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Last update received:"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Register webhook"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Remove webhook"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Send test message"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "4. Link operators"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Each operator links their Telegram account once, so their replies can be authorized individually. Operators must open a private chat with the bot and press Start before linking."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Link my Telegram account"
+msgstr ""
+
+#: assets/build/admin.js:16
+#, js-format
+msgid "Send this to @%1$s in a private chat within 10 minutes: %2$s"
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Manage other operators under Operators & teams. Anonymous group admins cannot reply to visitors because they cannot be identified."
+msgstr ""
+
+#: assets/build/admin.js:16
+msgid "Telegram setup"
+msgstr ""
