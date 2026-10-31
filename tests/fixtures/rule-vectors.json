@@ -1,0 +1,121 @@
+[
+  {
+    "name": "pricing page after 15 visible seconds, not opened, not seen in 24h",
+    "id": 7,
+    "definition": {
+      "conditions": {"op": "and", "items": [
+        {"type": "url", "operator": "wildcard", "value": "/pricing*"},
+        {"type": "time_on_page", "operator": "gte", "value": 15},
+        {"type": "chat_opened", "operator": "is", "value": false},
+        {"type": "trigger_seen", "operator": "not_within_hours", "value": {"rule": 0, "hours": 24}}
+      ]},
+      "actions": [{"type": "teaser", "text": "Questions about plans?"}],
+      "frequency": {"per_page": 1, "per_visitor": 1, "cooldown_hours": 24}
+    },
+    "cases": [
+      {"ctx": {"path": "/pricing/", "time_on_page": 15, "chat_opened": false, "seen": {}, "now": 1800000000}, "expected": true},
+      {"ctx": {"path": "/pricing/teams", "time_on_page": 16, "chat_opened": false, "seen": {}, "now": 1800000000}, "expected": true},
+      {"ctx": {"path": "/pricing", "time_on_page": 14, "chat_opened": false, "seen": {}, "now": 1800000000}, "expected": false},
+      {"ctx": {"path": "/pricing", "time_on_page": 30, "chat_opened": true, "seen": {}, "now": 1800000000}, "expected": false},
+      {"ctx": {"path": "/pricing", "time_on_page": 30, "chat_opened": false, "seen": {"7": 1799990000}, "now": 1800000000}, "expected": false},
+      {"ctx": {"path": "/pricing", "time_on_page": 30, "chat_opened": false, "seen": {"7": 1799900000}, "now": 1800000000}, "expected": true},
+      {"ctx": {"path": "/about", "time_on_page": 30, "chat_opened": false, "seen": {}, "now": 1800000000}, "expected": false}
+    ]
+  },
+  {
+    "name": "nested OR with exclusions",
+    "id": 8,
+    "definition": {
+      "conditions": {"op": "or", "items": [
+        {"type": "post_type", "operator": "in", "value": ["product"]},
+        {"op": "and", "items": [
+          {"type": "page_kind", "operator": "in", "value": ["archive"]},
+          {"type": "utm_source", "operator": "equals", "value": "newsletter"}
+        ]}
+      ]},
+      "exclusions": {"op": "or", "items": [
+        {"type": "woo_page", "operator": "in", "value": ["checkout", "cart"]},
+        {"type": "role", "operator": "in", "value": ["administrator"]}
+      ]},
+      "actions": [{"type": "open_chat"}]
+    },
+    "cases": [
+      {"ctx": {"post_type": ["product"], "woo_page": ["product"], "roles": []}, "expected": true},
+      {"ctx": {"post_type": ["product"], "woo_page": ["checkout"], "roles": []}, "expected": false},
+      {"ctx": {"post_type": ["post"], "page_kinds": ["archive"], "utm": {"source": "Newsletter"}, "roles": []}, "expected": true},
+      {"ctx": {"post_type": ["post"], "page_kinds": ["archive"], "utm": {"source": "ads"}, "roles": []}, "expected": false},
+      {"ctx": {"post_type": ["product"], "roles": ["administrator"]}, "expected": false}
+    ]
+  },
+  {
+    "name": "negated group, device, viewport, query, referrer",
+    "id": 9,
+    "definition": {
+      "conditions": {"op": "and", "items": [
+        {"op": "and", "negate": true, "items": [{"type": "device", "operator": "in", "value": ["mobile"]}]},
+        {"type": "viewport_width", "operator": "gte", "value": 1024},
+        {"type": "query", "operator": "equals", "value": {"key": "ref", "value": "partner"}},
+        {"type": "referrer_host", "operator": "contains", "value": "google"}
+      ]},
+      "actions": [{"type": "greeting", "text": "Welcome, partner!"}]
+    },
+    "cases": [
+      {"ctx": {"device": "desktop", "viewport_width": 1280, "query": {"ref": "partner"}, "referrer_host": "www.google.com"}, "expected": true},
+      {"ctx": {"device": "mobile", "viewport_width": 1280, "query": {"ref": "partner"}, "referrer_host": "www.google.com"}, "expected": false},
+      {"ctx": {"device": "desktop", "viewport_width": 800, "query": {"ref": "partner"}, "referrer_host": "www.google.com"}, "expected": false},
+      {"ctx": {"device": "desktop", "viewport_width": 1280, "query": {"ref": "other"}, "referrer_host": "www.google.com"}, "expected": false},
+      {"ctx": {"device": "desktop", "viewport_width": 1280, "query": {"ref": "partner"}, "referrer_host": ""}, "expected": false}
+    ]
+  },
+  {
+    "name": "wildcard is literal except star",
+    "id": 10,
+    "definition": {
+      "conditions": {"op": "and", "items": [{"type": "url", "operator": "wildcard", "value": "/shop/*/sale.html"}]},
+      "actions": [{"type": "launcher", "visible": false}]
+    },
+    "cases": [
+      {"ctx": {"path": "/shop/shoes/sale.html"}, "expected": true},
+      {"ctx": {"path": "/SHOP/Shoes/sale.html"}, "expected": true},
+      {"ctx": {"path": "/shop/shoes/saleXhtml"}, "expected": false},
+      {"ctx": {"path": "/shop/a/b/sale.html"}, "expected": true},
+      {"ctx": {"path": "/other/shop/x/sale.html"}, "expected": false}
+    ]
+  },
+  {
+    "name": "session conditions",
+    "id": 11,
+    "definition": {
+      "conditions": {"op": "and", "items": [
+        {"type": "logged_in", "operator": "is", "value": true},
+        {"type": "cart_value", "operator": "gte", "value": 100},
+        {"type": "cart_items", "operator": "lte", "value": 3},
+        {"type": "conversation_state", "operator": "in", "value": ["none", "closed"]},
+        {"type": "availability", "operator": "in", "value": ["online"]},
+        {"type": "visitor_type", "operator": "is", "value": "returning"},
+        {"type": "business_hours", "operator": "is", "value": "open"}
+      ]},
+      "actions": [{"type": "auto_message", "text": "Need help with your order?"}, {"type": "department", "key": "sales"}]
+    },
+    "cases": [
+      {"ctx": {"logged_in": true, "cart_value": 120.5, "cart_items": 2, "conversation_state": "none", "availability": "online", "visitor_type": "returning", "business_hours": "open"}, "expected": true},
+      {"ctx": {"logged_in": true, "cart_value": 99, "cart_items": 2, "conversation_state": "none", "availability": "online", "visitor_type": "returning", "business_hours": "open"}, "expected": false},
+      {"ctx": {"logged_in": true, "cart_value": 120, "conversation_state": "none", "availability": "online", "visitor_type": "returning", "business_hours": "open"}, "expected": false},
+      {"ctx": {"logged_in": true, "cart_value": 120, "cart_items": 1, "conversation_state": "active", "availability": "online", "visitor_type": "returning", "business_hours": "open"}, "expected": false},
+      {"ctx": {"logged_in": false, "cart_value": 120, "cart_items": 1, "conversation_state": "none", "availability": "online", "visitor_type": "returning", "business_hours": "open"}, "expected": false}
+    ]
+  },
+  {
+    "name": "expired rule never matches",
+    "id": 12,
+    "definition": {
+      "conditions": {"op": "and", "items": [{"type": "site", "operator": "is"}]},
+      "actions": [{"type": "teaser", "text": "Old campaign"}],
+      "frequency": {"expires_at": "2026-01-31"}
+    },
+    "cases": [
+      {"ctx": {"today": "2026-01-31"}, "expected": true},
+      {"ctx": {"today": "2026-02-01"}, "expected": false}
+    ]
+  }
+]

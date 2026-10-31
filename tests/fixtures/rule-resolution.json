@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {"id": 1, "priority": 10, "definition": {"conditions": {"op": "and", "items": [{"type": "site", "operator": "is"}]}, "actions": [{"type": "launcher", "visible": true}, {"type": "teaser", "text": "Low"}]}},
+    {"id": 2, "priority": 50, "definition": {"conditions": {"op": "and", "items": [{"type": "url", "operator": "wildcard", "value": "/pricing*"}]}, "actions": [{"type": "teaser", "text": "High"}, {"type": "greeting", "text": "Pricing hello"}]}},
+    {"id": 3, "priority": 10, "definition": {"conditions": {"op": "and", "items": [{"type": "url", "operator": "equals", "value": "/pricing"}]}, "actions": [{"type": "launcher", "visible": false}]}},
+    {"id": 4, "priority": 90, "definition": {"conditions": {"op": "and", "items": [{"type": "site", "operator": "is"}]}, "exclusions": {"op": "or", "items": [{"type": "url", "operator": "wildcard", "value": "/pricing*"}]}, "actions": [{"type": "open_chat"}]}}
+  ],
+  "cases": [
+    {"ctx": {"path": "/pricing"}, "expected": {"attention": "teaser:High", "launcher": false, "greeting": "Pricing hello", "matched": [2, 1, 3]}},
+    {"ctx": {"path": "/about"}, "expected": {"attention": "open_chat", "launcher": true, "greeting": null, "matched": [4, 1]}}
+  ]
+}

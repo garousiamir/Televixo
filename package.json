@@ -1,0 +1,27 @@
+{
+  "name": "televixo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build tooling for Televixo \u2013 Telegram Live Chat for WordPress",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "scripts": {
+    "build": "node bin/build.mjs",
+    "build:dev": "node bin/build.mjs --dev",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:js": "node --test tests/js/*.test.mjs",
+    "test:e2e": "node tests/e2e/run.mjs",
+    "package": "node bin/package.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/hanken-grotesk": "5.3.0",
+    "@fontsource/vazirmatn": "5.3.0",
+    "@types/react": "18.3.12",
+    "@wordpress/api-fetch": "7.20.0",
+    "@wordpress/element": "6.20.0",
+    "@wordpress/i18n": "5.20.0",
+    "axe-core": "4.10.3",
+    "esbuild": "0.25.12",
+    "typescript": "5.8.3"
+  }
+}
