@@ -1,0 +1,9 @@
+/vendor/
+/node_modules/
+/dist/
+/build-tmp/
+/test-results/
+/playwright-report/
+.phpunit.result.cache
+*.log
+.DS_Store

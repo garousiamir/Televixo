@@ -1,0 +1,21 @@
+{
+  "name": "televixo/televixo",
+  "description": "Televixo – Telegram Live Chat for WordPress (development workspace)",
+  "license": "GPL-2.0-or-later",
+  "type": "project",
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "wp-phpunit/wp-phpunit": "^7.1",
+    "yoast/phpunit-polyfills": "^4.0"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": { "php": "8.2.0" }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
