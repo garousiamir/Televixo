@@ -27,8 +27,8 @@ defined( 'ABSPATH' ) || exit;
 
 final class SessionManager {
 
-	public const COOKIE   = 'televixo_session';
-	public const TTL      = 30 * DAY_IN_SECONDS;
+	public const COOKIE      = 'televixo_session';
+	public const TTL         = 30 * DAY_IN_SECONDS;
 	public const RENEW_AFTER = DAY_IN_SECONDS;
 
 	/** @var array<string,mixed>|null|false Resolved session for this request (false = not resolved yet). */
@@ -113,7 +113,7 @@ final class SessionManager {
 		return Db::transaction(
 			static function () use ( $visitor_id, $now, $wp_user, $network, $token ): array {
 				if ( null === $visitor_id && $wp_user ) {
-					$existing = Db::var( Db::prepare( 'SELECT id FROM {visitors} WHERE wp_user_id = %d ORDER BY id DESC LIMIT 1', $wp_user ) );
+					$existing   = Db::var( Db::prepare( 'SELECT id FROM {visitors} WHERE wp_user_id = %d ORDER BY id DESC LIMIT 1', $wp_user ) );
 					$visitor_id = $existing ? (int) $existing : null;
 				}
 				if ( null === $visitor_id ) {

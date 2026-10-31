@@ -27,14 +27,18 @@ final class Worker {
 	 */
 	public static function run( float $seconds = 20.0, int $max_jobs = 200 ): array {
 		$deadline = microtime( true ) + $seconds;
-		$stats    = array( 'inbound' => 0, 'outbox' => 0, 'results' => array() );
+		$stats    = array(
+			'inbound' => 0,
+			'outbox'  => 0,
+			'results' => array(),
+		);
 		update_option( 'televixo_worker_last_run', Clock::mysql(), false );
 
 		while ( microtime( true ) < $deadline && $stats['outbox'] < $max_jobs ) {
-			$in    = Inbound::process_batch( 20, $deadline );
+			$in = Inbound::process_batch( 20, $deadline );
 			// Small batches keep leases short and let concurrent workers share
 			// conversations instead of one worker leasing every queue head.
-			$jobs  = Outbox::claim( 2 );
+			$jobs              = Outbox::claim( 2 );
 			$stats['inbound'] += $in;
 			if ( ! $jobs && 0 === $in ) {
 				break;
@@ -44,7 +48,7 @@ final class Worker {
 					Outbox::release( $job );
 					continue;
 				}
-				$result = self::process_job( $job );
+				$result                      = self::process_job( $job );
 				$stats['results'][ $result ] = ( $stats['results'][ $result ] ?? 0 ) + 1;
 				++$stats['outbox'];
 			}

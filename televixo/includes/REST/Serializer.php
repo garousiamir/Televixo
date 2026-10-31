@@ -82,17 +82,17 @@ final class Serializer {
 		}
 		$now = Clock::now();
 		return array(
-			'id'               => (string) $c['public_id'],
-			'reference'        => (string) $c['reference'],
-			'status'           => (string) $c['status'],
-			'active'           => ! in_array( $c['status'], array( 'closed', 'spam' ), true ),
-			'human_engaged'    => (bool) $c['human_engaged'],
-			'operator_typing'  => ( Clock::to_ts( $c['operator_typing_until'] ?? null ) ?? 0 ) > $now,
-			'operator_read'    => (int) $c['operator_read_id'],
-			'visitor_read'     => (int) $c['visitor_read_id'],
-			'last_cursor'      => (int) $c['last_message_id'],
-			'rated'            => (bool) ( $c['rated'] ?? false ),
-			'created_at'       => Clock::iso( (string) $c['created_at'] ),
+			'id'              => (string) $c['public_id'],
+			'reference'       => (string) $c['reference'],
+			'status'          => (string) $c['status'],
+			'active'          => ! in_array( $c['status'], array( 'closed', 'spam' ), true ),
+			'human_engaged'   => (bool) $c['human_engaged'],
+			'operator_typing' => ( Clock::to_ts( $c['operator_typing_until'] ?? null ) ?? 0 ) > $now,
+			'operator_read'   => (int) $c['operator_read_id'],
+			'visitor_read'    => (int) $c['visitor_read_id'],
+			'last_cursor'     => (int) $c['last_message_id'],
+			'rated'           => (bool) ( $c['rated'] ?? false ),
+			'created_at'      => Clock::iso( (string) $c['created_at'] ),
 		);
 	}
 

@@ -40,7 +40,12 @@ final class Repository {
 		$out = array();
 		foreach ( Db::rows( Db::prepare( "SELECT * FROM {rules} WHERE status = 'enabled' ORDER BY priority DESC, id ASC LIMIT 100" ) ) as $row ) {
 			$r     = self::hydrate( $row );
-			$out[] = array( 'id' => $r['id'], 'priority' => $r['priority'], 'revision' => $r['revision'], 'definition' => $r['definition'] );
+			$out[] = array(
+				'id'         => $r['id'],
+				'priority'   => $r['priority'],
+				'revision'   => $r['revision'],
+				'definition' => $r['definition'],
+			);
 		}
 		return $out;
 	}
@@ -90,7 +95,15 @@ final class Repository {
 		return array(
 			'format'  => 'televixo-rules',
 			'version' => 1,
-			'rules'   => array_map( static fn( $r ) => array( 'name' => $r['name'], 'status' => $r['status'], 'priority' => $r['priority'], 'definition' => $r['definition'] ), self::all() ),
+			'rules'   => array_map(
+				static fn( $r ) => array(
+					'name'       => $r['name'],
+					'status'     => $r['status'],
+					'priority'   => $r['priority'],
+					'definition' => $r['definition'],
+				),
+				self::all()
+			),
 		);
 	}
 
@@ -115,7 +128,10 @@ final class Repository {
 				$errors[] = "rules[$i]: " . $e->getMessage();
 			}
 		}
-		return array( 'imported' => $n, 'errors' => $errors );
+		return array(
+			'imported' => $n,
+			'errors'   => $errors,
+		);
 	}
 
 	/**

@@ -75,8 +75,8 @@ final class Formatter {
 	 * @param string[]            $fields Approved context fields.
 	 */
 	public static function header( array $conversation, array $visitor, array $fields, bool $first, int $part = 1, int $parts = 1 ): string {
-		$name  = '' !== trim( (string) ( $visitor['name'] ?? '' ) ) && in_array( 'name', $fields, true ) ? (string) $visitor['name'] : __( 'Visitor', 'televixo' );
-		$line  = '💬 ' . $conversation['reference'] . ' · ' . self::clean( $name );
+		$name = '' !== trim( (string) ( $visitor['name'] ?? '' ) ) && in_array( 'name', $fields, true ) ? (string) $visitor['name'] : __( 'Visitor', 'televixo' );
+		$line = '💬 ' . $conversation['reference'] . ' · ' . self::clean( $name );
 		if ( $parts > 1 ) {
 			$line .= sprintf( ' (%d/%d)', $part, $parts );
 		}

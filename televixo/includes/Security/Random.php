@@ -40,7 +40,7 @@ final class Random {
 	 * High-entropy secret (256 bits), base64url.
 	 */
 	public static function secret( int $bytes = 32 ): string {
-		return rtrim( strtr( base64_encode( random_bytes( $bytes ) ), '+/', '-_' ), '=' );
+		return sodium_bin2base64( random_bytes( $bytes ), SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING );
 	}
 
 	public static function hex( int $bytes = 16 ): string {

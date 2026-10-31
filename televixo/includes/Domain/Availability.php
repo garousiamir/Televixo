@@ -34,7 +34,12 @@ final class Availability {
 	public static function status( ?int $team_id = null ): array {
 		$h   = (array) Settings::get( 'hours' );
 		$tz  = self::timezone();
-		$out = array( 'state' => 'online', 'next_open' => null, 'operators_present' => 0, 'timezone' => $tz->getName() );
+		$out = array(
+			'state'             => 'online',
+			'next_open'         => null,
+			'operators_present' => 0,
+			'timezone'          => $tz->getName(),
+		);
 		if ( ! empty( $h['away'] ) ) {
 			$out['state'] = 'away';
 			return $out;
@@ -97,7 +102,7 @@ final class Availability {
 			$key = self::DAYS[ (int) $day->format( 'w' ) ];
 			foreach ( (array) Settings::get( 'hours.weekly.' . $key, array() ) as $range ) {
 				[ $hh, $mm ] = array_map( 'intval', explode( ':', $range[0] ) );
-				$open = $day->setTime( $hh, $mm );
+				$open        = $day->setTime( $hh, $mm );
 				if ( $open->getTimestamp() > $ts ) {
 					return $open->getTimestamp();
 				}

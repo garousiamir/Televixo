@@ -1,5 +1,5 @@
 === Televixo – Telegram Live Chat for WordPress ===
-Contributors: televixo
+Contributors: pdthemes
 Tags: live chat, telegram, support, chat widget, customer service
 Requires at least: 6.7
 Tested up to: 7.1
@@ -30,7 +30,7 @@ Televixo adds a chat widget to your site. Conversations, messages, files, routin
 3. Link operators' Telegram accounts with one-time codes (Televixo → Operators & teams).
 4. Recommended: run the queue from a real cron job: `* * * * * wp televixo worker --seconds=55`.
 
-Full documentation is in the docs folder of the download package.
+Full documentation is in the documentation folder of the download package. Support and updates: https://pdthemes.de
 
 == Frequently Asked Questions ==
 

@@ -43,7 +43,10 @@ final class Messages {
 
 		$existing = self::by_idempotency( $idem );
 		if ( $existing ) {
-			return array( 'message' => $existing, 'duplicate' => true );
+			return array(
+				'message'   => $existing,
+				'duplicate' => true,
+			);
 		}
 
 		$result = Db::transaction(
@@ -53,10 +56,10 @@ final class Messages {
 				if ( ! $fresh ) {
 					throw new DomainException( 'conversation_not_found', __( 'Conversation not found.', 'televixo' ), 404 );
 				}
-				$status   = ConversationStatus::from( (string) $fresh['status'] );
-				$is_spam  = ConversationStatus::Spam === $status;
-				$relay    = ! $is_spam && self::relay_enabled( $fresh );
-				$id       = Db::insert_ignore_duplicate(
+				$status  = ConversationStatus::from( (string) $fresh['status'] );
+				$is_spam = ConversationStatus::Spam === $status;
+				$relay   = ! $is_spam && self::relay_enabled( $fresh );
+				$id      = Db::insert_ignore_duplicate(
 					'messages',
 					array(
 						'public_id'       => Random::public_id(),
@@ -72,7 +75,10 @@ final class Messages {
 					)
 				);
 				if ( 0 === $id ) {
-					return array( 'id' => (int) Db::var( Db::prepare( 'SELECT id FROM {messages} WHERE idempotency_key = %s', $idem ) ), 'duplicate' => true );
+					return array(
+						'id'        => (int) Db::var( Db::prepare( 'SELECT id FROM {messages} WHERE idempotency_key = %s', $idem ) ),
+						'duplicate' => true,
+					);
 				}
 				if ( $attachment_ids ) {
 					Db::exec(
@@ -94,7 +100,12 @@ final class Messages {
 				if ( $relay ) {
 					Outbox::enqueue( 'telegram.deliver', 'conv:' . $fresh['id'], array( 'message_id' => $id ), (int) $fresh['id'], $id );
 				}
-				return array( 'id' => $id, 'duplicate' => false, 'became' => $next->value, 'was' => $status->value );
+				return array(
+					'id'        => $id,
+					'duplicate' => false,
+					'became'    => $next->value,
+					'was'       => $status->value,
+				);
 			}
 		);
 
@@ -105,7 +116,10 @@ final class Messages {
 				Assignment::auto_assign( (int) $conversation['id'] );
 			}
 		}
-		return array( 'message' => $message ?? array(), 'duplicate' => (bool) $result['duplicate'] );
+		return array(
+			'message'   => $message ?? array(),
+			'duplicate' => (bool) $result['duplicate'],
+		);
 	}
 
 	/**
@@ -123,7 +137,7 @@ final class Messages {
 		if ( ConversationStatus::Spam->value === $conversation['status'] ) {
 			throw new DomainException( 'conversation_spam', __( 'This conversation is marked as spam.', 'televixo' ), 409 );
 		}
-		$id = Db::transaction(
+		$id      = Db::transaction(
 			static function () use ( $conversation, $operator, $body, $source, $attachment_ids, $mirror_to_provider ): int {
 				$now   = Clock::mysql();
 				$fresh = Conversations::get( (int) $conversation['id'] ) ?? $conversation;
@@ -205,7 +219,14 @@ final class Messages {
 				'created_at'      => $now,
 			)
 		);
-		Db::update( 'conversations', array( 'last_message_id' => $id, 'last_message_at' => $now ), array( 'id' => (int) $conversation['id'] ) );
+		Db::update(
+			'conversations',
+			array(
+				'last_message_id' => $id,
+				'last_message_at' => $now,
+			),
+			array( 'id' => (int) $conversation['id'] )
+		);
 		return self::get( $id ) ?? array();
 	}
 
@@ -275,11 +296,21 @@ final class Messages {
 			$more = count( $rows ) > $limit;
 			$rows = array_reverse( array_slice( $rows, 0, $limit ) );
 		}
-		return array( 'items' => $rows, 'has_more' => $more );
+		return array(
+			'items'    => $rows,
+			'has_more' => $more,
+		);
 	}
 
 	public static function set_delivery( int $message_id, DeliveryState $state, string $error = '' ): void {
-		Db::update( 'messages', array( 'delivery_state' => $state->value, 'delivery_error' => substr( $error, 0, 64 ) ), array( 'id' => $message_id ) );
+		Db::update(
+			'messages',
+			array(
+				'delivery_state' => $state->value,
+				'delivery_error' => substr( $error, 0, 64 ),
+			),
+			array( 'id' => $message_id )
+		);
 	}
 
 	public static function normalize_body( string $body ): string {

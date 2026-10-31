@@ -22,7 +22,7 @@ final class Registry {
 	 */
 	public static function all(): array {
 		if ( null === self::$providers ) {
-			$list = apply_filters( 'televixo_providers', array( 'telegram' => new TelegramProvider() ) );
+			$list            = apply_filters( 'televixo_providers', array( 'telegram' => new TelegramProvider() ) );
 			self::$providers = array_filter( (array) $list, static fn( $p ) => $p instanceof ProviderInterface );
 		}
 		return self::$providers;

@@ -44,7 +44,11 @@ final class Welcome {
 	private static function options_payload( array $a ): array {
 		$opts = array();
 		foreach ( (array) $a['welcome_options'] as $i => $opt ) {
-			$opts[] = array( 'index' => $i, 'label' => $opt['label'], 'handoff' => (bool) $opt['handoff'] );
+			$opts[] = array(
+				'index'   => $i,
+				'label'   => $opt['label'],
+				'handoff' => (bool) $opt['handoff'],
+			);
 		}
 		return array( 'options' => $opts );
 	}

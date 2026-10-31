@@ -92,8 +92,8 @@ class TelegramProvider implements ProviderInterface {
 			return DeliveryResult::failed( 'bot_changed', 'Routing snapshot belongs to a different bot.' );
 		}
 
-		$topics   = 'topics' === ( $snap['mode'] ?? 'reply' );
-		$progress = Outbox::progress( $job );
+		$topics           = 'topics' === ( $snap['mode'] ?? 'reply' );
+		$progress         = Outbox::progress( $job );
 		$progress['done'] = (array) ( $progress['done'] ?? array() );
 
 		$thread_id = '';
@@ -106,15 +106,15 @@ class TelegramProvider implements ProviderInterface {
 			$conversation = Conversations::get( (int) $conversation['id'] ) ?? $conversation;
 		}
 
-		$visitor = Db::row( Db::prepare( 'SELECT * FROM {visitors} WHERE id = %d', (int) $conversation['visitor_id'] ) ) ?? array();
-		$parts   = $this->build_parts( $conversation, $visitor, $message, $snap, $mirror, $topics );
+		$visitor            = Db::row( Db::prepare( 'SELECT * FROM {visitors} WHERE id = %d', (int) $conversation['visitor_id'] ) ) ?? array();
+		$parts              = $this->build_parts( $conversation, $visitor, $message, $snap, $mirror, $topics );
 		$first_reply_target = $mirror || ! $topics ? $this->reply_target( $conversation, $chat_id, $mirror ) : '';
 
 		foreach ( $parts as $key => $part ) {
 			if ( in_array( $key, $progress['done'], true ) ) {
 				continue;
 			}
-			$params = $part['params'];
+			$params            = $part['params'];
 			$params['chat_id'] = $chat_id;
 			if ( '' !== $thread_id ) {
 				$params['message_thread_id'] = (int) $thread_id;
@@ -147,12 +147,12 @@ class TelegramProvider implements ProviderInterface {
 	 * @return array<string,array<string,mixed>>
 	 */
 	private function build_parts( array $conversation, array $visitor, array $message, array $snap, bool $mirror, bool $topics ): array {
-		$fields  = (array) ( $snap['context_fields'] ?? array( 'name' ) );
-		$first   = ! $mirror && 0 === (int) Db::var( Db::prepare( "SELECT COUNT(*) FROM {provider_messages} WHERE conversation_id = %d AND direction = 'out'", (int) $conversation['id'] ) );
-		$chunks  = Formatter::chunk( (string) $message['body'] );
-		$total   = count( $chunks );
-		$parts   = array();
-		$index   = 0;
+		$fields = (array) ( $snap['context_fields'] ?? array( 'name' ) );
+		$first  = ! $mirror && 0 === (int) Db::var( Db::prepare( "SELECT COUNT(*) FROM {provider_messages} WHERE conversation_id = %d AND direction = 'out'", (int) $conversation['id'] ) );
+		$chunks = Formatter::chunk( (string) $message['body'] );
+		$total  = count( $chunks );
+		$parts  = array();
+		$index  = 0;
 		foreach ( $chunks as $i => $chunk ) {
 			if ( $mirror ) {
 				$prefix = '↩️ ' . Formatter::clean( (string) $message['author_name'] ) . ' · ' . __( 'via website inbox', 'televixo' ) . ( $topics ? '' : ' · ' . $conversation['reference'] );
@@ -171,7 +171,11 @@ class TelegramProvider implements ProviderInterface {
 			if ( $topics && $first && 0 === $i ) {
 				$params['reply_markup'] = self::conversation_keyboard( $conversation );
 			}
-			$parts[ 'text:' . $i ] = array( 'method' => 'sendMessage', 'params' => $params, 'index' => $index++ );
+			$parts[ 'text:' . $i ] = array(
+				'method' => 'sendMessage',
+				'params' => $params,
+				'index'  => $index++,
+			);
 		}
 		$atts = Attachments::for_messages( array( (int) $message['id'] ) )[ (int) $message['id'] ] ?? array();
 		foreach ( $atts as $att ) {
@@ -238,7 +242,13 @@ class TelegramProvider implements ProviderInterface {
 		if ( '' !== $thread ) {
 			$map = Mappings::find_thread( $account, $chat_id, $thread );
 			if ( $map && 'closed' === $map['state'] ) {
-				$res = $this->api()->call( 'reopenForumTopic', array( 'chat_id' => $chat_id, 'message_thread_id' => (int) $thread ) );
+				$res = $this->api()->call(
+					'reopenForumTopic',
+					array(
+						'chat_id'           => $chat_id,
+						'message_thread_id' => (int) $thread,
+					)
+				);
 				if ( $res->ok() || 'topic_not_modified' === strtolower( $res->description ) || str_contains( strtolower( $res->description ), 'topic_not_modified' ) ) {
 					Mappings::set_thread_state( $account, $chat_id, $thread, 'open' );
 				}
@@ -248,7 +258,13 @@ class TelegramProvider implements ProviderInterface {
 			}
 		}
 		$visitor = Db::row( Db::prepare( 'SELECT * FROM {visitors} WHERE id = %d', (int) $conversation['visitor_id'] ) ) ?? array();
-		$res     = $this->api()->call( 'createForumTopic', array( 'chat_id' => $chat_id, 'name' => Formatter::topic_name( $conversation, $visitor ) ) );
+		$res     = $this->api()->call(
+			'createForumTopic',
+			array(
+				'chat_id' => $chat_id,
+				'name'    => Formatter::topic_name( $conversation, $visitor ),
+			)
+		);
 		if ( ! $res->ok() ) {
 			// A duplicate empty topic after an ambiguous timeout is harmless, so
 			// topic creation is retried rather than held.
@@ -276,8 +292,8 @@ class TelegramProvider implements ProviderInterface {
 	}
 
 	private function handle_failure( array $job, ApiResponse $res, array $conversation, array $message, array $progress, bool $topics, string $thread_id ): DeliveryResult {
-		$code = $res->error_code_slug();
-		$mid  = (int) $message['id'];
+		$code    = $res->error_code_slug();
+		$mid     = (int) $message['id'];
 		$partial = ! empty( $progress['done'] );
 
 		if ( '' !== $res->migrate_to_chat_id ) {
@@ -348,7 +364,18 @@ class TelegramProvider implements ProviderInterface {
 		foreach ( $ids as $id ) {
 			Conversations::migrate_routing( (int) $id, $new, 'telegram_supergroup_migration' );
 		}
-		Events::record( 'telegram.chat_migrated', 'system', '', null, 'chat', $new, array( 'from' => $old, 'conversations' => count( $ids ) ) );
+		Events::record(
+			'telegram.chat_migrated',
+			'system',
+			'',
+			null,
+			'chat',
+			$new,
+			array(
+				'from'          => $old,
+				'conversations' => count( $ids ),
+			)
+		);
 	}
 
 	private function notice( array $job ): DeliveryResult {
@@ -362,7 +389,10 @@ class TelegramProvider implements ProviderInterface {
 			$params['message_thread_id'] = (int) $p['thread_id'];
 		}
 		if ( ! empty( $p['reply_to'] ) ) {
-			$params['reply_parameters'] = array( 'message_id' => (int) $p['reply_to'], 'allow_sending_without_reply' => true );
+			$params['reply_parameters'] = array(
+				'message_id'                  => (int) $p['reply_to'],
+				'allow_sending_without_reply' => true,
+			);
 		}
 		$res = $this->api()->call( 'sendMessage', $params );
 		if ( $res->ok() ) {
@@ -382,7 +412,13 @@ class TelegramProvider implements ProviderInterface {
 		$snap   = Conversations::snapshot( $conversation );
 		$state  = (string) ( Outbox::payload( $job )['state'] ?? 'closed' );
 		$method = 'closed' === $state ? 'closeForumTopic' : 'reopenForumTopic';
-		$res    = $this->api()->call( $method, array( 'chat_id' => (string) $snap['chat_id'], 'message_thread_id' => (int) $conversation['provider_thread_id'] ) );
+		$res    = $this->api()->call(
+			$method,
+			array(
+				'chat_id'           => (string) $snap['chat_id'],
+				'message_thread_id' => (int) $conversation['provider_thread_id'],
+			)
+		);
 		if ( $res->ok() || str_contains( strtolower( $res->description ), 'topic_not_modified' ) ) {
 			Mappings::set_thread_state( (string) $snap['account'], (string) $snap['chat_id'], (string) $conversation['provider_thread_id'], 'closed' === $state ? 'closed' : 'open' );
 			return DeliveryResult::done();
@@ -394,6 +430,19 @@ class TelegramProvider implements ProviderInterface {
 	 * Queues a best-effort feedback message to an operator.
 	 */
 	public static function queue_notice( string $chat_id, string $text, string $reply_to = '', string $thread_id = '' ): void {
-		Outbox::enqueue( 'telegram.notice', '', array( 'chat_id' => $chat_id, 'text' => $text, 'reply_to' => $reply_to, 'thread_id' => $thread_id ), null, null, 0, 3 );
+		Outbox::enqueue(
+			'telegram.notice',
+			'',
+			array(
+				'chat_id'   => $chat_id,
+				'text'      => $text,
+				'reply_to'  => $reply_to,
+				'thread_id' => $thread_id,
+			),
+			null,
+			null,
+			0,
+			3
+		);
 	}
 }

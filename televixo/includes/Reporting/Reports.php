@@ -77,7 +77,10 @@ final class Reports {
 		$series = array();
 		for ( $d = $start; $d <= $end; $d = $d->modify( '+1 day' ) ) {
 			$k        = $d->format( 'Y-m-d' );
-			$series[] = array( 'date' => $k, 'conversations' => $daily[ $k ] ?? 0 );
+			$series[] = array(
+				'date'          => $k,
+				'conversations' => $daily[ $k ] ?? 0,
+			);
 		}
 
 		$resolved = Db::rows( Db::prepare( "SELECT created_at, closed_at, reopened_count FROM {conversations} WHERE status = 'closed' AND closed_at >= %s AND closed_at < %s LIMIT 100000", $utc_from, $utc_to ) );
@@ -98,22 +101,26 @@ final class Reports {
 		$ratings = Db::row( Db::prepare( 'SELECT COUNT(*) AS n, AVG(score) AS avg_score, SUM(score >= 4) AS good FROM {ratings} WHERE created_at >= %s AND created_at < %s', $utc_from, $utc_to ) );
 
 		return array(
-			'range'         => array( 'from' => $start->format( 'Y-m-d' ), 'to' => $end->format( 'Y-m-d' ), 'timezone' => $tz->getName() ),
-			'conversations' => count( $created ),
-			'unanswered'    => $unanswered,
-			'reopened'      => count( array_filter( $created, static fn( $c ) => (int) $c['reopened_count'] > 0 ) ),
+			'range'          => array(
+				'from'     => $start->format( 'Y-m-d' ),
+				'to'       => $end->format( 'Y-m-d' ),
+				'timezone' => $tz->getName(),
+			),
+			'conversations'  => count( $created ),
+			'unanswered'     => $unanswered,
+			'reopened'       => count( array_filter( $created, static fn( $c ) => (int) $c['reopened_count'] > 0 ) ),
 			'first_response' => self::stats( $frt ),
-			'resolution'    => self::stats( $res ),
-			'queue_wait'    => self::stats( $waits ),
-			'csat'          => array(
-				'responses' => (int) ( $ratings['n'] ?? 0 ),
-				'average'   => $ratings && $ratings['n'] ? round( (float) $ratings['avg_score'], 2 ) : null,
+			'resolution'     => self::stats( $res ),
+			'queue_wait'     => self::stats( $waits ),
+			'csat'           => array(
+				'responses'       => (int) ( $ratings['n'] ?? 0 ),
+				'average'         => $ratings && $ratings['n'] ? round( (float) $ratings['avg_score'], 2 ) : null,
 				'satisfied_share' => $ratings && $ratings['n'] ? round( (int) $ratings['good'] / (int) $ratings['n'], 3 ) : null,
 			),
-			'series'        => $series,
-			'operators'     => self::operators( $utc_from, $utc_to ),
-			'teams'         => Db::rows( Db::prepare( "SELECT COALESCE(t.name, '') AS team, COUNT(*) AS conversations FROM {conversations} c LEFT JOIN {teams} t ON t.id = c.team_id WHERE c.created_at >= %s AND c.created_at < %s AND c.status <> 'spam' GROUP BY c.team_id, t.name ORDER BY conversations DESC LIMIT 50", $utc_from, $utc_to ) ),
-			'automation'    => self::automation( $utc_from, $utc_to ),
+			'series'         => $series,
+			'operators'      => self::operators( $utc_from, $utc_to ),
+			'teams'          => Db::rows( Db::prepare( "SELECT COALESCE(t.name, '') AS team, COUNT(*) AS conversations FROM {conversations} c LEFT JOIN {teams} t ON t.id = c.team_id WHERE c.created_at >= %s AND c.created_at < %s AND c.status <> 'spam' GROUP BY c.team_id, t.name ORDER BY conversations DESC LIMIT 50", $utc_from, $utc_to ) ),
+			'automation'     => self::automation( $utc_from, $utc_to ),
 		);
 	}
 
@@ -124,12 +131,20 @@ final class Reports {
 	public static function stats( array $values ): array {
 		$n = count( $values );
 		if ( 0 === $n ) {
-			return array( 'count' => 0, 'median' => null, 'mean' => null );
+			return array(
+				'count'  => 0,
+				'median' => null,
+				'mean'   => null,
+			);
 		}
 		sort( $values );
 		$mid    = intdiv( $n, 2 );
 		$median = $n % 2 ? $values[ $mid ] : intdiv( $values[ $mid - 1 ] + $values[ $mid ], 2 );
-		return array( 'count' => $n, 'median' => (int) $median, 'mean' => (int) round( array_sum( $values ) / $n ) );
+		return array(
+			'count'  => $n,
+			'median' => (int) $median,
+			'mean'   => (int) round( array_sum( $values ) / $n ),
+		);
 	}
 
 	/**
@@ -151,7 +166,7 @@ final class Reports {
 				$to
 			)
 		);
-		$frt = array();
+		$frt  = array();
 		foreach ( Db::rows(
 			Db::prepare(
 				"SELECT c.id, c.first_human_response_at,
@@ -183,7 +198,13 @@ final class Reports {
 	 */
 	private static function automation( string $from, string $to ): array {
 		return array_map(
-			static fn( $r ) => array( 'rule_id' => (int) $r['rule_id'], 'name' => (string) $r['name'], 'shown' => (int) $r['shown'], 'conversions' => (int) $r['conversions'], 'rate' => $r['shown'] ? round( (int) $r['conversions'] / (int) $r['shown'], 3 ) : 0 ),
+			static fn( $r ) => array(
+				'rule_id'     => (int) $r['rule_id'],
+				'name'        => (string) $r['name'],
+				'shown'       => (int) $r['shown'],
+				'conversions' => (int) $r['conversions'],
+				'rate'        => $r['shown'] ? round( (int) $r['conversions'] / (int) $r['shown'], 3 ) : 0,
+			),
 			Db::rows(
 				Db::prepare(
 					"SELECT t.rule_id, COALESCE(ru.name, '') AS name, COUNT(DISTINCT t.visitor_id) AS shown,

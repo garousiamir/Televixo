@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 final class Operators {
 
-	public const CHALLENGE_TTL      = 10 * MINUTE_IN_SECONDS;
-	public const HEARTBEAT_TIMEOUT  = 90;
+	public const CHALLENGE_TTL     = 10 * MINUTE_IN_SECONDS;
+	public const HEARTBEAT_TIMEOUT = 90;
 
 	/**
 	 * @return array<string,mixed>|null
@@ -135,7 +135,10 @@ final class Operators {
 				'created_at'  => Clock::mysql(),
 			)
 		);
-		return array( 'code' => $code, 'expires_at' => gmdate( 'c', $expires ) );
+		return array(
+			'code'       => $code,
+			'expires_at' => gmdate( 'c', $expires ),
+		);
 	}
 
 	public static function challenge_hash( string $code ): string {

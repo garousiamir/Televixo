@@ -19,9 +19,34 @@ final class SvgSanitizer {
 	private const ELEMENTS = array( 'svg', 'g', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon' );
 
 	private const ATTRIBUTES = array(
-		'viewbox', 'd', 'cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'width', 'height',
-		'points', 'fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule',
-		'clip-rule', 'opacity', 'fill-opacity', 'stroke-opacity', 'transform', 'xmlns',
+		'viewbox',
+		'd',
+		'cx',
+		'cy',
+		'r',
+		'rx',
+		'ry',
+		'x',
+		'y',
+		'x1',
+		'y1',
+		'x2',
+		'y2',
+		'width',
+		'height',
+		'points',
+		'fill',
+		'stroke',
+		'stroke-width',
+		'stroke-linecap',
+		'stroke-linejoin',
+		'fill-rule',
+		'clip-rule',
+		'opacity',
+		'fill-opacity',
+		'stroke-opacity',
+		'transform',
+		'xmlns',
 	);
 
 	public static function sanitize_icon( string $svg ): string {
@@ -56,8 +81,8 @@ final class SvgSanitizer {
 		}
 		$remove = array();
 		foreach ( $el->attributes as $attr ) {
-			$name  = strtolower( $attr->nodeName );
-			$value = (string) $attr->nodeValue;
+			$name    = strtolower( $attr->nodeName );
+			$value   = (string) $attr->nodeValue;
 			$allowed = in_array( $name, self::ATTRIBUTES, true )
 				|| 'aria-hidden' === $name || 'focusable' === $name;
 			if ( ! $allowed || preg_match( '/url\s*\(|javascript:|data:|&|expression/i', $value ) ) {

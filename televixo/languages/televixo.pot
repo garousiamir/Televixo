@@ -1,15 +1,15 @@
-# Copyright (C) 2026 Televixo
+# Copyright (C) 2026 pdthemes
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Televixo – Telegram Live Chat for WordPress 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://pdthemes.de\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: pdthemes <https://pdthemes.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-31T06:43:40+00:00\n"
+"POT-Creation-Date: 2026-10-31T11:40:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: televixo\n"
@@ -19,65 +19,75 @@ msgstr ""
 msgid "Televixo – Telegram Live Chat for WordPress"
 msgstr ""
 
-#. Description of the plugin
+#. Plugin URI of the plugin
+#. Author URI of the plugin
 #: televixo.php:4
+#: televixo.php:10
+msgid "https://pdthemes.de"
+msgstr ""
+
+#. Description of the plugin
+#: televixo.php:5
 msgid "Self-hosted live chat. Visitors chat on your site; operators answer in Telegram or the WordPress inbox."
 msgstr ""
 
 #. Author of the plugin
-#: televixo.php:8
-#: includes/Admin/Admin.php:49
-msgid "Televixo"
+#: televixo.php:9
+msgid "pdthemes"
 msgstr ""
 
-#: includes/Admin/Admin.php:35
+#: includes/Admin/Admin.php:36
 #: assets/build/admin.js:10
 #: assets/build/admin.js:16
 msgid "Inbox"
 msgstr ""
 
-#: includes/Admin/Admin.php:36
-#: includes/Admin/Admin.php:134
-msgid "Setup"
-msgstr ""
-
 #: includes/Admin/Admin.php:37
-#: assets/build/admin.js:16
-msgid "Operators & teams"
+#: includes/Admin/Admin.php:152
+msgid "Setup"
 msgstr ""
 
 #: includes/Admin/Admin.php:38
 #: assets/build/admin.js:16
-msgid "Widget"
+msgid "Operators & teams"
 msgstr ""
 
 #: includes/Admin/Admin.php:39
 #: assets/build/admin.js:16
-msgid "Targeting"
+msgid "Widget"
 msgstr ""
 
 #: includes/Admin/Admin.php:40
 #: assets/build/admin.js:16
-msgid "Replies & FAQ"
+msgid "Targeting"
 msgstr ""
 
 #: includes/Admin/Admin.php:41
 #: assets/build/admin.js:16
-msgid "Settings"
+msgid "Replies & FAQ"
 msgstr ""
 
 #: includes/Admin/Admin.php:42
+#: assets/build/admin.js:16
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/Admin.php:43
 #: assets/build/admin.js:10
 #: assets/build/admin.js:16
 msgid "Reports"
 msgstr ""
 
-#: includes/Admin/Admin.php:43
+#: includes/Admin/Admin.php:44
 #: assets/build/admin.js:16
 msgid "Delivery & health"
 msgstr ""
 
-#: includes/Admin/Admin.php:60
+#: includes/Admin/Admin.php:50
+msgid "Televixo"
+msgstr ""
+
+#: includes/Admin/Admin.php:61
 #: assets/build/admin.js:1
 #: assets/build/admin.js:6
 #: assets/build/admin.js:10
@@ -85,23 +95,29 @@ msgstr ""
 msgid "Loading…"
 msgstr ""
 
-#: includes/Admin/Admin.php:60
+#: includes/Admin/Admin.php:61
 msgid "Televixo needs JavaScript in the admin area."
 msgstr ""
 
-#: includes/Admin/Admin.php:113
+#: includes/Admin/Admin.php:117
 msgid "Televixo is installed. Connect a Telegram bot to start receiving chats."
 msgstr ""
 
-#: includes/Admin/Admin.php:115
+#: includes/Admin/Admin.php:119
 msgid "Open setup"
 msgstr ""
 
-#: includes/Admin/Admin.php:122
+#: includes/Admin/Admin.php:121
+#: includes/Widget/Strings.php:144
+#: assets/build/admin.js:1
+msgid "Dismiss"
+msgstr ""
+
+#: includes/Admin/Admin.php:128
 msgid "Televixo cannot deliver chats to Telegram right now (the bot token or destination needs attention)."
 msgstr ""
 
-#: includes/Admin/Admin.php:124
+#: includes/Admin/Admin.php:130
 msgid "View diagnostics"
 msgstr ""
 
@@ -110,11 +126,11 @@ msgid "Title is required."
 msgstr ""
 
 #: includes/Automation/Welcome.php:37
-#: includes/Automation/Welcome.php:68
+#: includes/Automation/Welcome.php:72
 msgid "Automated assistant"
 msgstr ""
 
-#: includes/Automation/Welcome.php:62
+#: includes/Automation/Welcome.php:66
 msgid "Invalid option."
 msgstr ""
 
@@ -145,8 +161,8 @@ msgid "The database connection must use the utf8mb4 character set."
 msgstr ""
 
 #: includes/Domain/Assignment.php:36
-#: includes/REST/AdminController.php:541
-#: includes/REST/AdminController.php:576
+#: includes/REST/AdminController.php:602
+#: includes/REST/AdminController.php:643
 msgid "Operator not found."
 msgstr ""
 
@@ -171,54 +187,54 @@ msgid "The file could not be stored."
 msgstr ""
 
 #: includes/Domain/Attachments.php:164
-#: includes/REST/AdminController.php:319
+#: includes/REST/AdminController.php:333
 msgid "Attachment not found."
 msgstr ""
 
-#: includes/Domain/Attachments.php:222
+#: includes/Domain/Attachments.php:223
 #: includes/Widget/Strings.php:135
 msgid "The file is too large."
 msgstr ""
 
-#: includes/Domain/Attachments.php:223
 #: includes/Domain/Attachments.php:224
+#: includes/Domain/Attachments.php:225
 #: includes/Widget/Strings.php:136
 msgid "This file type is not allowed."
 msgstr ""
 
-#: includes/Domain/Attachments.php:225
+#: includes/Domain/Attachments.php:226
 msgid "The file content does not match its type."
 msgstr ""
 
-#: includes/Domain/Attachments.php:226
+#: includes/Domain/Attachments.php:227
 msgid "The file contains blocked content."
 msgstr ""
 
-#: includes/Domain/Attachments.php:227
+#: includes/Domain/Attachments.php:228
 msgid "The image could not be read."
 msgstr ""
 
-#: includes/Domain/Attachments.php:228
+#: includes/Domain/Attachments.php:229
 msgid "The file is empty."
 msgstr ""
 
-#: includes/Domain/Attachments.php:230
+#: includes/Domain/Attachments.php:231
 msgid "The file could not be accepted."
 msgstr ""
 
 #: includes/Domain/Conversations.php:43
-#: includes/Domain/Messages.php:54
+#: includes/Domain/Messages.php:57
 #: includes/REST/AdminController.php:131
-#: includes/Telegram/UpdateProcessor.php:420
+#: includes/Telegram/UpdateProcessor.php:443
 msgid "Conversation not found."
 msgstr ""
 
-#: includes/Domain/Conversations.php:211
+#: includes/Domain/Conversations.php:222
 msgid "The conversation was changed by someone else. Reload and try again."
 msgstr ""
 
 #: includes/Domain/Messages.php:34
-#: includes/Domain/Messages.php:121
+#: includes/Domain/Messages.php:135
 msgid "Message is empty."
 msgstr ""
 
@@ -230,46 +246,46 @@ msgstr ""
 msgid "Invalid message identifier."
 msgstr ""
 
-#: includes/Domain/Messages.php:124
+#: includes/Domain/Messages.php:138
 msgid "This conversation is marked as spam."
 msgstr ""
 
-#: includes/Domain/Messages.php:220
+#: includes/Domain/Messages.php:241
 msgid "Note is empty."
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:30
-#: includes/Privacy/PersonalData.php:39
+#: includes/Privacy/PersonalData.php:31
+#: includes/Privacy/PersonalData.php:43
 msgid "Televixo chat conversations"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:65
+#: includes/Privacy/PersonalData.php:72
 msgid "Reference"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:66
+#: includes/Privacy/PersonalData.php:76
 msgid "Started"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:67
+#: includes/Privacy/PersonalData.php:80
 #: assets/build/admin.js:10
 #: assets/build/admin.js:16
 msgid "Status"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:68
+#: includes/Privacy/PersonalData.php:84
 msgid "Transcript"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:70
+#: includes/Privacy/PersonalData.php:90
 msgid "Chat conversations"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:78
+#: includes/Privacy/PersonalData.php:101
 msgid "Chat profile"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:81
+#: includes/Privacy/PersonalData.php:105
 #: includes/Widget/Strings.php:99
 #: assets/build/admin.js:3
 #: assets/build/admin.js:10
@@ -277,46 +293,46 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:82
+#: includes/Privacy/PersonalData.php:109
 #: includes/Widget/Strings.php:100
 #: assets/build/admin.js:3
 #: assets/build/admin.js:10
 msgid "Email"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:83
+#: includes/Privacy/PersonalData.php:113
 #: includes/Widget/Strings.php:101
 #: assets/build/admin.js:3
 #: assets/build/admin.js:10
 msgid "Phone"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:84
+#: includes/Privacy/PersonalData.php:117
 #: assets/build/admin.js:10
 msgid "First seen"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:85
+#: includes/Privacy/PersonalData.php:121
 msgid "Consent given"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:106
+#: includes/Privacy/PersonalData.php:147
 msgid "Chat messages already delivered to Telegram are not removed from Telegram. Delete them there if required."
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:134
+#: includes/Privacy/PersonalData.php:175
 msgid "Televixo live chat"
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:136
+#: includes/Privacy/PersonalData.php:177
 msgid "When you use the chat, we store your messages, any files you send, the name, email and phone number you choose to give, the page you started the chat on and the referring website (domain only). A random session cookie (televixo_session) keeps your conversation available across pages; it is not used for tracking. The chat may also store, in your browser, a first-visit date, message drafts and which chat prompts you have seen, so prompts are not repeated."
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:137
+#: includes/Privacy/PersonalData.php:178
 msgid "Chat messages are relayed to our support team through Telegram (Telegram Messenger Inc.). Copies delivered to Telegram are subject to Telegram's privacy policy and are not removed when we delete your conversation from this website."
 msgstr ""
 
-#: includes/Privacy/PersonalData.php:138
+#: includes/Privacy/PersonalData.php:179
 msgid "Conversations are deleted automatically after the retention period set by the site owner. You can request an export or deletion of your chat data."
 msgstr ""
 
@@ -357,53 +373,53 @@ msgstr ""
 msgid "Your operator account is disabled."
 msgstr ""
 
-#: includes/REST/AdminController.php:336
-#: includes/REST/PublicController.php:290
+#: includes/REST/AdminController.php:358
+#: includes/REST/PublicController.php:297
 msgid "No file received."
 msgstr ""
 
-#: includes/REST/AdminController.php:367
+#: includes/REST/AdminController.php:395
 msgid "Only the assignee or a supervisor can transfer."
 msgstr ""
 
-#: includes/REST/AdminController.php:396
+#: includes/REST/AdminController.php:431
 msgid "Invalid status."
 msgstr ""
 
-#: includes/REST/AdminController.php:452
-#: includes/REST/AdminController.php:464
+#: includes/REST/AdminController.php:499
+#: includes/REST/AdminController.php:511
 msgid "Visitor not found."
 msgstr ""
 
-#: includes/REST/AdminController.php:491
+#: includes/REST/AdminController.php:538
 msgid "Shortcut and text are required."
 msgstr ""
 
-#: includes/REST/AdminController.php:501
+#: includes/REST/AdminController.php:553
 msgid "That shortcut already exists."
 msgstr ""
 
-#: includes/REST/AdminController.php:531
+#: includes/REST/AdminController.php:592
 msgid "That user cannot handle chats. Give them the Chat Operator role first."
 msgstr ""
 
-#: includes/REST/AdminController.php:573
+#: includes/REST/AdminController.php:640
 msgid "You can only link your own Telegram account."
 msgstr ""
 
-#: includes/REST/AdminController.php:586
+#: includes/REST/AdminController.php:658
 msgid "You can only unlink your own Telegram account."
 msgstr ""
 
-#: includes/REST/AdminController.php:603
+#: includes/REST/AdminController.php:675
 msgid "Team name is required."
 msgstr ""
 
-#: includes/REST/AdminController.php:618
+#: includes/REST/AdminController.php:690
 msgid "A team with that slug exists."
 msgstr ""
 
-#: includes/REST/AdminController.php:743
+#: includes/REST/AdminController.php:840
 msgid "This is not a Televixo settings export."
 msgstr ""
 
@@ -444,12 +460,12 @@ msgid "Too many requests. Please wait a moment."
 msgstr ""
 
 #: includes/REST/PublicController.php:129
-#: includes/REST/PublicController.php:404
+#: includes/REST/PublicController.php:411
 msgid "Your message could not be sent."
 msgstr ""
 
 #: includes/REST/PublicController.php:132
-#: includes/REST/PublicController.php:410
+#: includes/REST/PublicController.php:417
 msgid "Please complete the verification."
 msgstr ""
 
@@ -458,7 +474,7 @@ msgid "Please enter your name."
 msgstr ""
 
 #: includes/REST/PublicController.php:167
-#: includes/REST/PublicController.php:416
+#: includes/REST/PublicController.php:423
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -485,64 +501,64 @@ msgstr ""
 msgid "%s is required."
 msgstr ""
 
-#: includes/REST/PublicController.php:211
-#: includes/REST/PublicController.php:422
+#: includes/REST/PublicController.php:213
+#: includes/REST/PublicController.php:431
 msgid "Please check the highlighted fields."
 msgstr ""
 
-#: includes/REST/PublicController.php:254
+#: includes/REST/PublicController.php:261
 #: includes/Widget/Strings.php:141
 msgid "You are sending messages too quickly. Please wait a moment."
 msgstr ""
 
-#: includes/REST/PublicController.php:259
+#: includes/REST/PublicController.php:266
 msgid "Invalid message."
 msgstr ""
 
-#: includes/REST/PublicController.php:279
+#: includes/REST/PublicController.php:286
 msgid "File uploads are disabled."
 msgstr ""
 
-#: includes/REST/PublicController.php:283
+#: includes/REST/PublicController.php:290
 msgid "Too many uploads. Please wait."
 msgstr ""
 
-#: includes/REST/PublicController.php:317
+#: includes/REST/PublicController.php:324
 msgid "File not found."
 msgstr ""
 
-#: includes/REST/PublicController.php:350
+#: includes/REST/PublicController.php:357
 msgid "Ratings are disabled."
 msgstr ""
 
-#: includes/REST/PublicController.php:355
+#: includes/REST/PublicController.php:362
 msgid "Please choose a rating from 1 to 5."
 msgstr ""
 
-#: includes/REST/PublicController.php:369
+#: includes/REST/PublicController.php:376
 msgid "You already rated this conversation."
 msgstr ""
 
-#: includes/REST/PublicController.php:386
+#: includes/REST/PublicController.php:393
 msgid "Transcripts are disabled."
 msgstr ""
 
-#: includes/REST/PublicController.php:407
+#: includes/REST/PublicController.php:414
 msgid "Too many requests. Please try again later."
 msgstr ""
 
-#: includes/REST/PublicController.php:419
+#: includes/REST/PublicController.php:426
 msgid "Please enter a message."
 msgstr ""
 
 #. translators: %s: conversation reference
-#: includes/REST/PublicController.php:432
+#: includes/REST/PublicController.php:452
 #, php-format
 msgid "New offline message %s"
 msgstr ""
 
 #. translators: 1: visitor email, 2: message
-#: includes/REST/PublicController.php:434
+#: includes/REST/PublicController.php:454
 #, php-format
 msgid ""
 "From: %1$s\n"
@@ -552,143 +568,143 @@ msgid ""
 "Reply from the Televixo inbox in WordPress."
 msgstr ""
 
-#: includes/REST/PublicController.php:447
+#: includes/REST/PublicController.php:474
 msgid "Too many requests."
 msgstr ""
 
-#: includes/REST/SetupController.php:69
+#: includes/REST/SetupController.php:76
 msgid "The bot token is defined in wp-config.php and cannot be changed here."
 msgstr ""
 
-#: includes/REST/SetupController.php:73
+#: includes/REST/SetupController.php:80
 msgid "That does not look like a bot token from @BotFather."
 msgstr ""
 
-#: includes/REST/SetupController.php:78
+#: includes/REST/SetupController.php:85
 msgid "Telegram rejected this token."
 msgstr ""
 
-#: includes/REST/SetupController.php:78
+#: includes/REST/SetupController.php:85
 msgid "Could not reach Telegram. Check that the server can make outbound HTTPS requests to api.telegram.org."
 msgstr ""
 
 #. translators: %d: number of active conversations
-#: includes/REST/SetupController.php:87
+#: includes/REST/SetupController.php:94
 #, php-format
 msgid "This is a different bot. %d active conversations are routed through the current bot and will stop relaying to Telegram (they remain available in the WordPress inbox). Confirm to continue."
 msgstr ""
 
-#: includes/REST/SetupController.php:142
+#: includes/REST/SetupController.php:152
 msgid "Enter a numeric chat ID (groups start with -100)."
 msgstr ""
 
-#: includes/REST/SetupController.php:147
+#: includes/REST/SetupController.php:157
 msgid "The bot cannot access that chat. Add the bot to the group (or send /start to the bot for a private chat) and try again."
 msgstr ""
 
-#: includes/REST/SetupController.php:153
+#: includes/REST/SetupController.php:163
 msgid "Channels are not supported because operator replies cannot be attributed to individual people. Use a group."
 msgstr ""
 
-#: includes/REST/SetupController.php:157
+#: includes/REST/SetupController.php:167
 msgid "Topics Mode needs a supergroup with Topics enabled."
 msgstr ""
 
-#: includes/REST/SetupController.php:159
+#: includes/REST/SetupController.php:172
 msgid "Private chat: only this person will see visitor messages. They must keep the bot unblocked."
 msgstr ""
 
-#: includes/REST/SetupController.php:166
+#: includes/REST/SetupController.php:189
 msgid "The bot is a member of the group."
 msgstr ""
 
-#: includes/REST/SetupController.php:167
+#: includes/REST/SetupController.php:194
 msgid "Every member of this group can read relayed visitor messages. Use separate groups per team (or the WordPress inbox) when visitors must be isolated between teams."
 msgstr ""
 
-#: includes/REST/SetupController.php:169
+#: includes/REST/SetupController.php:200
 msgid "The bot can read group messages."
 msgstr ""
 
-#: includes/REST/SetupController.php:169
+#: includes/REST/SetupController.php:200
 msgid "Privacy mode is on: the bot only receives replies to its own messages and commands, which is all Reply Mode needs."
 msgstr ""
 
-#: includes/REST/SetupController.php:173
+#: includes/REST/SetupController.php:208
 msgid "Topics are enabled."
 msgstr ""
 
-#: includes/REST/SetupController.php:173
+#: includes/REST/SetupController.php:208
 msgid "Enable Topics in the group settings (requires a supergroup)."
 msgstr ""
 
-#: includes/REST/SetupController.php:174
+#: includes/REST/SetupController.php:213
 msgid "The bot can create and close topics."
 msgstr ""
 
-#: includes/REST/SetupController.php:174
+#: includes/REST/SetupController.php:213
 msgid "Make the bot an administrator with the \"Manage topics\" right."
 msgstr ""
 
-#: includes/REST/SetupController.php:175
+#: includes/REST/SetupController.php:218
 msgid "The bot receives messages inside topics."
 msgstr ""
 
-#: includes/REST/SetupController.php:175
+#: includes/REST/SetupController.php:218
 msgid "The bot must be an administrator (or have privacy mode disabled in @BotFather) to receive messages typed inside topics."
 msgstr ""
 
-#: includes/REST/SetupController.php:190
+#: includes/REST/SetupController.php:257
 msgid "New conversations use this destination. Existing conversations keep the routing they started with."
 msgstr ""
 
-#: includes/REST/SetupController.php:196
+#: includes/REST/SetupController.php:264
 msgid "Choose a destination first."
 msgstr ""
 
-#: includes/REST/SetupController.php:198
+#: includes/REST/SetupController.php:270
 msgid "✅ Televixo test message. Visitor chats from your website will appear here."
 msgstr ""
 
-#: includes/REST/SetupController.php:200
+#: includes/REST/SetupController.php:274
 msgid "Telegram did not accept the message."
 msgstr ""
 
-#: includes/REST/SetupController.php:202
+#: includes/REST/SetupController.php:278
 msgid "Telegram accepted the message. That confirms delivery to the chat, not that someone has read it."
 msgstr ""
 
-#: includes/REST/SetupController.php:208
+#: includes/REST/SetupController.php:285
 msgid "Could not read the webhook status from Telegram."
 msgstr ""
 
-#: includes/REST/SetupController.php:230
+#: includes/REST/SetupController.php:307
 msgid "Telegram webhooks require HTTPS. Enable HTTPS on this site first."
 msgstr ""
 
 #. translators: %s: host name of the other webhook
-#: includes/REST/SetupController.php:239
+#: includes/REST/SetupController.php:316
 #, php-format
 msgid "This bot already sends updates to %s. Replacing it will stop that integration. Use a dedicated bot for this site, or confirm to replace."
 msgstr ""
 
-#: includes/REST/SetupController.php:254
+#: includes/REST/SetupController.php:331
 msgid "Telegram did not accept the webhook."
 msgstr ""
 
-#: includes/REST/SetupController.php:268
+#: includes/REST/SetupController.php:345
 msgid "The registered webhook belongs to another site, so it was left unchanged."
 msgstr ""
 
-#: includes/Rules/Repository.php:59
+#: includes/Rules/Repository.php:64
 msgid "Rule name is required."
 msgstr ""
 
-#: includes/Rules/Repository.php:70
+#: includes/Rules/Repository.php:75
 msgid "Rule not found."
 msgstr ""
 
-#: includes/Rules/Repository.php:105
+#: includes/Rules/Repository.php:118
 msgid "This is not a Televixo rules export."
 msgstr ""
 
@@ -707,117 +723,117 @@ msgstr ""
 msgid "via website inbox"
 msgstr ""
 
-#: includes/Telegram/TelegramProvider.php:213
+#: includes/Telegram/TelegramProvider.php:217
 #: assets/build/admin.js:10
 msgid "Claim"
 msgstr ""
 
-#: includes/Telegram/TelegramProvider.php:217
+#: includes/Telegram/TelegramProvider.php:221
 #: assets/build/admin.js:10
 msgid "Close"
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:161
+#: includes/Telegram/UpdateProcessor.php:174
 msgid "Anonymous admin messages cannot be sent to visitors because the sender cannot be identified. Turn off \"Remain anonymous\" to reply."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:176
+#: includes/Telegram/UpdateProcessor.php:189
 msgid "That reply points to a different conversation than this topic, so it was not sent."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:188
+#: includes/Telegram/UpdateProcessor.php:201
 msgid "This reply is not linked to a website conversation, so it was not sent. Reply directly to a visitor message from the bot."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:196
+#: includes/Telegram/UpdateProcessor.php:209
 msgid "You are not an enrolled Televixo operator, so your message was not sent to the visitor. Ask an administrator for an enrollment code."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:212
+#: includes/Telegram/UpdateProcessor.php:225
 msgid "This conversation is assigned to another operator. Your message was not sent."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:222
+#: includes/Telegram/UpdateProcessor.php:235
 msgid "This conversation is marked as spam; replies are not delivered."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:230
+#: includes/Telegram/UpdateProcessor.php:243
 msgid "Another operator claimed this conversation a moment ago. Your message was not sent."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:247
+#: includes/Telegram/UpdateProcessor.php:260
 msgid "The file could not be delivered (type or size not allowed)."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:255
+#: includes/Telegram/UpdateProcessor.php:268
 msgid "Your text was delivered, but an attachment was refused (type or size not allowed)."
 msgstr ""
 
 #. translators: %s: operator display name
-#: includes/Telegram/UpdateProcessor.php:323
+#: includes/Telegram/UpdateProcessor.php:338
 #, php-format
 msgid "Linked to Televixo operator %s. You can now reply to visitor messages in the support group."
 msgstr ""
 
 #. translators: %s: operator display name
-#: includes/Telegram/UpdateProcessor.php:324
+#: includes/Telegram/UpdateProcessor.php:339
 msgid "That code is invalid or expired. Create a new code in WordPress → Televixo → Operators."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:328
+#: includes/Telegram/UpdateProcessor.php:344
 msgid "Hello! This bot relays website chats. To become an operator, open WordPress → Televixo → Operators, create an enrollment code and send it here as: /link CODE"
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:344
+#: includes/Telegram/UpdateProcessor.php:360
 msgid "You are marked available for the next 8 hours (or until you send /away or /offline)."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:345
+#: includes/Telegram/UpdateProcessor.php:361
 msgid "You are marked away."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:346
+#: includes/Telegram/UpdateProcessor.php:362
 msgid "You are marked offline."
 msgstr ""
 
 #. translators: %s: conversation reference
-#: includes/Telegram/UpdateProcessor.php:357
-#: includes/Telegram/UpdateProcessor.php:426
+#: includes/Telegram/UpdateProcessor.php:373
+#: includes/Telegram/UpdateProcessor.php:449
 #, php-format
 msgid "You claimed %s."
 msgstr ""
 
 #. translators: %s: conversation reference
-#: includes/Telegram/UpdateProcessor.php:364
+#: includes/Telegram/UpdateProcessor.php:380
 #, php-format
 msgid "%s closed."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:377
+#: includes/Telegram/UpdateProcessor.php:393
 msgid "Marked as spam. Further visitor messages will not be relayed."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:384
+#: includes/Telegram/UpdateProcessor.php:400
 msgid "Commands: /claim, /close, /note text, /spam, /online, /away. Messages starting with \"/\" are never sent to visitors."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:391
+#: includes/Telegram/UpdateProcessor.php:407
 msgid "You do not have access to this conversation."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:406
+#: includes/Telegram/UpdateProcessor.php:429
 msgid "Unsupported action."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:415
+#: includes/Telegram/UpdateProcessor.php:438
 msgid "You are not an enrolled operator."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:430
+#: includes/Telegram/UpdateProcessor.php:453
 msgid "This conversation is assigned to another operator."
 msgstr ""
 
-#: includes/Telegram/UpdateProcessor.php:434
+#: includes/Telegram/UpdateProcessor.php:457
 msgid "Conversation closed."
 msgstr ""
 
@@ -1142,11 +1158,6 @@ msgstr ""
 msgid "Microphone access was denied. You can attach a file or type instead."
 msgstr ""
 
-#: includes/Widget/Strings.php:144
-#: assets/build/admin.js:1
-msgid "Dismiss"
-msgstr ""
-
 #: includes/Widget/Strings.php:145
 msgid "Chat"
 msgstr ""
@@ -1185,7 +1196,7 @@ msgid "More options"
 msgstr ""
 
 #. translators: 1: required PHP version, 2: required WordPress version, 3: current PHP version, 4: current WordPress version.
-#: televixo.php:42
+#: televixo.php:46
 #, php-format
 msgid "Televixo requires PHP %1$s+ and WordPress %2$s+. This site runs PHP %3$s and WordPress %4$s. Televixo is inactive until the server is upgraded."
 msgstr ""
@@ -3160,7 +3171,7 @@ msgstr ""
 
 #: assets/build/admin.js:16
 #, js-format
-msgid "Send this to @%1$s in a private chat within 10 minutes: %2$s"
+msgid "Send this to @%s in a private chat within 10 minutes:"
 msgstr ""
 
 #: assets/build/admin.js:16

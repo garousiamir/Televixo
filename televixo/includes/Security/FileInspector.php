@@ -17,18 +17,54 @@ final class FileInspector {
 	 * Allowed extension => accepted detected MIME types and attachment kind.
 	 */
 	public const ALLOWED = array(
-		'jpg'  => array( 'mimes' => array( 'image/jpeg' ), 'kind' => 'image' ),
-		'png'  => array( 'mimes' => array( 'image/png' ), 'kind' => 'image' ),
-		'gif'  => array( 'mimes' => array( 'image/gif' ), 'kind' => 'image' ),
-		'webp' => array( 'mimes' => array( 'image/webp' ), 'kind' => 'image' ),
-		'pdf'  => array( 'mimes' => array( 'application/pdf' ), 'kind' => 'file' ),
-		'txt'  => array( 'mimes' => array( 'text/plain' ), 'kind' => 'file' ),
-		'csv'  => array( 'mimes' => array( 'text/plain', 'text/csv' ), 'kind' => 'file' ),
-		'docx' => array( 'mimes' => array( 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip' ), 'kind' => 'file' ),
-		'xlsx' => array( 'mimes' => array( 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/zip' ), 'kind' => 'file' ),
-		'ogg'  => array( 'mimes' => array( 'audio/ogg', 'application/ogg', 'video/ogg' ), 'kind' => 'voice' ),
-		'mp3'  => array( 'mimes' => array( 'audio/mpeg' ), 'kind' => 'voice' ),
-		'm4a'  => array( 'mimes' => array( 'audio/mp4', 'audio/x-m4a', 'video/mp4' ), 'kind' => 'voice' ),
+		'jpg'  => array(
+			'mimes' => array( 'image/jpeg' ),
+			'kind'  => 'image',
+		),
+		'png'  => array(
+			'mimes' => array( 'image/png' ),
+			'kind'  => 'image',
+		),
+		'gif'  => array(
+			'mimes' => array( 'image/gif' ),
+			'kind'  => 'image',
+		),
+		'webp' => array(
+			'mimes' => array( 'image/webp' ),
+			'kind'  => 'image',
+		),
+		'pdf'  => array(
+			'mimes' => array( 'application/pdf' ),
+			'kind'  => 'file',
+		),
+		'txt'  => array(
+			'mimes' => array( 'text/plain' ),
+			'kind'  => 'file',
+		),
+		'csv'  => array(
+			'mimes' => array( 'text/plain', 'text/csv' ),
+			'kind'  => 'file',
+		),
+		'docx' => array(
+			'mimes' => array( 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip' ),
+			'kind'  => 'file',
+		),
+		'xlsx' => array(
+			'mimes' => array( 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/zip' ),
+			'kind'  => 'file',
+		),
+		'ogg'  => array(
+			'mimes' => array( 'audio/ogg', 'application/ogg', 'video/ogg' ),
+			'kind'  => 'voice',
+		),
+		'mp3'  => array(
+			'mimes' => array( 'audio/mpeg' ),
+			'kind'  => 'voice',
+		),
+		'm4a'  => array(
+			'mimes' => array( 'audio/mp4', 'audio/x-m4a', 'video/mp4' ),
+			'kind'  => 'voice',
+		),
 	);
 
 	private const DENY_EXT = '/\.(php\d?|phtml|phar|pht|shtml|cgi|pl|py|rb|sh|bash|exe|dll|bat|cmd|com|msi|js|mjs|jsp|asp|aspx|htaccess|htm|html|xhtml|svg|svgz|xml|swf|jar|vbs|ps1|hta|scr)(\.|$)/i';
@@ -41,47 +77,74 @@ final class FileInspector {
 	 */
 	public static function inspect( string $path, string $client_name, array $enabled, int $max_bytes ): array {
 		if ( ! is_file( $path ) || ! is_readable( $path ) ) {
-			return array( 'ok' => false, 'error' => 'file_unreadable' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_unreadable',
+			);
 		}
 		$size = (int) filesize( $path );
 		if ( $size <= 0 ) {
-			return array( 'ok' => false, 'error' => 'file_empty' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_empty',
+			);
 		}
 		if ( $size > $max_bytes ) {
-			return array( 'ok' => false, 'error' => 'file_too_large' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_too_large',
+			);
 		}
 		$name = self::safe_name( $client_name );
 		if ( preg_match( self::DENY_EXT, $client_name ) ) {
-			return array( 'ok' => false, 'error' => 'file_type_blocked' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_type_blocked',
+			);
 		}
 		$ext = strtolower( (string) pathinfo( $name, PATHINFO_EXTENSION ) );
 		if ( 'jpeg' === $ext ) {
 			$ext = 'jpg';
 		}
 		if ( ! isset( self::ALLOWED[ $ext ] ) || ! in_array( $ext, $enabled, true ) ) {
-			return array( 'ok' => false, 'error' => 'file_type_not_allowed' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_type_not_allowed',
+			);
 		}
 		$finfo = new \finfo( FILEINFO_MIME_TYPE );
 		$mime  = (string) $finfo->file( $path );
 		if ( ! in_array( $mime, self::ALLOWED[ $ext ]['mimes'], true ) ) {
-			return array( 'ok' => false, 'error' => 'file_content_mismatch' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_content_mismatch',
+			);
 		}
-		$head = (string) file_get_contents( $path, false, null, 0, 4096 );
+		$head = substr( \Televixo\Core\Fs::get( $path ), 0, 4096 );
 		if ( preg_match( '/<\?php|<script|<svg|<html|<!DOCTYPE html|<iframe|^#!/i', $head ) ) {
-			return array( 'ok' => false, 'error' => 'file_content_blocked' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_content_blocked',
+			);
 		}
 		$width  = 0;
 		$height = 0;
 		if ( 'image' === self::ALLOWED[ $ext ]['kind'] ) {
-			$dims = @getimagesize( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- invalid images return false.
+			$dims = wp_getimagesize( $path );
 			if ( ! $dims || $dims[0] < 1 || $dims[1] < 1 || $dims[0] * $dims[1] > 40000000 ) {
-				return array( 'ok' => false, 'error' => 'image_invalid' );
+				return array(
+					'ok'    => false,
+					'error' => 'image_invalid',
+				);
 			}
 			$width  = (int) $dims[0];
 			$height = (int) $dims[1];
 		}
 		if ( in_array( $ext, array( 'docx', 'xlsx' ), true ) && ! self::is_office_zip( $path ) ) {
-			return array( 'ok' => false, 'error' => 'file_content_mismatch' );
+			return array(
+				'ok'    => false,
+				'error' => 'file_content_mismatch',
+			);
 		}
 		return array(
 			'ok'     => true,

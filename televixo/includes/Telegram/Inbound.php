@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class Inbound {
 
-	public const LEASE = 60;
+	public const LEASE        = 60;
 	public const MAX_ATTEMPTS = 5;
 
 	/**
@@ -44,8 +44,8 @@ final class Inbound {
 	 * Claims and processes stored updates in update_id order.
 	 */
 	public static function process_batch( int $limit, float $deadline ): int {
-		$now  = Clock::mysql();
-		$rows = Db::rows(
+		$now      = Clock::mysql();
+		$rows     = Db::rows(
 			Db::prepare(
 				"SELECT id FROM {inbound_updates}
 				WHERE (status = 'received' AND (lease_expires_at IS NULL OR lease_expires_at < %s)) OR (status = 'processing' AND lease_expires_at < %s)
@@ -88,7 +88,7 @@ final class Inbound {
 				Db::exec( Db::prepare( "UPDATE {inbound_updates} SET status = 'received', lease_token = '', lease_expires_at = %s, result_code = 'deferred' WHERE id = %d AND lease_token = %s", Clock::mysql( Clock::now() + 5 * (int) $row['attempts'] ), (int) $row['id'], $token ) );
 				continue;
 			}
-			$status = str_starts_with( $result, 'error:' ) ? ( (int) $row['attempts'] < self::MAX_ATTEMPTS ? 'received' : 'failed' ) : ( str_starts_with( $result, 'ignored' ) ? 'ignored' : 'processed' );
+			$status    = str_starts_with( $result, 'error:' ) ? ( (int) $row['attempts'] < self::MAX_ATTEMPTS ? 'received' : 'failed' ) : ( str_starts_with( $result, 'ignored' ) ? 'ignored' : 'processed' );
 			$lease_sql = 'received' === $status ? Db::prepare( '%s', Clock::mysql( Clock::now() + 10 ) ) : 'NULL';
 			Db::exec(
 				Db::prepare(

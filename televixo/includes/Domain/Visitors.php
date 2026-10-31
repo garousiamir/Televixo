@@ -29,7 +29,11 @@ final class Visitors {
 	 */
 	public static function update_profile( int $id, array $fields ): void {
 		$data = array( 'updated_at' => Clock::mysql() );
-		foreach ( array( 'name' => 190, 'email' => 190, 'phone' => 64 ) as $key => $len ) {
+		foreach ( array(
+			'name'  => 190,
+			'email' => 190,
+			'phone' => 64,
+		) as $key => $len ) {
 			if ( isset( $fields[ $key ] ) && '' !== $fields[ $key ] ) {
 				$data[ $key ] = mb_substr( (string) $fields[ $key ], 0, $len );
 			}
@@ -72,7 +76,15 @@ final class Visitors {
 		if ( ! $visitor ) {
 			return;
 		}
-		Db::update( 'visitors', array( 'is_blocked' => 0, 'blocked_reason' => '', 'blocked_at' => null ), array( 'id' => $visitor_id ) );
+		Db::update(
+			'visitors',
+			array(
+				'is_blocked'     => 0,
+				'blocked_reason' => '',
+				'blocked_at'     => null,
+			),
+			array( 'id' => $visitor_id )
+		);
 		$list = array_values( array_diff( (array) get_option( self::BLOCKED_NETWORKS, array() ), array( (string) $visitor['network_hash'] ) ) );
 		update_option( self::BLOCKED_NETWORKS, $list, false );
 		Events::record( 'visitor.unblocked', $actor_type, $actor_ref, null, 'visitor', (string) $visitor_id );

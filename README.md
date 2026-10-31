@@ -1,5 +1,7 @@
 # Televixo – Telegram Live Chat for WordPress
 
+By [pdthemes](https://pdthemes.de).
+
 Self-hosted live chat for WordPress. Visitors chat on your website without a Telegram account; operators answer in Telegram (Reply Mode or Topics Mode) or in the WordPress inbox. WordPress is the source of truth for conversations, messages, permissions, routing and delivery status.
 
 * Plugin source: [`televixo/`](televixo/) (installable directory)

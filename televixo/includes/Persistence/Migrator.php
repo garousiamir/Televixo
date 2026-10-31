@@ -17,8 +17,8 @@ defined( 'ABSPATH' ) || exit;
 
 final class Migrator {
 
-	public const OPTION         = 'televixo_db_version';
-	public const CURRENT        = 1;
+	public const OPTION          = 'televixo_db_version';
+	public const CURRENT         = 1;
 	private const LOCK_TRANSIENT = 'televixo_migrating';
 
 	/**

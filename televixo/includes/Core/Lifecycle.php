@@ -29,7 +29,12 @@ final class Lifecycle {
 			);
 		}
 		if ( is_multisite() && $network_wide ) {
-			foreach ( get_sites( array( 'fields' => 'ids', 'number' => 1000 ) ) as $site_id ) {
+			foreach ( get_sites(
+				array(
+					'fields' => 'ids',
+					'number' => 1000,
+				)
+			) as $site_id ) {
 				switch_to_blog( (int) $site_id );
 				self::activate_site();
 				restore_current_blog();
@@ -54,7 +59,12 @@ final class Lifecycle {
 
 	public static function deactivate( bool $network_wide = false ): void {
 		if ( is_multisite() && $network_wide ) {
-			foreach ( get_sites( array( 'fields' => 'ids', 'number' => 1000 ) ) as $site_id ) {
+			foreach ( get_sites(
+				array(
+					'fields' => 'ids',
+					'number' => 1000,
+				)
+			) as $site_id ) {
 				switch_to_blog( (int) $site_id );
 				Scheduler::clear_events();
 				restore_current_blog();

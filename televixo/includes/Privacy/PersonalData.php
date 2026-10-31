@@ -27,7 +27,10 @@ final class PersonalData {
 	 * @return array<string,mixed>
 	 */
 	public static function exporters( array $e ): array {
-		$e['televixo'] = array( 'exporter_friendly_name' => __( 'Televixo chat conversations', 'televixo' ), 'callback' => array( self::class, 'export' ) );
+		$e['televixo'] = array(
+			'exporter_friendly_name' => __( 'Televixo chat conversations', 'televixo' ),
+			'callback'               => array( self::class, 'export' ),
+		);
 		return $e;
 	}
 
@@ -36,7 +39,10 @@ final class PersonalData {
 	 * @return array<string,mixed>
 	 */
 	public static function erasers( array $e ): array {
-		$e['televixo'] = array( 'eraser_friendly_name' => __( 'Televixo chat conversations', 'televixo' ), 'callback' => array( self::class, 'erase' ) );
+		$e['televixo'] = array(
+			'eraser_friendly_name' => __( 'Televixo chat conversations', 'televixo' ),
+			'callback'             => array( self::class, 'erase' ),
+		);
 		return $e;
 	}
 
@@ -61,13 +67,30 @@ final class PersonalData {
 		$data  = array();
 		$convs = $ids ? Db::rows( Db::prepare( 'SELECT * FROM {conversations} WHERE visitor_id IN (' . Db::in_ints( $ids ) . ') ORDER BY id ASC LIMIT %d OFFSET %d', 10, ( $page - 1 ) * 10 ) ) : array();
 		foreach ( $convs as $c ) {
-			$items = array(
-				array( 'name' => __( 'Reference', 'televixo' ), 'value' => $c['reference'] ),
-				array( 'name' => __( 'Started', 'televixo' ), 'value' => Clock::iso( $c['created_at'] ) ),
-				array( 'name' => __( 'Status', 'televixo' ), 'value' => $c['status'] ),
-				array( 'name' => __( 'Transcript', 'televixo' ), 'value' => nl2br( esc_html( Transcript::build( $c ) ) ) ),
+			$items  = array(
+				array(
+					'name'  => __( 'Reference', 'televixo' ),
+					'value' => $c['reference'],
+				),
+				array(
+					'name'  => __( 'Started', 'televixo' ),
+					'value' => Clock::iso( $c['created_at'] ),
+				),
+				array(
+					'name'  => __( 'Status', 'televixo' ),
+					'value' => $c['status'],
+				),
+				array(
+					'name'  => __( 'Transcript', 'televixo' ),
+					'value' => nl2br( esc_html( Transcript::build( $c ) ) ),
+				),
 			);
-			$data[] = array( 'group_id' => 'televixo-conversations', 'group_label' => __( 'Chat conversations', 'televixo' ), 'item_id' => 'televixo-' . $c['public_id'], 'data' => $items );
+			$data[] = array(
+				'group_id'    => 'televixo-conversations',
+				'group_label' => __( 'Chat conversations', 'televixo' ),
+				'item_id'     => 'televixo-' . $c['public_id'],
+				'data'        => $items,
+			);
 		}
 		if ( 1 === $page ) {
 			foreach ( $ids as $vid ) {
@@ -78,17 +101,35 @@ final class PersonalData {
 						'group_label' => __( 'Chat profile', 'televixo' ),
 						'item_id'     => 'televixo-visitor-' . $v['public_id'],
 						'data'        => array(
-							array( 'name' => __( 'Name', 'televixo' ), 'value' => $v['name'] ),
-							array( 'name' => __( 'Email', 'televixo' ), 'value' => $v['email'] ),
-							array( 'name' => __( 'Phone', 'televixo' ), 'value' => $v['phone'] ),
-							array( 'name' => __( 'First seen', 'televixo' ), 'value' => Clock::iso( $v['first_seen_at'] ) ),
-							array( 'name' => __( 'Consent given', 'televixo' ), 'value' => Clock::iso( $v['consent_at'] ) ?? '' ),
+							array(
+								'name'  => __( 'Name', 'televixo' ),
+								'value' => $v['name'],
+							),
+							array(
+								'name'  => __( 'Email', 'televixo' ),
+								'value' => $v['email'],
+							),
+							array(
+								'name'  => __( 'Phone', 'televixo' ),
+								'value' => $v['phone'],
+							),
+							array(
+								'name'  => __( 'First seen', 'televixo' ),
+								'value' => Clock::iso( $v['first_seen_at'] ),
+							),
+							array(
+								'name'  => __( 'Consent given', 'televixo' ),
+								'value' => Clock::iso( $v['consent_at'] ) ?? '',
+							),
 						),
 					);
 				}
 			}
 		}
-		return array( 'data' => $data, 'done' => count( $convs ) < 10 );
+		return array(
+			'data' => $data,
+			'done' => count( $convs ) < 10,
+		);
 	}
 
 	/**
@@ -115,14 +156,14 @@ final class PersonalData {
 		$messages = Db::rows( Db::prepare( 'SELECT public_id, author_type, author_name, source, body, delivery_state, created_at FROM {messages} WHERE conversation_id = %d ORDER BY id ASC LIMIT 5000', (int) $c['id'] ) );
 		$notes    = Db::rows( Db::prepare( 'SELECT author_name, body, created_at FROM {notes} WHERE conversation_id = %d ORDER BY id ASC LIMIT 2000', (int) $c['id'] ) );
 		return array(
-			'format'       => 'televixo-conversation',
-			'reference'    => $c['reference'],
-			'status'       => $c['status'],
-			'created_at'   => Clock::iso( $c['created_at'] ),
-			'closed_at'    => Clock::iso( $c['closed_at'] ),
-			'context'      => json_decode( (string) $c['context'], true ),
-			'messages'     => $messages,
-			'notes'        => $notes,
+			'format'     => 'televixo-conversation',
+			'reference'  => $c['reference'],
+			'status'     => $c['status'],
+			'created_at' => Clock::iso( $c['created_at'] ),
+			'closed_at'  => Clock::iso( $c['closed_at'] ),
+			'context'    => json_decode( (string) $c['context'], true ),
+			'messages'   => $messages,
+			'notes'      => $notes,
 		);
 	}
 

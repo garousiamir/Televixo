@@ -90,6 +90,10 @@ final class KnowledgeBase {
 	 * @return array<string,mixed>
 	 */
 	private static function shape( array $r ): array {
-		return array( 'id' => (int) $r['id'], 'title' => (string) $r['title'], 'body' => (string) $r['body'] );
+		return array(
+			'id'    => (int) $r['id'],
+			'title' => (string) $r['title'],
+			'body'  => (string) $r['body'],
+		);
 	}
 }

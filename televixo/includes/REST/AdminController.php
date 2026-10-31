@@ -149,7 +149,10 @@ final class AdminController extends Controller {
 			Operators::set_availability( (int) $op['id'], $avail );
 		}
 		Operators::heartbeat( (int) $op['id'] );
-		return array( 'operator' => $this->op_shape( Operators::get( (int) $op['id'] ) ?? $op ), 'unread' => $this->unread_total( $op ) );
+		return array(
+			'operator' => $this->op_shape( Operators::get( (int) $op['id'] ) ?? $op ),
+			'unread'   => $this->unread_total( $op ),
+		);
 	}
 
 	private function unread_total( array $op ): int {
@@ -170,7 +173,7 @@ final class AdminController extends Controller {
 		$where = array( '1=1' );
 		$args  = array();
 		if ( ! Operators::can_view_all( $op ) ) {
-			$teams = Operators::team_ids( (int) $op['id'] );
+			$teams   = Operators::team_ids( (int) $op['id'] );
 			$where[] = '(c.assigned_operator_id = %d OR (c.assigned_operator_id IS NULL AND (c.team_id IS NULL OR c.team_id IN (' . Db::in_ints( $teams ) . '))))';
 			$args[]  = (int) $op['id'];
 		}
@@ -212,9 +215,9 @@ final class AdminController extends Controller {
 	 * Inbox list with keyset pagination on (last activity, id).
 	 */
 	public function list( \WP_REST_Request $r ) {
-		$op    = $this->operator();
-		$limit = max( 1, min( 50, absint( $r->get_param( 'limit' ) ?: 25 ) ) );
-		$f     = array(
+		$op               = $this->operator();
+		$limit            = max( 1, min( 50, absint( $r->get_param( 'limit' ) ?: 25 ) ) );
+		$f                = array(
 			'status'   => self::str( $r, 'status', 16 ) ?: 'active',
 			'assigned' => self::str( $r, 'assigned', 16 ),
 			'team'     => absint( $r->get_param( 'team' ) ),
@@ -223,7 +226,7 @@ final class AdminController extends Controller {
 			'q'        => self::str( $r, 'q', 100 ),
 		);
 		[ $where, $args ] = $this->scope_sql( $op, $f );
-		$cursor = self::str( $r, 'cursor', 64 );
+		$cursor           = self::str( $r, 'cursor', 64 );
 		if ( preg_match( '/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})_(\d+)$/', str_replace( 'T', ' ', $cursor ), $m ) ) {
 			$where .= ' AND (c.last_message_at < %s OR (c.last_message_at = %s AND c.id < %d))';
 			array_push( $args, $m[1], $m[1], (int) $m[2] );
@@ -239,9 +242,9 @@ final class AdminController extends Controller {
 				...$args
 			)
 		);
-		$more = count( $rows ) > $limit;
-		$rows = array_slice( $rows, 0, $limit );
-		$last = end( $rows );
+		$more   = count( $rows ) > $limit;
+		$rows   = array_slice( $rows, 0, $limit );
+		$last   = end( $rows );
 		return array(
 			'items'       => array_map( array( $this, 'conv_shape' ), $rows ),
 			'next_cursor' => $more && $last ? str_replace( ' ', 'T', (string) $last['last_message_at'] ) . '_' . $last['id'] : null,
@@ -250,10 +253,10 @@ final class AdminController extends Controller {
 	}
 
 	public function detail( \WP_REST_Request $r ) {
-		$c       = $this->conversation( $r );
-		$visitor = Visitors::get( (int) $c['visitor_id'] ) ?? array();
-		$history = Db::rows( Db::prepare( 'SELECT public_id, reference, status, created_at FROM {conversations} WHERE visitor_id = %d AND id <> %d ORDER BY id DESC LIMIT 10', (int) $c['visitor_id'], (int) $c['id'] ) );
-		$rating  = Db::row( Db::prepare( 'SELECT score, comment, created_at FROM {ratings} WHERE conversation_id = %d', (int) $c['id'] ) );
+		$c                      = $this->conversation( $r );
+		$visitor                = Visitors::get( (int) $c['visitor_id'] ) ?? array();
+		$history                = Db::rows( Db::prepare( 'SELECT public_id, reference, status, created_at FROM {conversations} WHERE visitor_id = %d AND id <> %d ORDER BY id DESC LIMIT 10', (int) $c['visitor_id'], (int) $c['id'] ) );
+		$rating                 = Db::row( Db::prepare( 'SELECT score, comment, created_at FROM {ratings} WHERE conversation_id = %d', (int) $c['id'] ) );
 		$c['visitor_name']      = $visitor['name'] ?? '';
 		$c['visitor_email']     = $visitor['email'] ?? '';
 		$c['visitor_public_id'] = $visitor['public_id'] ?? '';
@@ -274,8 +277,19 @@ final class AdminController extends Controller {
 			),
 			'context'      => Conversations::context( $c ),
 			'routing'      => Conversations::snapshot( $c ),
-			'history'      => array_map( static fn( $h ) => array( 'id' => $h['public_id'], 'reference' => $h['reference'], 'status' => $h['status'], 'created_at' => Clock::iso( $h['created_at'] ) ), $history ),
-			'rating'       => $rating ? array( 'score' => (int) $rating['score'], 'comment' => (string) $rating['comment'] ) : null,
+			'history'      => array_map(
+				static fn( $h ) => array(
+					'id'         => $h['public_id'],
+					'reference'  => $h['reference'],
+					'status'     => $h['status'],
+					'created_at' => Clock::iso( $h['created_at'] ),
+				),
+				$history
+			),
+			'rating'       => $rating ? array(
+				'score'   => (int) $rating['score'],
+				'comment' => (string) $rating['comment'],
+			) : null,
 			'tags'         => $this->conv_tags( (int) $c['id'] ),
 		);
 	}
@@ -287,16 +301,16 @@ final class AdminController extends Controller {
 		$out  = array();
 		foreach ( $page['items'] as $m ) {
 			$out[] = array(
-				'id'          => (string) $m['public_id'],
-				'cursor'      => (int) $m['id'],
-				'author'      => (string) $m['author_type'],
-				'author_name' => (string) $m['author_name'],
-				'source'      => (string) $m['source'],
-				'body'        => (string) $m['body'],
-				'delivery'    => (string) $m['delivery_state'],
+				'id'             => (string) $m['public_id'],
+				'cursor'         => (int) $m['id'],
+				'author'         => (string) $m['author_type'],
+				'author_name'    => (string) $m['author_name'],
+				'source'         => (string) $m['source'],
+				'body'           => (string) $m['body'],
+				'delivery'       => (string) $m['delivery_state'],
 				'delivery_error' => (string) $m['delivery_error'],
-				'created_at'  => Clock::iso( (string) $m['created_at'] ),
-				'attachments' => array_map( array( Serializer::class, 'attachment' ), $atts[ (int) $m['id'] ] ?? array() ),
+				'created_at'     => Clock::iso( (string) $m['created_at'] ),
+				'attachments'    => array_map( array( Serializer::class, 'attachment' ), $atts[ (int) $m['id'] ] ?? array() ),
 			);
 		}
 		$fresh = Conversations::get( (int) $c['id'] ) ?? $c;
@@ -325,7 +339,15 @@ final class AdminController extends Controller {
 		}
 		$mirror = Messages::relay_enabled( $c ) && rest_sanitize_boolean( $r->get_param( 'mirror' ) ?? true );
 		$m      = Messages::create_operator_message( $c, $op, (string) $r->get_param( 'body' ), 'admin', $atts, $mirror );
-		return new \WP_REST_Response( array( 'message' => array( 'id' => $m['public_id'], 'cursor' => (int) $m['id'] ) ), 201 );
+		return new \WP_REST_Response(
+			array(
+				'message' => array(
+					'id'     => $m['public_id'],
+					'cursor' => (int) $m['id'],
+				),
+			),
+			201
+		);
 	}
 
 	public function upload( \WP_REST_Request $r ) {
@@ -343,7 +365,13 @@ final class AdminController extends Controller {
 		$c = $this->conversation( $r );
 		return array(
 			'items' => array_map(
-				static fn( $n ) => array( 'id' => (int) $n['id'], 'author_name' => (string) $n['author_name'], 'source' => (string) $n['source'], 'body' => (string) $n['body'], 'created_at' => Clock::iso( (string) $n['created_at'] ) ),
+				static fn( $n ) => array(
+					'id'          => (int) $n['id'],
+					'author_name' => (string) $n['author_name'],
+					'source'      => (string) $n['source'],
+					'body'        => (string) $n['body'],
+					'created_at'  => Clock::iso( (string) $n['created_at'] ),
+				),
 				array_reverse( Messages::notes( (int) $c['id'] ) )
 			),
 		);
@@ -369,7 +397,14 @@ final class AdminController extends Controller {
 		$to   = absint( $r->get_param( 'operator_id' ) );
 		$team = $r->get_param( 'team_id' );
 		if ( null !== $team ) {
-			Db::update( 'conversations', array( 'team_id' => absint( $team ) ?: null, 'updated_at' => Clock::mysql() ), array( 'id' => (int) $c['id'] ) );
+			Db::update(
+				'conversations',
+				array(
+					'team_id'    => absint( $team ) ?: null,
+					'updated_at' => Clock::mysql(),
+				),
+				array( 'id' => (int) $c['id'] )
+			);
 			Events::record( 'conversation.team', 'user', (string) get_current_user_id(), (int) $c['id'], 'team', (string) absint( $team ) );
 			$c = Conversations::get( (int) $c['id'] ) ?? $c;
 		}
@@ -414,9 +449,21 @@ final class AdminController extends Controller {
 				if ( '' === $slug ) {
 					continue;
 				}
-				Db::insert_ignore_duplicate( 'tags', array( 'name' => $name, 'slug' => $slug ) );
+				Db::insert_ignore_duplicate(
+					'tags',
+					array(
+						'name' => $name,
+						'slug' => $slug,
+					)
+				);
 				$tag = (int) Db::var( Db::prepare( 'SELECT id FROM {tags} WHERE slug = %s', $slug ) );
-				Db::insert_ignore_duplicate( 'conversation_tags', array( 'conversation_id' => (int) $c['id'], 'tag_id' => $tag ) );
+				Db::insert_ignore_duplicate(
+					'conversation_tags',
+					array(
+						'conversation_id' => (int) $c['id'],
+						'tag_id'          => $tag,
+					)
+				);
 			}
 		}
 		return array( 'tags' => $this->conv_tags( (int) $c['id'] ) );
@@ -491,7 +538,12 @@ final class AdminController extends Controller {
 			throw new DomainException( 'validation_failed', __( 'Shortcut and text are required.', 'televixo' ), 422 );
 		}
 		$id   = absint( $r->get_param( 'id' ) );
-		$data = array( 'shortcut' => $shortcut, 'title' => $title ?: $shortcut, 'body' => $body, 'updated_at' => Clock::mysql() );
+		$data = array(
+			'shortcut'   => $shortcut,
+			'title'      => $title ?: $shortcut,
+			'body'       => $body,
+			'updated_at' => Clock::mysql(),
+		);
 		if ( $id ) {
 			Db::update( 'canned_replies', $data, array( 'id' => $id ) );
 		} else {
@@ -512,15 +564,24 @@ final class AdminController extends Controller {
 	public function operators() {
 		$loads = Assignment::open_loads( array_map( static fn( $o ) => (int) $o['id'], Operators::all() ) );
 		return array(
-			'items' => array_map(
+			'items'      => array_map(
 				function ( $o ) use ( $loads ) {
 					return $this->op_shape( $o ) + array( 'open' => $loads[ (int) $o['id'] ] ?? 0 );
 				},
 				Operators::all()
 			),
 			'candidates' => current_user_can( Caps::MANAGE_SETTINGS ) ? array_map(
-				static fn( $u ) => array( 'id' => (int) $u->ID, 'name' => $u->display_name ),
-				get_users( array( 'capability__in' => array( Caps::HANDLE_ASSIGNED, Caps::VIEW_ALL ), 'number' => 200, 'fields' => array( 'ID', 'display_name' ) ) )
+				static fn( $u ) => array(
+					'id'   => (int) $u->ID,
+					'name' => $u->display_name,
+				),
+				get_users(
+					array(
+						'capability__in' => array( Caps::HANDLE_ASSIGNED, Caps::VIEW_ALL ),
+						'number'         => 200,
+						'fields'         => array( 'ID', 'display_name' ),
+					)
+				)
 			) : array(),
 		);
 	}
@@ -555,7 +616,13 @@ final class AdminController extends Controller {
 			Db::exec( Db::prepare( 'DELETE FROM {team_members} WHERE operator_id = %d', $id ) );
 			foreach ( array_map( 'absint', $r->get_param( 'teams' ) ) as $team ) {
 				if ( $team ) {
-					Db::insert_ignore_duplicate( 'team_members', array( 'team_id' => $team, 'operator_id' => $id ) );
+					Db::insert_ignore_duplicate(
+						'team_members',
+						array(
+							'team_id'     => $team,
+							'operator_id' => $id,
+						)
+					);
 				}
 			}
 		}
@@ -576,7 +643,12 @@ final class AdminController extends Controller {
 			throw new DomainException( 'operator_not_found', __( 'Operator not found.', 'televixo' ), 404 );
 		}
 		$c = Operators::create_challenge( $id );
-		return array( 'code' => $c['code'], 'expires_at' => $c['expires_at'], 'command' => '/link ' . $c['code'], 'bot_username' => (string) Settings::get( 'telegram.bot_username' ) );
+		return array(
+			'code'         => $c['code'],
+			'expires_at'   => $c['expires_at'],
+			'command'      => '/link ' . $c['code'],
+			'bot_username' => (string) Settings::get( 'telegram.bot_username' ),
+		);
 	}
 
 	public function unlink( \WP_REST_Request $r ) {
@@ -609,7 +681,7 @@ final class AdminController extends Controller {
 			'destination_chat_id' => Settings::provider_id( $r->get_param( 'destination_chat_id' ) ),
 			'updated_at'          => Clock::mysql(),
 		);
-		$id = absint( $r->get_param( 'id' ) );
+		$id   = absint( $r->get_param( 'id' ) );
 		if ( $id ) {
 			Db::update( 'teams', $data, array( 'id' => $id ) );
 		} else {
@@ -667,9 +739,20 @@ final class AdminController extends Controller {
 		if ( is_array( $r->get_param( 'definition' ) ) ) {
 			$v = RuleSchema::validate( $r->get_param( 'definition' ) );
 			if ( ! $v['ok'] ) {
-				return new \WP_Error( 'rule_invalid', implode( '; ', $v['errors'] ), array( 'status' => 422, 'errors' => $v['errors'] ) );
+				return new \WP_Error(
+					'rule_invalid',
+					implode( '; ', $v['errors'] ),
+					array(
+						'status' => 422,
+						'errors' => $v['errors'],
+					)
+				);
 			}
-			$rules[] = array( 'id' => absint( $r->get_param( 'id' ) ), 'priority' => (int) $r->get_param( 'priority' ), 'definition' => $v['definition'] );
+			$rules[] = array(
+				'id'         => absint( $r->get_param( 'id' ) ),
+				'priority'   => (int) $r->get_param( 'priority' ),
+				'definition' => $v['definition'],
+			);
 		} else {
 			foreach ( Rules::all() as $rule ) {
 				if ( 'enabled' === $rule['status'] ) {
@@ -690,18 +773,21 @@ final class AdminController extends Controller {
 	}
 
 	public function rule_schema() {
-		return array( 'conditions' => RuleSchema::CONDITIONS, 'actions' => RuleSchema::ACTIONS );
+		return array(
+			'conditions' => RuleSchema::CONDITIONS,
+			'actions'    => RuleSchema::ACTIONS,
+		);
 	}
 
 	public function settings() {
 		return array(
-			'settings' => Settings::all(),
-			'secrets'  => array(
+			'settings'    => Settings::all(),
+			'secrets'     => array(
 				'bot_token_set'         => \Televixo\Security\Secrets::bot_token() !== '',
 				'bot_token_from_config' => \Televixo\Security\Secrets::bot_token_from_config(),
 				'key_source'            => \Televixo\Security\Secrets::key_source(),
 			),
-			'roles'    => array_map( static fn( $r ) => translate_user_role( $r['name'] ), wp_roles()->roles ),
+			'roles'       => array_map( static fn( $r ) => translate_user_role( $r['name'] ), wp_roles()->roles ),
 			'woocommerce' => class_exists( 'WooCommerce' ),
 		);
 	}
@@ -714,7 +800,18 @@ final class AdminController extends Controller {
 		$saved  = Settings::update( $in );
 		if ( $before !== $saved['telegram']['routing_mode'] ) {
 			// Existing conversations keep their snapshot; only new ones change.
-			Events::record( 'settings.routing_mode', 'user', (string) get_current_user_id(), null, '', '', array( 'from' => $before, 'to' => $saved['telegram']['routing_mode'] ) );
+			Events::record(
+				'settings.routing_mode',
+				'user',
+				(string) get_current_user_id(),
+				null,
+				'',
+				'',
+				array(
+					'from' => $before,
+					'to'   => $saved['telegram']['routing_mode'],
+				)
+			);
 		}
 		Events::record( 'settings.saved', 'user', (string) get_current_user_id() );
 		return $this->settings();
@@ -745,12 +842,23 @@ final class AdminController extends Controller {
 		$in = (array) ( $data['settings'] ?? array() );
 		unset( $in['telegram']['bot_id'], $in['telegram']['bot_username'], $in['telegram']['webhook_url'], $in['telegram']['webhook_owner'] );
 		Settings::update( $in );
-		$rules = array( 'imported' => 0, 'errors' => array() );
+		$rules = array(
+			'imported' => 0,
+			'errors'   => array(),
+		);
 		if ( rest_sanitize_boolean( $r->get_param( 'include_rules' ) ) && ! empty( $data['rules'] ) ) {
-			$rules = Rules::import( array( 'format' => 'televixo-rules', 'rules' => $data['rules'] ) );
+			$rules = Rules::import(
+				array(
+					'format' => 'televixo-rules',
+					'rules'  => $data['rules'],
+				)
+			);
 		}
 		Events::record( 'settings.imported', 'user', (string) get_current_user_id() );
-		return array( 'ok' => true, 'rules' => $rules );
+		return array(
+			'ok'    => true,
+			'rules' => $rules,
+		);
 	}
 
 	public function reports( \WP_REST_Request $r ) {
@@ -763,11 +871,14 @@ final class AdminController extends Controller {
 		$status = self::str( $r, 'status', 16 ) ?: 'dead';
 		$rows   = Db::rows( Db::prepare( 'SELECT id, job_type, conversation_id, message_id, status, attempts, max_attempts, available_at, last_error_code, last_error, created_at, updated_at FROM {outbox} WHERE status = %s ORDER BY id DESC LIMIT 100', $status ) );
 		foreach ( $rows as &$row ) {
-			$conv               = $row['conversation_id'] ? Conversations::get( (int) $row['conversation_id'] ) : null;
-			$row['reference']   = $conv['reference'] ?? '';
+			$conv                = $row['conversation_id'] ? Conversations::get( (int) $row['conversation_id'] ) : null;
+			$row['reference']    = $conv['reference'] ?? '';
 			$row['conversation'] = $conv['public_id'] ?? '';
 		}
-		return array( 'items' => $rows, 'health' => \Televixo\Queue\Scheduler::health() );
+		return array(
+			'items'  => $rows,
+			'health' => \Televixo\Queue\Scheduler::health(),
+		);
 	}
 
 	public function queue_retry( \WP_REST_Request $r ) {
@@ -806,27 +917,30 @@ final class AdminController extends Controller {
 	private function conv_shape( array $c ): array {
 		$op = $c['assigned_operator_id'] ? Operators::get( (int) $c['assigned_operator_id'] ) : null;
 		return array(
-			'id'               => (string) $c['public_id'],
-			'reference'        => (string) $c['reference'],
-			'status'           => (string) $c['status'],
-			'offline'          => (bool) $c['is_offline'],
-			'priority'         => (int) $c['priority'],
-			'department'       => (string) $c['department'],
-			'team_id'          => $c['team_id'] ? (int) $c['team_id'] : null,
-			'routing_mode'     => (string) $c['routing_mode'],
-			'assigned'         => $op ? array( 'id' => (int) $op['id'], 'name' => (string) $op['display_name'] ) : null,
-			'visitor'          => array(
+			'id'              => (string) $c['public_id'],
+			'reference'       => (string) $c['reference'],
+			'status'          => (string) $c['status'],
+			'offline'         => (bool) $c['is_offline'],
+			'priority'        => (int) $c['priority'],
+			'department'      => (string) $c['department'],
+			'team_id'         => $c['team_id'] ? (int) $c['team_id'] : null,
+			'routing_mode'    => (string) $c['routing_mode'],
+			'assigned'        => $op ? array(
+				'id'   => (int) $op['id'],
+				'name' => (string) $op['display_name'],
+			) : null,
+			'visitor'         => array(
 				'id'      => (string) ( $c['visitor_public_id'] ?? '' ),
 				'name'    => (string) ( $c['visitor_name'] ?? '' ),
 				'email'   => (string) ( $c['visitor_email'] ?? '' ),
 				'blocked' => (bool) ( $c['is_blocked'] ?? false ),
 			),
-			'unread'           => (int) ( $c['unread'] ?? 0 ),
-			'last_body'        => mb_substr( (string) ( $c['last_body'] ?? '' ), 0, 140 ),
-			'last_message_at'  => Clock::iso( $c['last_message_at'] ?? null ),
-			'created_at'       => Clock::iso( (string) $c['created_at'] ),
-			'closed_at'        => Clock::iso( $c['closed_at'] ?? null ),
-			'human_engaged'    => (bool) $c['human_engaged'],
+			'unread'          => (int) ( $c['unread'] ?? 0 ),
+			'last_body'       => mb_substr( (string) ( $c['last_body'] ?? '' ), 0, 140 ),
+			'last_message_at' => Clock::iso( $c['last_message_at'] ?? null ),
+			'created_at'      => Clock::iso( (string) $c['created_at'] ),
+			'closed_at'       => Clock::iso( $c['closed_at'] ?? null ),
+			'human_engaged'   => (bool) $c['human_engaged'],
 		);
 	}
 

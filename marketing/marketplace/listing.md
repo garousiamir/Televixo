@@ -1,5 +1,9 @@
 # Listing copy
 
+## Author
+
+pdthemes — https://pdthemes.de
+
 ## Item name (≤ 100 characters)
 
 Televixo – Telegram Live Chat for WordPress
@@ -46,6 +50,10 @@ WordPress 6.7+, PHP 8.2+, MySQL 5.7+ or MariaDB 10.4+, HTTPS, and a free Telegra
 * Everyone in the Telegram group you choose can read relayed messages. Use a separate group per team, or the WordPress inbox, when conversations must stay private between teams.
 * Telegram does not report operator online status or read receipts; Televixo never invents them.
 * Telegram is a trademark of its owner. Televixo is not affiliated with Telegram.
+
+### Support
+
+By pdthemes — https://pdthemes.de
 
 ### Changelog
 

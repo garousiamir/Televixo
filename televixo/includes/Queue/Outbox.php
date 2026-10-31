@@ -76,8 +76,8 @@ final class Outbox {
 				$limit * 3
 			)
 		);
-		$claimed = array();
-		$keys    = array();
+		$claimed    = array();
+		$keys       = array();
 		foreach ( $candidates as $c ) {
 			if ( count( $claimed ) >= $limit ) {
 				break;
@@ -249,7 +249,14 @@ final class Outbox {
 	 */
 	public static function counts(): array {
 		$rows = Db::rows( Db::prepare( 'SELECT status, COUNT(*) AS n FROM {outbox} GROUP BY status' ) );
-		$out  = array( 'pending' => 0, 'leased' => 0, 'done' => 0, 'dead' => 0, 'uncertain' => 0, 'cancelled' => 0 );
+		$out  = array(
+			'pending'   => 0,
+			'leased'    => 0,
+			'done'      => 0,
+			'dead'      => 0,
+			'uncertain' => 0,
+			'cancelled' => 0,
+		);
 		foreach ( $rows as $r ) {
 			$out[ (string) $r['status'] ] = (int) $r['n'];
 		}

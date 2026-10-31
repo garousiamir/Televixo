@@ -14,7 +14,7 @@ final class Redactor {
 
 	public static function text( string $text ): string {
 		// Telegram bot tokens: <digits>:<35+ token chars>, also inside URLs (/bot<token>/, /file/bot<token>/).
-		$text = (string) preg_replace( '/\d{5,}:[A-Za-z0-9_-]{30,}/', '[redacted-token]', $text );
+		$text   = (string) preg_replace( '/\d{5,}:[A-Za-z0-9_-]{30,}/', '[redacted-token]', $text );
 		$secret = Secrets::get( 'webhook_secret' );
 		if ( '' !== $secret ) {
 			$text = str_replace( $secret, '[redacted-secret]', $text );

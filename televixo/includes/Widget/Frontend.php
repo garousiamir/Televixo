@@ -38,14 +38,26 @@ final class Frontend {
 			return;
 		}
 		$asset = TELEVIXO_DIR . 'assets/build/widget.asset.php';
-		$meta  = is_readable( $asset ) ? require $asset : array( 'version' => TELEVIXO_VERSION, 'dependencies' => array() );
+		$meta  = is_readable( $asset ) ? require $asset : array(
+			'version'      => TELEVIXO_VERSION,
+			'dependencies' => array(),
+		);
 		$url   = plugins_url( 'assets/build/', TELEVIXO_FILE );
-		wp_register_script( 'televixo-widget', $url . 'widget.js', array(), $meta['version'], array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_register_script(
+			'televixo-widget',
+			$url . 'widget.js',
+			array(),
+			$meta['version'],
+			array(
+				'strategy'  => 'defer',
+				'in_footer' => true,
+			)
+		);
 		$boot = array(
-			'config'  => Config::public_config(),
-			'page'    => self::page_context(),
-			'css'     => $url . 'widget.css?ver=' . rawurlencode( (string) $meta['version'] ),
-			'i18n'    => Strings::widget(),
+			'config' => Config::public_config(),
+			'page'   => self::page_context(),
+			'css'    => $url . 'widget.css?ver=' . rawurlencode( (string) $meta['version'] ),
+			'i18n'   => Strings::widget(),
 		);
 		wp_add_inline_script( 'televixo-widget', 'window.televixoBoot=' . wp_json_encode( $boot, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) . ';', 'before' );
 		wp_enqueue_script( 'televixo-widget' );
@@ -79,14 +91,14 @@ final class Frontend {
 			$kinds[] = 'singular';
 		}
 		$ctx = array(
-			'page_id'    => is_singular() ? (int) get_queried_object_id() : 0,
-			'post_type'  => is_singular() ? array( (string) get_post_type() ) : array(),
-			'template'   => is_singular() ? array( (string) get_page_template_slug( get_queried_object_id() ) ) : array(),
-			'terms'      => array(),
-			'page_kinds' => $kinds,
-			'language'   => array( determine_locale() ),
-			'woo_page'   => array(),
-			'product_id' => 0,
+			'page_id'      => is_singular() ? (int) get_queried_object_id() : 0,
+			'post_type'    => is_singular() ? array( (string) get_post_type() ) : array(),
+			'template'     => is_singular() ? array( (string) get_page_template_slug( get_queried_object_id() ) ) : array(),
+			'terms'        => array(),
+			'page_kinds'   => $kinds,
+			'language'     => array( determine_locale() ),
+			'woo_page'     => array(),
+			'product_id'   => 0,
 			'product_cats' => array(),
 		);
 		if ( is_singular() && $obj instanceof \WP_Post ) {
@@ -102,7 +114,13 @@ final class Frontend {
 			$ctx['terms'][] = $obj->taxonomy . ':' . $obj->term_id;
 		}
 		if ( function_exists( 'is_woocommerce' ) ) {
-			foreach ( array( 'shop' => 'is_shop', 'product' => 'is_product', 'cart' => 'is_cart', 'checkout' => 'is_checkout', 'account' => 'is_account_page' ) as $key => $fn ) {
+			foreach ( array(
+				'shop'     => 'is_shop',
+				'product'  => 'is_product',
+				'cart'     => 'is_cart',
+				'checkout' => 'is_checkout',
+				'account'  => 'is_account_page',
+			) as $key => $fn ) {
 				if ( function_exists( $fn ) && $fn() ) {
 					$ctx['woo_page'][] = $key;
 				}

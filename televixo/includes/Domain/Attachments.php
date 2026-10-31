@@ -53,7 +53,7 @@ final class Attachments {
 		foreach ( $files as $name => $content ) {
 			$path = $dir . '/' . $name;
 			if ( ! file_exists( $path ) ) {
-				file_put_contents( $path, $content ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+				\Televixo\Core\Fs::put( $path, $content );
 			}
 		}
 	}
@@ -73,7 +73,7 @@ final class Attachments {
 		if ( Settings::get( 'uploads.voice' ) ) {
 			$enabled = array_merge( $enabled, array( 'ogg', 'mp3', 'm4a' ) );
 		}
-		$max     = (int) Settings::get( 'uploads.max_mb', 10 ) * MB_IN_BYTES;
+		$max = (int) Settings::get( 'uploads.max_mb', 10 ) * MB_IN_BYTES;
 		if ( 'operator' === $uploader_type ) {
 			$enabled = array_keys( FileInspector::ALLOWED );
 			$max     = 20 * MB_IN_BYTES;
@@ -213,6 +213,7 @@ final class Attachments {
 		header( 'Cross-Origin-Resource-Policy: same-origin' );
 		header( 'Cache-Control: private, no-store' );
 		header( sprintf( 'Content-Disposition: %s; filename="%s"; filename*=UTF-8\'\'%s', $inline ? 'inline' : 'attachment', $ascii, rawurlencode( $name ) ) );
+		// Streamed rather than read into memory (files up to 20 MB).
 		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
 		exit;
 	}

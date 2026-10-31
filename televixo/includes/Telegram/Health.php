@@ -17,7 +17,10 @@ final class Health {
 
 	public static function flag( string $area, string $code ): void {
 		$all          = self::all();
-		$all[ $area ] = array( 'code' => $code, 'at' => Clock::mysql() );
+		$all[ $area ] = array(
+			'code' => $code,
+			'at'   => Clock::mysql(),
+		);
 		update_option( self::OPTION, $all, false );
 	}
 

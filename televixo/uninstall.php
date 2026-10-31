@@ -39,22 +39,23 @@ function televixo_uninstall_site() {
 	}
 	$dir = \Televixo\Domain\Attachments::storage_dir();
 	if ( ! defined( 'TELEVIXO_STORAGE_DIR' ) && is_dir( $dir ) ) {
-		foreach ( (array) glob( $dir . '/{,.}*', GLOB_BRACE ) as $file ) {
-			if ( is_file( $file ) ) {
-				wp_delete_file( $file );
-			}
-		}
-		@rmdir( $dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged,WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
+		\Televixo\Core\Fs::rmdir( $dir, true );
 	}
 	\Televixo\Persistence\Migrator::drop_all();
 	\Televixo\Security\Capabilities::uninstall();
+	delete_metadata( 'user', 0, 'televixo_setup_notice_dismissed', '', true );
 	foreach ( array( 'televixo_settings', 'televixo_secrets', 'televixo_install_id', 'televixo_storage_suffix', 'televixo_health', 'televixo_webhook_last_seen', 'televixo_worker_last_run', 'televixo_maintenance_last_run', 'televixo_blocked_networks', 'televixo_version', 'televixo_db_migrated_at' ) as $option ) {
 		delete_option( $option );
 	}
 }
 
 if ( is_multisite() ) {
-	foreach ( get_sites( array( 'fields' => 'ids', 'number' => 1000 ) ) as $televixo_site ) {
+	foreach ( get_sites(
+		array(
+			'fields' => 'ids',
+			'number' => 1000,
+		)
+	) as $televixo_site ) {
 		switch_to_blog( (int) $televixo_site );
 		televixo_uninstall_site();
 		restore_current_blog();

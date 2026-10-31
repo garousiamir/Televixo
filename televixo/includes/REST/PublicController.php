@@ -208,7 +208,14 @@ final class PublicController extends Controller {
 			$out['custom'][ $cf['key'] ] = $v;
 		}
 		if ( $errors ) {
-			return new \WP_Error( 'validation_failed', __( 'Please check the highlighted fields.', 'televixo' ), array( 'status' => 422, 'fields' => $errors ) );
+			return new \WP_Error(
+				'validation_failed',
+				__( 'Please check the highlighted fields.', 'televixo' ),
+				array(
+					'status' => 422,
+					'fields' => $errors,
+				)
+			);
 		}
 		return $out;
 	}
@@ -419,9 +426,22 @@ final class PublicController extends Controller {
 			$errors['message'] = __( 'Please enter a message.', 'televixo' );
 		}
 		if ( $errors ) {
-			return new \WP_Error( 'validation_failed', __( 'Please check the highlighted fields.', 'televixo' ), array( 'status' => 422, 'fields' => $errors ) );
+			return new \WP_Error(
+				'validation_failed',
+				__( 'Please check the highlighted fields.', 'televixo' ),
+				array(
+					'status' => 422,
+					'fields' => $errors,
+				)
+			);
 		}
-		Visitors::update_profile( $this->visitor_id(), array( 'name' => sanitize_text_field( self::str( $r, 'name', 120 ) ), 'email' => sanitize_email( $email ) ) );
+		Visitors::update_profile(
+			$this->visitor_id(),
+			array(
+				'name'  => sanitize_text_field( self::str( $r, 'name', 120 ) ),
+				'email' => sanitize_email( $email ),
+			)
+		);
 		$c      = Conversations::start( $this->visitor_id(), '', Config::sanitize_context( (array) $r->get_param( 'context' ) ), true );
 		$result = Messages::create_visitor_message( $c, $this->visitor_id(), mb_substr( $message, 0, 4000 ), self::str( $r, 'client_id', 64 ) ?: \Televixo\Security\Random::secret( 12 ) );
 		$notify = (string) Settings::get( 'offline.notify_email', '' );
@@ -434,7 +454,14 @@ final class PublicController extends Controller {
 				sprintf( __( "From: %1\$s\n\n%2\$s\n\nReply from the Televixo inbox in WordPress.", 'televixo' ), sanitize_email( $email ), Messages::normalize_body( $message ) )
 			);
 		}
-		return new \WP_REST_Response( array( 'ok' => true, 'conversation' => Serializer::visitor_conversation( Conversations::get( (int) $c['id'] ) ), 'message' => $result['message']['public_id'] ?? '' ), 201 );
+		return new \WP_REST_Response(
+			array(
+				'ok'           => true,
+				'conversation' => Serializer::visitor_conversation( Conversations::get( (int) $c['id'] ) ),
+				'message'      => $result['message']['public_id'] ?? '',
+			),
+			201
+		);
 	}
 
 	public function kb( \WP_REST_Request $r ) {

@@ -1,17 +1,21 @@
 <?php
 /**
  * Plugin Name:       Televixo – Telegram Live Chat for WordPress
+ * Plugin URI:        https://pdthemes.de
  * Description:       Self-hosted live chat. Visitors chat on your site; operators answer in Telegram or the WordPress inbox.
  * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      8.2
- * Author:            Televixo
+ * Author:            pdthemes
+ * Author URI:        https://pdthemes.de
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       televixo
  * Domain Path:       /languages
  *
  * @package Televixo
+ * @author  pdthemes <https://pdthemes.de>
+ * @copyright 2026 pdthemes
  */
 
 defined( 'ABSPATH' ) || exit;

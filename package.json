@@ -23,5 +23,10 @@
     "axe-core": "4.10.3",
     "esbuild": "0.25.12",
     "typescript": "5.8.3"
-  }
+  },
+  "author": {
+    "name": "pdthemes",
+    "url": "https://pdthemes.de"
+  },
+  "homepage": "https://pdthemes.de"
 }

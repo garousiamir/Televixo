@@ -25,6 +25,7 @@ final class Admin {
 		add_action( 'admin_enqueue_scripts', array( self::class, 'assets' ) );
 		add_action( 'admin_notices', array( self::class, 'notices' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( TELEVIXO_FILE ), array( self::class, 'links' ) );
+		add_action( 'admin_post_televixo_dismiss_setup', array( self::class, 'dismiss_setup' ) );
 	}
 
 	/**
@@ -45,7 +46,7 @@ final class Admin {
 	}
 
 	public static function menu(): void {
-		$cap = current_user_can( Caps::HANDLE_ASSIGNED ) ? Caps::HANDLE_ASSIGNED : Caps::VIEW_ALL;
+		$cap           = current_user_can( Caps::HANDLE_ASSIGNED ) ? Caps::HANDLE_ASSIGNED : Caps::VIEW_ALL;
 		self::$hooks[] = (string) add_menu_page( __( 'Televixo', 'televixo' ), __( 'Televixo', 'televixo' ), $cap, self::SLUG, array( self::class, 'render' ), 'dashicons-format-chat', 26 );
 		foreach ( self::screens() as $route => [ $title, $screen_cap ] ) {
 			$slug          = 'inbox' === $route ? self::SLUG : self::SLUG . '-' . $route;
@@ -65,7 +66,10 @@ final class Admin {
 			return;
 		}
 		$asset = TELEVIXO_DIR . 'assets/build/admin.asset.php';
-		$meta  = is_readable( $asset ) ? require $asset : array( 'dependencies' => array( 'wp-element', 'wp-api-fetch', 'wp-i18n' ), 'version' => TELEVIXO_VERSION );
+		$meta  = is_readable( $asset ) ? require $asset : array(
+			'dependencies' => array( 'wp-element', 'wp-api-fetch', 'wp-i18n' ),
+			'version'      => TELEVIXO_VERSION,
+		);
 		$url   = plugins_url( 'assets/build/', TELEVIXO_FILE );
 		wp_enqueue_style( 'televixo-admin', $url . 'admin.css', array(), $meta['version'] );
 		wp_enqueue_script( 'televixo-admin', $url . 'admin.js', $meta['dependencies'], $meta['version'], true );
@@ -75,22 +79,22 @@ final class Admin {
 			'televixo-admin',
 			'window.televixoAdmin=' . wp_json_encode(
 				array(
-					'adminUrl'   => admin_url( 'admin.php' ),
-					'restUrl'    => esc_url_raw( rest_url( 'televixo/v1/' ) ),
-					'nonce'      => wp_create_nonce( 'wp_rest' ),
-					'webhookUrl' => esc_url_raw( rest_url( 'televixo/v1/telegram/webhook' ) ),
-					'version'    => TELEVIXO_VERSION,
-					'caps'       => array_values( array_filter( Caps::ALL, 'current_user_can' ) ),
-					'userId'     => get_current_user_id(),
-					'timezone'   => wp_timezone_string(),
-					'locale'     => determine_locale(),
-					'rtl'        => is_rtl(),
+					'adminUrl'      => admin_url( 'admin.php' ),
+					'restUrl'       => esc_url_raw( rest_url( 'televixo/v1/' ) ),
+					'nonce'         => wp_create_nonce( 'wp_rest' ),
+					'webhookUrl'    => esc_url_raw( rest_url( 'televixo/v1/telegram/webhook' ) ),
+					'version'       => TELEVIXO_VERSION,
+					'caps'          => array_values( array_filter( Caps::ALL, 'current_user_can' ) ),
+					'userId'        => get_current_user_id(),
+					'timezone'      => wp_timezone_string(),
+					'locale'        => determine_locale(),
+					'rtl'           => is_rtl(),
 					'widgetPreview' => array(
 						'script' => $url . 'widget.js?ver=' . rawurlencode( (string) $meta['version'] ),
 						'css'    => $url . 'widget.css?ver=' . rawurlencode( (string) $meta['version'] ),
 						'i18n'   => \Televixo\Widget\Strings::widget(),
 					),
-					'woocommerce' => class_exists( 'WooCommerce' ),
+					'woocommerce'   => class_exists( 'WooCommerce' ),
 				),
 				JSON_HEX_TAG | JSON_HEX_AMP
 			) . ';',
@@ -105,14 +109,16 @@ final class Admin {
 		$health = Health::all();
 		if ( '' === (string) Settings::get( 'telegram.bot_id' ) ) {
 			$screen = get_current_screen();
-			if ( $screen && str_contains( (string) $screen->id, 'televixo' ) ) {
+			if ( ( $screen && str_contains( (string) $screen->id, 'televixo' ) ) || get_user_meta( get_current_user_id(), 'televixo_setup_notice_dismissed', true ) ) {
 				return;
 			}
 			printf(
-				'<div class="notice notice-info"><p>%s <a href="%s">%s</a></p></div>',
+				'<div class="notice notice-info"><p>%s <a href="%s">%s</a> · <a href="%s">%s</a></p></div>',
 				esc_html__( 'Televixo is installed. Connect a Telegram bot to start receiving chats.', 'televixo' ),
 				esc_url( admin_url( 'admin.php?page=televixo-setup' ) ),
-				esc_html__( 'Open setup', 'televixo' )
+				esc_html__( 'Open setup', 'televixo' ),
+				esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=televixo_dismiss_setup' ), 'televixo_dismiss_setup' ) ),
+				esc_html__( 'Dismiss', 'televixo' )
 			);
 			return;
 		}
@@ -124,6 +130,18 @@ final class Admin {
 				esc_html__( 'View diagnostics', 'televixo' )
 			);
 		}
+	}
+
+	/**
+	 * Remembers that the current user dismissed the setup notice.
+	 */
+	public static function dismiss_setup(): void {
+		check_admin_referer( 'televixo_dismiss_setup' );
+		if ( current_user_can( Caps::MANAGE_SETTINGS ) ) {
+			update_user_meta( get_current_user_id(), 'televixo_setup_notice_dismissed', 1 );
+		}
+		wp_safe_redirect( wp_get_referer() ?: admin_url() );
+		exit;
 	}
 
 	/**

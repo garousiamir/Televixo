@@ -71,7 +71,7 @@ final class Assignment {
 		$where = ( null === $expected || 0 === $expected )
 			? 'assigned_operator_id IS NULL'
 			: Db::prepare( 'assigned_operator_id = %d', $expected );
-		$n = Db::exec(
+		$n     = Db::exec(
 			Db::prepare(
 				"UPDATE {conversations}
 				SET assigned_operator_id = %d,
@@ -196,7 +196,7 @@ final class Assignment {
 				"SELECT assigned_operator_id AS op, COUNT(*) AS n FROM {conversations} WHERE status NOT IN ('closed','spam') AND assigned_operator_id IN (" . Db::in_ints( $operator_ids ) . ') GROUP BY assigned_operator_id'
 			)
 		);
-		$out = array();
+		$out  = array();
 		foreach ( $rows as $r ) {
 			$out[ (int) $r['op'] ] = (int) $r['n'];
 		}

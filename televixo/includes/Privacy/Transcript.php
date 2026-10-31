@@ -20,12 +20,12 @@ final class Transcript {
 			get_bloginfo( 'name' ),
 			str_repeat( '-', 40 ),
 		);
-		$last = 0;
+		$last  = 0;
 		do {
 			$rows = Db::rows( Db::prepare( 'SELECT * FROM {messages} WHERE conversation_id = %d AND id > %d ORDER BY id ASC LIMIT 500', (int) $conversation['id'], $last ) );
 			foreach ( $rows as $r ) {
-				$last  = (int) $r['id'];
-				$who   = match ( $r['author_type'] ) {
+				$last = (int) $r['id'];
+				$who  = match ( $r['author_type'] ) {
 					'visitor'    => __( 'You', 'televixo' ),
 					'operator'   => (string) $r['author_name'],
 					'automation' => __( 'Automated message', 'televixo' ),

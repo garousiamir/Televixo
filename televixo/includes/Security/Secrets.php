@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class Secrets {
 
-	public const OPTION = 'televixo_secrets';
+	public const OPTION  = 'televixo_secrets';
 	private const PREFIX = 'tvx1';
 
 	public static function bot_token(): string {
@@ -92,7 +92,7 @@ final class Secrets {
 		$key   = self::current_key();
 		$nonce = random_bytes( SODIUM_CRYPTO_SECRETBOX_NONCEBYTES );
 		$box   = sodium_crypto_secretbox( $plain, $nonce, $key );
-		return self::PREFIX . ':' . self::key_id( $key ) . ':' . base64_encode( $nonce . $box );
+		return self::PREFIX . ':' . self::key_id( $key ) . ':' . sodium_bin2base64( $nonce . $box, SODIUM_BASE64_VARIANT_ORIGINAL );
 	}
 
 	public static function decrypt( string $stored ): ?string {
@@ -100,8 +100,8 @@ final class Secrets {
 		if ( 3 !== count( $parts ) || self::PREFIX !== $parts[0] ) {
 			return null;
 		}
-		$raw = base64_decode( $parts[2], true );
-		if ( false === $raw || strlen( $raw ) <= SODIUM_CRYPTO_SECRETBOX_NONCEBYTES ) {
+		$raw = self::b64decode( $parts[2] );
+		if ( null === $raw || strlen( $raw ) <= SODIUM_CRYPTO_SECRETBOX_NONCEBYTES ) {
 			return null;
 		}
 		$nonce = substr( $raw, 0, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES );
@@ -181,8 +181,19 @@ final class Secrets {
 		if ( ! defined( $constant ) ) {
 			return null;
 		}
-		$raw = base64_decode( (string) constant( $constant ), true );
-		return ( false !== $raw && SODIUM_CRYPTO_SECRETBOX_KEYBYTES === strlen( $raw ) ) ? $raw : null;
+		$raw = self::b64decode( (string) constant( $constant ) );
+		return ( null !== $raw && SODIUM_CRYPTO_SECRETBOX_KEYBYTES === strlen( $raw ) ) ? $raw : null;
+	}
+
+	/**
+	 * Strict standard Base64 decoding (libsodium; same alphabet as base64_encode).
+	 */
+	private static function b64decode( string $in ): ?string {
+		try {
+			return sodium_base642bin( $in, SODIUM_BASE64_VARIANT_ORIGINAL );
+		} catch ( \SodiumException $e ) {
+			return null;
+		}
 	}
 
 	private static function derived_key(): string {

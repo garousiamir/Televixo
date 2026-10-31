@@ -101,7 +101,10 @@ final class Scheduler {
 				'timeout'   => 0.01,
 				'blocking'  => false,
 				'sslverify' => apply_filters( 'https_local_ssl_verify', false ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core filter.
-				'body'      => array( 'ts' => $ts, 'sig' => $sig ),
+				'body'      => array(
+			'ts'  => $ts,
+			'sig' => $sig,
+			),
 			)
 		);
 	}
@@ -118,9 +121,9 @@ final class Scheduler {
 	 * @return array<string,mixed> Queue health for diagnostics.
 	 */
 	public static function health(): array {
-		$last    = Clock::to_ts( (string) get_option( 'televixo_worker_last_run', '' ) );
-		$age     = Outbox::oldest_pending_age();
-		$warns   = array();
+		$last  = Clock::to_ts( (string) get_option( 'televixo_worker_last_run', '' ) );
+		$age   = Outbox::oldest_pending_age();
+		$warns = array();
 		if ( ! $last || Clock::now() - $last > 10 * MINUTE_IN_SECONDS ) {
 			$warns[] = 'worker_stale';
 		}

@@ -73,7 +73,7 @@ final class Requirements {
 		$version = preg_match( '/^(\d+\.\d+(\.\d+)?)/', $raw, $m ) ? $m[1] : '0';
 		$floor   = $maria ? version_compare( $version, '10.4', '>=' ) : version_compare( $version, '5.7', '>=' );
 		// Vendor-supported lines as of the release date (docs/capabilities.md).
-		$vendor  = $maria
+		$vendor = $maria
 			? ( version_compare( $version, '10.11', '>=' ) )
 			: ( version_compare( $version, '8.4', '>=' ) );
 		return array(

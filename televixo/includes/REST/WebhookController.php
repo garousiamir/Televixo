@@ -48,7 +48,10 @@ final class WebhookController extends Controller {
 		$update = json_decode( $raw, true, 64, JSON_BIGINT_AS_STRING );
 		if ( ! is_array( $update ) || ! isset( $update['update_id'] ) || ! preg_match( '/^\d{1,20}$/', (string) $update['update_id'] ) ) {
 			// Acknowledge malformed payloads so Telegram does not retry forever.
-			return array( 'ok' => true, 'ignored' => 'malformed' );
+			return array(
+				'ok'      => true,
+				'ignored' => 'malformed',
+			);
 		}
 		$account = ( new BotApi() )->bot_id();
 		if ( '' === $account ) {

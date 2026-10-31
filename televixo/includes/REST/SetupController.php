@@ -49,15 +49,22 @@ final class SetupController extends Controller {
 	public function status() {
 		$t = Settings::get( 'telegram' );
 		return array(
-			'token_set'        => '' !== Secrets::bot_token(),
+			'token_set'         => '' !== Secrets::bot_token(),
 			'token_from_config' => Secrets::bot_token_from_config(),
-			'bot'              => array( 'id' => $t['bot_id'], 'username' => $t['bot_username'] ),
-			'destination'      => array( 'chat_id' => $t['destination_chat_id'], 'title' => $t['destination_title'], 'type' => $t['destination_type'] ),
-			'routing_mode'     => $t['routing_mode'],
-			'webhook_expected' => self::webhook_url(),
+			'bot'               => array(
+				'id'       => $t['bot_id'],
+				'username' => $t['bot_username'],
+			),
+			'destination'       => array(
+				'chat_id' => $t['destination_chat_id'],
+				'title'   => $t['destination_title'],
+				'type'    => $t['destination_type'],
+			),
+			'routing_mode'      => $t['routing_mode'],
+			'webhook_expected'  => self::webhook_url(),
 			'webhook_last_seen' => Clock::iso( (string) get_option( 'televixo_webhook_last_seen', '' ) ),
-			'health'           => Health::all(),
-			'https'            => str_starts_with( self::webhook_url(), 'https://' ),
+			'health'            => Health::all(),
+			'https'             => str_starts_with( self::webhook_url(), 'https://' ),
 		);
 	}
 
@@ -85,7 +92,10 @@ final class SetupController extends Controller {
 				'bot_change_confirm',
 				/* translators: %d: number of active conversations */
 				sprintf( __( 'This is a different bot. %d active conversations are routed through the current bot and will stop relaying to Telegram (they remain available in the WordPress inbox). Confirm to continue.', 'televixo' ), $active ),
-				array( 'status' => 409, 'active' => $active )
+				array(
+					'status' => 409,
+					'active' => $active,
+				)
 			);
 		}
 		Secrets::set( 'bot_token', $token );
@@ -156,28 +166,70 @@ final class SetupController extends Controller {
 			if ( 'topics' === $mode ) {
 				throw new DomainException( 'topics_need_forum', __( 'Topics Mode needs a supergroup with Topics enabled.', 'televixo' ), 422 );
 			}
-			$checks[] = array( 'id' => 'private_chat', 'ok' => true, 'message' => __( 'Private chat: only this person will see visitor messages. They must keep the bot unblocked.', 'televixo' ) );
+			$checks[] = array(
+				'id'      => 'private_chat',
+				'ok'      => true,
+				'message' => __( 'Private chat: only this person will see visitor messages. They must keep the bot unblocked.', 'televixo' ),
+			);
 		} else {
-			$me     = $api->call( 'getMe' );
-			$member = $api->call( 'getChatMember', array( 'chat_id' => $chat_id, 'user_id' => (int) $api->bot_id() ) );
-			$status = (string) ( $member->result['status'] ?? '' );
-			$admin  = 'administrator' === $status;
+			$me       = $api->call( 'getMe' );
+			$member   = $api->call(
+				'getChatMember',
+				array(
+					'chat_id' => $chat_id,
+					'user_id' => (int) $api->bot_id(),
+				)
+			);
+			$status   = (string) ( $member->result['status'] ?? '' );
+			$admin    = 'administrator' === $status;
 			$read_all = (bool) ( $me->result['can_read_all_group_messages'] ?? false );
-			$checks[] = array( 'id' => 'bot_member', 'ok' => in_array( $status, array( 'member', 'administrator' ), true ), 'message' => __( 'The bot is a member of the group.', 'televixo' ) );
-			$checks[] = array( 'id' => 'group_visibility', 'ok' => true, 'message' => __( 'Every member of this group can read relayed visitor messages. Use separate groups per team (or the WordPress inbox) when visitors must be isolated between teams.', 'televixo' ) );
+			$checks[] = array(
+				'id'      => 'bot_member',
+				'ok'      => in_array( $status, array( 'member', 'administrator' ), true ),
+				'message' => __( 'The bot is a member of the group.', 'televixo' ),
+			);
+			$checks[] = array(
+				'id'      => 'group_visibility',
+				'ok'      => true,
+				'message' => __( 'Every member of this group can read relayed visitor messages. Use separate groups per team (or the WordPress inbox) when visitors must be isolated between teams.', 'televixo' ),
+			);
 			if ( 'reply' === $mode ) {
-				$checks[] = array( 'id' => 'privacy_mode', 'ok' => true, 'message' => $read_all || $admin ? __( 'The bot can read group messages.', 'televixo' ) : __( 'Privacy mode is on: the bot only receives replies to its own messages and commands, which is all Reply Mode needs.', 'televixo' ) );
+				$checks[] = array(
+					'id'      => 'privacy_mode',
+					'ok'      => true,
+					'message' => $read_all || $admin ? __( 'The bot can read group messages.', 'televixo' ) : __( 'Privacy mode is on: the bot only receives replies to its own messages and commands, which is all Reply Mode needs.', 'televixo' ),
+				);
 			} else {
-				$forum = ! empty( $chat->result['is_forum'] );
-				$topic = $admin && ! empty( $member->result['can_manage_topics'] );
-				$checks[] = array( 'id' => 'forum', 'ok' => $forum, 'message' => $forum ? __( 'Topics are enabled.', 'televixo' ) : __( 'Enable Topics in the group settings (requires a supergroup).', 'televixo' ) );
-				$checks[] = array( 'id' => 'can_manage_topics', 'ok' => $topic, 'message' => $topic ? __( 'The bot can create and close topics.', 'televixo' ) : __( 'Make the bot an administrator with the "Manage topics" right.', 'televixo' ) );
-				$checks[] = array( 'id' => 'receive_topic_messages', 'ok' => $admin || $read_all, 'message' => $admin || $read_all ? __( 'The bot receives messages inside topics.', 'televixo' ) : __( 'The bot must be an administrator (or have privacy mode disabled in @BotFather) to receive messages typed inside topics.', 'televixo' ) );
-				$ok = $forum && $topic && ( $admin || $read_all );
+				$forum    = ! empty( $chat->result['is_forum'] );
+				$topic    = $admin && ! empty( $member->result['can_manage_topics'] );
+				$checks[] = array(
+					'id'      => 'forum',
+					'ok'      => $forum,
+					'message' => $forum ? __( 'Topics are enabled.', 'televixo' ) : __( 'Enable Topics in the group settings (requires a supergroup).', 'televixo' ),
+				);
+				$checks[] = array(
+					'id'      => 'can_manage_topics',
+					'ok'      => $topic,
+					'message' => $topic ? __( 'The bot can create and close topics.', 'televixo' ) : __( 'Make the bot an administrator with the "Manage topics" right.', 'televixo' ),
+				);
+				$checks[] = array(
+					'id'      => 'receive_topic_messages',
+					'ok'      => $admin || $read_all,
+					'message' => $admin || $read_all ? __( 'The bot receives messages inside topics.', 'televixo' ) : __( 'The bot must be an administrator (or have privacy mode disabled in @BotFather) to receive messages typed inside topics.', 'televixo' ),
+				);
+				$ok       = $forum && $topic && ( $admin || $read_all );
 			}
 		}
 		if ( ! $ok && ! rest_sanitize_boolean( $r->get_param( 'save_anyway' ) ) ) {
-			return array( 'saved' => false, 'checks' => $checks, 'chat' => array( 'id' => $chat_id, 'type' => $type, 'title' => (string) ( $chat->result['title'] ?? '' ) ) );
+			return array(
+				'saved'  => false,
+				'checks' => $checks,
+				'chat'   => array(
+					'id'    => $chat_id,
+					'type'  => $type,
+					'title' => (string) ( $chat->result['title'] ?? '' ),
+				),
+			);
 		}
 		$before = Settings::get( 'telegram' );
 		Settings::set_internal( 'telegram.destination_chat_id', $chat_id );
@@ -186,8 +238,24 @@ final class SetupController extends Controller {
 		Settings::set_internal( 'telegram.routing_mode', $mode );
 		Health::clear( 'destination' );
 		Health::clear( 'topics' );
-		Events::record( 'telegram.destination_set', 'user', (string) get_current_user_id(), null, 'chat', $chat_id, array( 'mode' => $mode, 'previous_chat' => $before['destination_chat_id'], 'previous_mode' => $before['routing_mode'] ) );
-		return array( 'saved' => true, 'checks' => $checks, 'note' => __( 'New conversations use this destination. Existing conversations keep the routing they started with.', 'televixo' ) );
+		Events::record(
+			'telegram.destination_set',
+			'user',
+			(string) get_current_user_id(),
+			null,
+			'chat',
+			$chat_id,
+			array(
+				'mode'          => $mode,
+				'previous_chat' => $before['destination_chat_id'],
+				'previous_mode' => $before['routing_mode'],
+			)
+		);
+		return array(
+			'saved'  => true,
+			'checks' => $checks,
+			'note'   => __( 'New conversations use this destination. Existing conversations keep the routing they started with.', 'televixo' ),
+		);
 	}
 
 	public function test_message() {
@@ -195,11 +263,20 @@ final class SetupController extends Controller {
 		if ( '' === $chat ) {
 			throw new DomainException( 'not_configured', __( 'Choose a destination first.', 'televixo' ), 409 );
 		}
-		$res = ( new BotApi() )->call( 'sendMessage', array( 'chat_id' => $chat, 'text' => __( '✅ Televixo test message. Visitor chats from your website will appear here.', 'televixo' ) ) );
+		$res = ( new BotApi() )->call(
+			'sendMessage',
+			array(
+				'chat_id' => $chat,
+				'text'    => __( '✅ Televixo test message. Visitor chats from your website will appear here.', 'televixo' ),
+			)
+		);
 		if ( ! $res->ok() ) {
 			throw new DomainException( $res->error_code_slug(), Redactor::text( $res->description ) ?: __( 'Telegram did not accept the message.', 'televixo' ), 502 );
 		}
-		return array( 'ok' => true, 'note' => __( 'Telegram accepted the message. That confirms delivery to the chat, not that someone has read it.', 'televixo' ) );
+		return array(
+			'ok'   => true,
+			'note' => __( 'Telegram accepted the message. That confirms delivery to the chat, not that someone has read it.', 'televixo' ),
+		);
 	}
 
 	public function webhook_info() {
@@ -304,32 +381,36 @@ final class SetupController extends Controller {
 		global $wpdb;
 		$probe = self::storage_probe();
 		return array(
-			'versions'   => array(
+			'versions'             => array(
 				'plugin'    => TELEVIXO_VERSION,
 				'wordpress' => get_bloginfo( 'version' ),
 				'php'       => PHP_VERSION,
 				'database'  => Requirements::database(),
 				'db_schema' => Migrator::installed_version(),
 			),
-			'problems'   => Requirements::problems(),
-			'warnings'   => Requirements::warnings(),
-			'missing_tables' => Migrator::missing_tables(),
-			'queue'      => Scheduler::health(),
-			'health'     => Health::all(),
-			'secrets'    => array(
+			'problems'             => Requirements::problems(),
+			'warnings'             => Requirements::warnings(),
+			'missing_tables'       => Migrator::missing_tables(),
+			'queue'                => Scheduler::health(),
+			'health'               => Health::all(),
+			'secrets'              => array(
 				'key_source'    => Secrets::key_source(),
 				'undecryptable' => Secrets::undecryptable(),
 				'token_set'     => '' !== Secrets::bot_token(),
 			),
-			'storage'    => $probe,
-			'webhook_last_seen' => Clock::iso( (string) get_option( 'televixo_webhook_last_seen', '' ) ),
+			'storage'              => $probe,
+			'webhook_last_seen'    => Clock::iso( (string) get_option( 'televixo_webhook_last_seen', '' ) ),
 			'maintenance_last_run' => Clock::iso( (string) get_option( 'televixo_maintenance_last_run', '' ) ),
-			'object_cache' => wp_using_ext_object_cache(),
-			'multisite'  => is_multisite(),
-			'charset'    => $wpdb->charset,
-			'recent_errors' => array_map(
-				static fn( $e ) => array( 'event' => $e['event'], 'at' => Clock::iso( $e['created_at'] ), 'data' => json_decode( (string) $e['data'], true ) ),
-				Db::rows( Db::prepare( "SELECT event, data, created_at FROM {events} WHERE event LIKE %s ORDER BY id DESC LIMIT 20", '%fail%' ) )
+			'object_cache'         => wp_using_ext_object_cache(),
+			'multisite'            => is_multisite(),
+			'charset'              => $wpdb->charset,
+			'recent_errors'        => array_map(
+				static fn( $e ) => array(
+					'event' => $e['event'],
+					'at'    => Clock::iso( $e['created_at'] ),
+					'data'  => json_decode( (string) $e['data'], true ),
+				),
+				Db::rows( Db::prepare( 'SELECT event, data, created_at FROM {events} WHERE event LIKE %s ORDER BY id DESC LIMIT 20', '%fail%' ) )
 			),
 		);
 	}
@@ -345,13 +426,23 @@ final class SetupController extends Controller {
 	public static function storage_probe(): array {
 		$dir = Attachments::storage_dir();
 		if ( defined( 'TELEVIXO_STORAGE_DIR' ) ) {
-			return array( 'location' => 'custom', 'publicly_reachable' => null );
+			return array(
+				'location'           => 'custom',
+				'publicly_reachable' => null,
+			);
 		}
 		$name = 'probe-' . wp_generate_password( 12, false ) . '.txt';
-		file_put_contents( $dir . '/' . $name, 'televixo-probe' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		\Televixo\Core\Fs::put( $dir . '/' . $name, 'televixo-probe' );
 		$uploads = wp_upload_dir( null, false );
 		$url     = trailingslashit( $uploads['baseurl'] ) . basename( $dir ) . '/' . $name;
-		$res     = wp_remote_get( $url, array( 'timeout' => 5, 'redirection' => 0, 'sslverify' => false ) );
+		$res     = wp_remote_get(
+			$url,
+			array(
+				'timeout'     => 5,
+				'redirection' => 0,
+				'sslverify'   => false,
+			)
+		);
 		wp_delete_file( $dir . '/' . $name );
 		$public = ! is_wp_error( $res ) && 200 === (int) wp_remote_retrieve_response_code( $res ) && str_contains( (string) wp_remote_retrieve_body( $res ), 'televixo-probe' );
 		return array(

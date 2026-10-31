@@ -59,10 +59,10 @@ class BotApi {
 			'user-agent'  => 'Televixo/' . ( defined( 'TELEVIXO_VERSION' ) ? TELEVIXO_VERSION : '1' ) . '; WordPress',
 		);
 		if ( $files ) {
-			$boundary              = 'tvx' . bin2hex( random_bytes( 12 ) );
-			$args['headers']       = array( 'Content-Type' => 'multipart/form-data; boundary=' . $boundary );
-			$args['body']          = self::multipart( $boundary, $params, $files );
-			$args['timeout']       = max( $timeout, 60 );
+			$boundary        = 'tvx' . bin2hex( random_bytes( 12 ) );
+			$args['headers'] = array( 'Content-Type' => 'multipart/form-data; boundary=' . $boundary );
+			$args['body']    = self::multipart( $boundary, $params, $files );
+			$args['timeout'] = max( $timeout, 60 );
 		} else {
 			$args['headers'] = array( 'Content-Type' => 'application/json' );
 			$args['body']    = wp_json_encode( $params );
@@ -145,7 +145,7 @@ class BotApi {
 			$body .= '--' . $boundary . $eol
 				. 'Content-Disposition: form-data; name="' . $field . '"; filename="' . $name . '"' . $eol
 				. 'Content-Type: ' . $file['mime'] . $eol . $eol
-				. (string) file_get_contents( $file['path'] ) . $eol; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+				. \Televixo\Core\Fs::get( $file['path'] ) . $eol;
 		}
 		return $body . '--' . $boundary . '--' . $eol;
 	}

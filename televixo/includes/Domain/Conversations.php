@@ -145,7 +145,18 @@ final class Conversations {
 						'joined_at'        => $now,
 					)
 				);
-				Events::record( 'conversation.created', 'visitor', (string) $visitor_id, $id, '', '', array( 'mode' => $snap['mode'], 'offline' => $offline ) );
+				Events::record(
+					'conversation.created',
+					'visitor',
+					(string) $visitor_id,
+					$id,
+					'',
+					'',
+					array(
+						'mode'    => $snap['mode'],
+						'offline' => $offline,
+					)
+				);
 				return $id;
 			}
 		);
@@ -211,7 +222,18 @@ final class Conversations {
 			throw new DomainException( 'conflict', __( 'The conversation was changed by someone else. Reload and try again.', 'televixo' ), 409 );
 		}
 		if ( $current !== $next ) {
-			Events::record( 'conversation.status', $actor_type, $actor_ref, (int) $conversation['id'], '', '', array( 'from' => $current->value, 'to' => $next->value ) );
+			Events::record(
+				'conversation.status',
+				$actor_type,
+				$actor_ref,
+				(int) $conversation['id'],
+				'',
+				'',
+				array(
+					'from' => $current->value,
+					'to'   => $next->value,
+				)
+			);
 			do_action( 'televixo_conversation_status_changed', (int) $conversation['id'], $current->value, $next->value );
 		}
 		return self::get( (int) $conversation['id'] ) ?? $conversation;
@@ -283,6 +305,18 @@ final class Conversations {
 			),
 			array( 'id' => $conversation_id )
 		);
-		Events::record( 'routing.migrated', 'system', '', $conversation_id, '', '', array( 'from' => $snap['migrated_from'], 'to' => $new_chat_id, 'reason' => $reason ) );
+		Events::record(
+			'routing.migrated',
+			'system',
+			'',
+			$conversation_id,
+			'',
+			'',
+			array(
+				'from'   => $snap['migrated_from'],
+				'to'     => $new_chat_id,
+				'reason' => $reason,
+			)
+		);
 	}
 }

@@ -71,10 +71,27 @@ final class Schema {
 	public static function validate( $def ): array {
 		$errors = array();
 		if ( ! is_array( $def ) ) {
-			return array( 'ok' => false, 'errors' => array( 'definition must be an object' ), 'definition' => array() );
+			return array(
+				'ok'         => false,
+				'errors'     => array( 'definition must be an object' ),
+				'definition' => array(),
+			);
 		}
 		$out               = array();
-		$out['conditions'] = self::group( $def['conditions'] ?? array( 'op' => 'and', 'items' => array( array( 'type' => 'site', 'operator' => 'is' ) ) ), 1, 'conditions', $errors );
+		$out['conditions'] = self::group(
+			$def['conditions'] ?? array(
+				'op'    => 'and',
+				'items' => array(
+					array(
+						'type'     => 'site',
+						'operator' => 'is',
+					),
+				),
+			),
+			1,
+			'conditions',
+			$errors
+		);
 		$out['exclusions'] = isset( $def['exclusions'] ) && is_array( $def['exclusions'] ) && ! empty( $def['exclusions']['items'] ) ? self::group( $def['exclusions'], 1, 'exclusions', $errors ) : null;
 		$out['actions']    = array();
 		foreach ( array_slice( (array) ( $def['actions'] ?? array() ), 0, 6 ) as $i => $a ) {
@@ -113,12 +130,16 @@ final class Schema {
 			'cooldown_hours' => self::opt_int( $f['cooldown_hours'] ?? null, 0, 8760 ),
 			'expires_at'     => isset( $f['expires_at'] ) && preg_match( '/^\d{4}-\d{2}-\d{2}$/', (string) $f['expires_at'] ) ? (string) $f['expires_at'] : null,
 		);
-		$s           = (array) ( $def['stop'] ?? array() );
-		$out['stop'] = array();
+		$s                = (array) ( $def['stop'] ?? array() );
+		$out['stop']      = array();
 		foreach ( array( 'on_reply', 'on_typing', 'on_close', 'on_human', 'if_opened' ) as $k ) {
 			$out['stop'][ $k ] = (bool) ( $s[ $k ] ?? true );
 		}
-		return array( 'ok' => ! $errors, 'errors' => $errors, 'definition' => $out );
+		return array(
+			'ok'         => ! $errors,
+			'errors'     => $errors,
+			'definition' => $out,
+		);
 	}
 
 	/**
@@ -129,11 +150,19 @@ final class Schema {
 	private static function group( $g, int $depth, string $path, array &$errors ): array {
 		if ( ! is_array( $g ) ) {
 			$errors[] = "$path: group must be an object";
-			return array( 'op' => 'and', 'negate' => false, 'items' => array() );
+			return array(
+				'op'     => 'and',
+				'negate' => false,
+				'items'  => array(),
+			);
 		}
 		if ( $depth > self::MAX_DEPTH ) {
 			$errors[] = "$path: nesting too deep";
-			return array( 'op' => 'and', 'negate' => false, 'items' => array() );
+			return array(
+				'op'     => 'and',
+				'negate' => false,
+				'items'  => array(),
+			);
 		}
 		$op    = 'or' === ( $g['op'] ?? 'and' ) ? 'or' : 'and';
 		$items = array();
@@ -154,7 +183,11 @@ final class Schema {
 		if ( ! $items ) {
 			$errors[] = "$path: group is empty";
 		}
-		return array( 'op' => $op, 'negate' => ! empty( $g['negate'] ), 'items' => $items );
+		return array(
+			'op'     => $op,
+			'negate' => ! empty( $g['negate'] ),
+			'items'  => $items,
+		);
 	}
 
 	/**
@@ -229,7 +262,11 @@ final class Schema {
 				);
 				break;
 		}
-		return array( 'type' => $type, 'operator' => $op, 'value' => $v );
+		return array(
+			'type'     => $type,
+			'operator' => $op,
+			'value'    => $v,
+		);
 	}
 
 	/**

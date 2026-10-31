@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 
 abstract class Controller {
 
-	public const NS = 'televixo/v1';
+	public const NS             = 'televixo/v1';
 	public const MAX_JSON_BYTES = 65536;
 
 	abstract public function register(): void;

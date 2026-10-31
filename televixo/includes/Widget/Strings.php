@@ -22,9 +22,9 @@ final class Strings {
 			's'      => self::singulars(),
 			'p'      => array(
 				/* translators: %d: number of unread messages */
-				'unread'   => self::forms( _n_noop( '%d new message', '%d new messages', 'televixo' ) ),
+				'unread'  => self::forms( _n_noop( '%d new message', '%d new messages', 'televixo' ) ),
 				/* translators: %d: number of minutes */
-				'minutes'  => self::forms( _n_noop( '%d minute', '%d minutes', 'televixo' ) ),
+				'minutes' => self::forms( _n_noop( '%d minute', '%d minutes', 'televixo' ) ),
 			),
 			'plural' => self::plural_expression(),
 		);

@@ -32,75 +32,81 @@ final class Config {
 		}
 		$avatar = $w['avatar_id'] ? wp_get_attachment_image_url( (int) $w['avatar_id'], 'thumbnail' ) : '';
 		return array(
-			'version'  => TELEVIXO_VERSION,
-			'rest'     => esc_url_raw( rest_url( 'televixo/v1/' ) ),
-			'enabled'  => (bool) $w['enabled'],
-			'locale'   => determine_locale(),
-			'rtl'      => is_rtl(),
-			'appearance' => array(
-				'position'          => $w['position'],
-				'offset_x'          => $w['offset_x'],
-				'offset_y'          => $w['offset_y'],
-				'mobile_offset_x'   => $w['mobile_offset_x'],
-				'mobile_offset_y'   => $w['mobile_offset_y'],
-				'size'              => $w['size'],
-				'mobile_size'       => $w['mobile_size'],
-				'variant'           => $w['variant'],
-				'icon'              => $w['icon'],
-				'custom_icon'       => $w['custom_icon_svg'],
-				'avatar'            => $avatar ? esc_url_raw( $avatar ) : '',
-				'accent'            => $w['accent'],
-				'z_index'           => $w['z_index'],
-				'entrance'          => $w['entrance_animation'],
-				'attention'         => $w['attention_animation'],
-				'avoid_selectors'   => array_values( array_filter( explode( "\n", (string) $w['avoid_selectors'] ) ) ),
-				'sound'             => $w['sound'],
-				'notifications'     => $w['browser_notifications'],
+			'version'        => TELEVIXO_VERSION,
+			'rest'           => esc_url_raw( rest_url( 'televixo/v1/' ) ),
+			'enabled'        => (bool) $w['enabled'],
+			'locale'         => determine_locale(),
+			'rtl'            => is_rtl(),
+			'appearance'     => array(
+				'position'        => $w['position'],
+				'offset_x'        => $w['offset_x'],
+				'offset_y'        => $w['offset_y'],
+				'mobile_offset_x' => $w['mobile_offset_x'],
+				'mobile_offset_y' => $w['mobile_offset_y'],
+				'size'            => $w['size'],
+				'mobile_size'     => $w['mobile_size'],
+				'variant'         => $w['variant'],
+				'icon'            => $w['icon'],
+				'custom_icon'     => $w['custom_icon_svg'],
+				'avatar'          => $avatar ? esc_url_raw( $avatar ) : '',
+				'accent'          => $w['accent'],
+				'z_index'         => $w['z_index'],
+				'entrance'        => $w['entrance_animation'],
+				'attention'       => $w['attention_animation'],
+				'avoid_selectors' => array_values( array_filter( explode( "\n", (string) $w['avoid_selectors'] ) ) ),
+				'sound'           => $w['sound'],
+				'notifications'   => $w['browser_notifications'],
 			),
-			'texts'    => array(
-				'label'        => '' !== $w['label'] ? $w['label'] : __( 'Chat with us', 'televixo' ),
-				'title'        => '' !== $w['title'] ? $w['title'] : get_bloginfo( 'name' ),
-				'subtitle'     => $w['subtitle'],
-				'greeting'     => $w['greeting'],
-				'offline'      => '' !== $s['offline']['message'] ? $s['offline']['message'] : __( 'We are offline right now. Leave a message and we will get back to you by email.', 'televixo' ),
-				'away'         => '' !== $s['hours']['away_message'] ? $s['hours']['away_message'] : __( 'We are away for a moment. Your message will be answered as soon as possible.', 'televixo' ),
-				'consent'      => $s['prechat']['consent_text'],
+			'texts'          => array(
+				'label'    => '' !== $w['label'] ? $w['label'] : __( 'Chat with us', 'televixo' ),
+				'title'    => '' !== $w['title'] ? $w['title'] : get_bloginfo( 'name' ),
+				'subtitle' => $w['subtitle'],
+				'greeting' => $w['greeting'],
+				'offline'  => '' !== $s['offline']['message'] ? $s['offline']['message'] : __( 'We are offline right now. Leave a message and we will get back to you by email.', 'televixo' ),
+				'away'     => '' !== $s['hours']['away_message'] ? $s['hours']['away_message'] : __( 'We are away for a moment. Your message will be answered as soon as possible.', 'televixo' ),
+				'consent'  => $s['prechat']['consent_text'],
 			),
-			'greeting' => array(
+			'greeting'       => array(
 				'bubble' => $w['greeting_bubble'] && '' !== $w['greeting'],
 				'delay'  => $w['greeting_delay'],
 			),
-			'prechat'  => array(
-				'enabled'      => $s['prechat']['enabled'],
-				'name'         => $s['prechat']['name'],
-				'email'        => $s['prechat']['email'],
-				'phone'        => $s['prechat']['phone'],
-				'department'   => $s['prechat']['department'],
-				'consent'      => $s['prechat']['consent'],
-				'departments'  => array_map( static fn( $d ) => array( 'key' => $d['key'], 'label' => $d['label'] ), $s['prechat']['departments'] ),
+			'prechat'        => array(
+				'enabled'       => $s['prechat']['enabled'],
+				'name'          => $s['prechat']['name'],
+				'email'         => $s['prechat']['email'],
+				'phone'         => $s['prechat']['phone'],
+				'department'    => $s['prechat']['department'],
+				'consent'       => $s['prechat']['consent'],
+				'departments'   => array_map(
+					static fn( $d ) => array(
+						'key'   => $d['key'],
+						'label' => $d['label'],
+					),
+					$s['prechat']['departments']
+				),
 				'custom_fields' => $s['prechat']['custom_fields'],
 			),
-			'offline'  => array( 'behavior' => $s['offline']['behavior'] ),
-			'hours'    => array(
+			'offline'        => array( 'behavior' => $s['offline']['behavior'] ),
+			'hours'          => array(
 				'enabled'  => $s['hours']['enabled'],
 				'timezone' => \Televixo\Domain\Availability::timezone()->getName(),
 				'weekly'   => $s['hours']['weekly'],
 				'holidays' => array_column( $s['hours']['holidays'], 'date' ),
 			),
-			'uploads'  => array(
+			'uploads'        => array(
 				'enabled' => $s['uploads']['enabled'],
 				'max_mb'  => $s['uploads']['max_mb'],
 				'accept'  => array_values( array_intersect( $types, array_keys( FileInspector::ALLOWED ) ) ),
 				'voice'   => $s['uploads']['voice'],
 			),
-			'csat'        => $s['csat'],
-			'transcript'  => $s['privacy']['transcript_download'],
-			'suggestions' => $w['suggestions'],
-			'kb'          => $w['show_kb'] ? KnowledgeBase::suggested() : array(),
-			'kb_search'   => $w['show_kb'] && KnowledgeBase::count() > 0,
+			'csat'           => $s['csat'],
+			'transcript'     => $s['privacy']['transcript_download'],
+			'suggestions'    => $w['suggestions'],
+			'kb'             => $w['show_kb'] ? KnowledgeBase::suggested() : array(),
+			'kb_search'      => $w['show_kb'] && KnowledgeBase::count() > 0,
 			'excluded_paths' => array_values( array_filter( explode( "\n", (string) $w['excluded_paths'] ) ) ),
-			'rules'       => Rules::public_rules(),
-			'limits'      => array( 'max_chars' => $s['limits']['max_message_chars'] ),
+			'rules'          => Rules::public_rules(),
+			'limits'         => array( 'max_chars' => $s['limits']['max_message_chars'] ),
 		);
 	}
 
@@ -127,6 +133,7 @@ final class Config {
 				}
 			} catch ( \Throwable $e ) {
 				// Cart unavailable in this request; conditions on it evaluate false.
+				unset( $ctx['cart_items'], $ctx['cart_total'] );
 			}
 		}
 		return $ctx;
@@ -152,9 +159,9 @@ final class Config {
 			'device'        => in_array( $in['device'] ?? '', array( 'desktop', 'tablet', 'mobile' ), true ) ? $in['device'] : '',
 			'post_id'       => absint( $in['post_id'] ?? 0 ),
 		);
-		$ref = (string) ( $in['referrer'] ?? '' );
+		$ref  = (string) ( $in['referrer'] ?? '' );
 		if ( '' !== $ref ) {
-			$host = (string) wp_parse_url( $ref, PHP_URL_HOST );
+			$host                 = (string) wp_parse_url( $ref, PHP_URL_HOST );
 			$out['referrer_host'] = preg_match( '/^[a-z0-9.-]{1,190}$/i', $host ) ? strtolower( $host ) : '';
 		}
 		foreach ( array( 'source', 'medium', 'campaign' ) as $k ) {

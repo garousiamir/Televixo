@@ -49,14 +49,14 @@ final class Retention {
 				)
 			);
 		}
-		$out['events']       = Db::exec( Db::prepare( 'DELETE FROM {events} WHERE created_at < %s', Clock::mysql( Clock::now() - (int) Settings::get( 'privacy.event_retention_days', 365 ) * DAY_IN_SECONDS ) ) );
-		$out['triggers']     = Db::exec( Db::prepare( 'DELETE FROM {trigger_executions} WHERE created_at < %s', Clock::mysql( Clock::now() - 180 * DAY_IN_SECONDS ) ) );
-		$out['challenges']   = Db::exec( Db::prepare( 'DELETE FROM {challenges} WHERE expires_at < %s', Clock::mysql( Clock::now() - DAY_IN_SECONDS ) ) );
-		$out['sessions']     = SessionManager::purge_expired();
-		$out['inbound']      = Inbound::purge();
-		$out['outbox']       = Outbox::purge();
-		$out['rate_limits']  = RateLimiter::purge();
-		$out['orphans']      = Attachments::purge_orphans();
+		$out['events']      = Db::exec( Db::prepare( 'DELETE FROM {events} WHERE created_at < %s', Clock::mysql( Clock::now() - (int) Settings::get( 'privacy.event_retention_days', 365 ) * DAY_IN_SECONDS ) ) );
+		$out['triggers']    = Db::exec( Db::prepare( 'DELETE FROM {trigger_executions} WHERE created_at < %s', Clock::mysql( Clock::now() - 180 * DAY_IN_SECONDS ) ) );
+		$out['challenges']  = Db::exec( Db::prepare( 'DELETE FROM {challenges} WHERE expires_at < %s', Clock::mysql( Clock::now() - DAY_IN_SECONDS ) ) );
+		$out['sessions']    = SessionManager::purge_expired();
+		$out['inbound']     = Inbound::purge();
+		$out['outbox']      = Outbox::purge();
+		$out['rate_limits'] = RateLimiter::purge();
+		$out['orphans']     = Attachments::purge_orphans();
 		update_option( 'televixo_maintenance_last_run', Clock::mysql(), false );
 		return $out;
 	}

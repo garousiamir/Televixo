@@ -1,26 +1,35 @@
 {
-  "name": "televixo/televixo",
-  "description": "Televixo – Telegram Live Chat for WordPress (development workspace)",
-  "license": "GPL-2.0-or-later",
-  "type": "project",
-  "require": {
-    "php": ">=8.2"
-  },
-  "require-dev": {
-    "phpcompatibility/phpcompatibility-wp": "^2.1",
-    "phpunit/phpunit": "^9.6",
-    "wp-coding-standards/wpcs": "^3.1",
-    "wp-phpunit/wp-phpunit": "^7.1",
-    "yoast/phpunit-polyfills": "^4.0"
-  },
-  "config": {
-    "sort-packages": true,
-    "platform": { "php": "8.2.0" },
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
-    }
-  },
-  "scripts": {
-    "test": "phpunit"
-  }
+    "name": "televixo/televixo",
+    "description": "Televixo \u2013 Telegram Live Chat for WordPress (development workspace)",
+    "license": "GPL-2.0-or-later",
+    "type": "project",
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpunit/phpunit": "^9.6",
+        "wp-coding-standards/wpcs": "^3.1",
+        "wp-phpunit/wp-phpunit": "^7.1",
+        "yoast/phpunit-polyfills": "^4.0"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "homepage": "https://pdthemes.de",
+    "authors": [
+        {
+            "name": "pdthemes",
+            "homepage": "https://pdthemes.de"
+        }
+    ]
 }

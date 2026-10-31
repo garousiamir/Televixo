@@ -33,16 +33,25 @@ final class Engine {
 	public static function evaluate( array $rule_def, array $ctx, int $rule_id = 0 ): array {
 		$trace = array();
 		if ( ! empty( $rule_def['frequency']['expires_at'] ) && ( $ctx['today'] ?? gmdate( 'Y-m-d' ) ) > $rule_def['frequency']['expires_at'] ) {
-			return array( 'matched' => false, 'trace' => array( array( 'expired' => true ) ) );
+			return array(
+				'matched' => false,
+				'trace'   => array( array( 'expired' => true ) ),
+			);
 		}
 		if ( ! empty( $rule_def['exclusions'] ) ) {
 			$ex = self::group( $rule_def['exclusions'], $ctx, $rule_id, $trace, 'exclusions' );
 			if ( $ex ) {
-				return array( 'matched' => false, 'trace' => $trace );
+				return array(
+					'matched' => false,
+					'trace'   => $trace,
+				);
 			}
 		}
 		$ok = self::group( $rule_def['conditions'], $ctx, $rule_id, $trace, 'conditions' );
-		return array( 'matched' => $ok, 'trace' => $trace );
+		return array(
+			'matched' => $ok,
+			'trace'   => $trace,
+		);
 	}
 
 	/**
@@ -60,7 +69,12 @@ final class Engine {
 		if ( ! empty( $g['negate'] ) ) {
 			$v = ! $v;
 		}
-		$trace[] = array( 'path' => $path, 'group' => $g['op'], 'negate' => ! empty( $g['negate'] ), 'result' => $v );
+		$trace[] = array(
+			'path'   => $path,
+			'group'  => $g['op'],
+			'negate' => ! empty( $g['negate'] ),
+			'result' => $v,
+		);
 		return $v;
 	}
 
@@ -69,7 +83,14 @@ final class Engine {
 	 */
 	private static function condition( array $c, array $ctx, int $rule_id, array &$trace, string $path ): bool {
 		$v       = self::test( $c, $ctx, $rule_id );
-		$trace[] = array( 'path' => $path, 'type' => $c['type'], 'operator' => $c['operator'], 'value' => $c['value'], 'actual' => self::actual( $c['type'], $ctx ), 'result' => $v );
+		$trace[] = array(
+			'path'     => $path,
+			'type'     => $c['type'],
+			'operator' => $c['operator'],
+			'value'    => $c['value'],
+			'actual'   => self::actual( $c['type'], $ctx ),
+			'result'   => $v,
+		);
 		return $v;
 	}
 
@@ -102,7 +123,13 @@ final class Engine {
 			case 'language':
 			case 'woo_page':
 			case 'page_kind':
-				$key    = array( 'post_type' => 'post_type', 'template' => 'template', 'language' => 'language', 'woo_page' => 'woo_page', 'page_kind' => 'page_kinds' )[ $c['type'] ];
+				$key    = array(
+					'post_type' => 'post_type',
+					'template'  => 'template',
+					'language'  => 'language',
+					'woo_page'  => 'woo_page',
+					'page_kind' => 'page_kinds',
+				)[ $c['type'] ];
 				$actual = (array) ( $ctx[ $key ] ?? array() );
 				return self::in( $op, (bool) array_intersect( array_map( 'strval', $actual ), array_map( 'strval', $v ) ) );
 			case 'term':
@@ -205,7 +232,11 @@ final class Engine {
 		$explain = array();
 		foreach ( $rules as $rule ) {
 			$r         = self::evaluate( $rule['definition'], $ctx, (int) $rule['id'] );
-			$explain[] = array( 'rule' => (int) $rule['id'], 'matched' => $r['matched'], 'trace' => $r['trace'] );
+			$explain[] = array(
+				'rule'    => (int) $rule['id'],
+				'matched' => $r['matched'],
+				'trace'   => $r['trace'],
+			);
 			if ( ! $r['matched'] ) {
 				continue;
 			}
@@ -213,12 +244,22 @@ final class Engine {
 			foreach ( $rule['definition']['actions'] as $a ) {
 				$slot = in_array( $a['type'], array( 'teaser', 'open_chat', 'auto_message' ), true ) ? 'attention' : $a['type'];
 				if ( ! isset( $slots[ $slot ] ) ) {
-					$slots[ $slot ] = $a + array( 'rule' => (int) $rule['id'], 'priority' => (int) $rule['priority'] );
+					$slots[ $slot ] = $a + array(
+						'rule'     => (int) $rule['id'],
+						'priority' => (int) $rule['priority'],
+					);
 				} elseif ( 'launcher' === $slot && $slots[ $slot ]['priority'] === (int) $rule['priority'] && empty( $a['visible'] ) ) {
-					$slots[ $slot ] = $a + array( 'rule' => (int) $rule['id'], 'priority' => (int) $rule['priority'] );
+					$slots[ $slot ] = $a + array(
+						'rule'     => (int) $rule['id'],
+						'priority' => (int) $rule['priority'],
+					);
 				}
 			}
 		}
-		return array( 'actions' => $slots, 'matched' => $matched, 'explain' => $explain );
+		return array(
+			'actions' => $slots,
+			'matched' => $matched,
+			'explain' => $explain,
+		);
 	}
 }

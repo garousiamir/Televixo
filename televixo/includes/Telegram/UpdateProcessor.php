@@ -88,9 +88,19 @@ final class UpdateProcessor {
 		$files = array();
 		if ( ! empty( $m['photo'] ) && is_array( $m['photo'] ) ) {
 			$largest = end( $m['photo'] );
-			$files[] = array( 'file_id' => (string) $largest['file_id'], 'file_size' => (int) ( $largest['file_size'] ?? 0 ), 'name' => 'photo.jpg', 'mime' => 'image/jpeg', 'kind' => 'image' );
+			$files[] = array(
+				'file_id'   => (string) $largest['file_id'],
+				'file_size' => (int) ( $largest['file_size'] ?? 0 ),
+				'name'      => 'photo.jpg',
+				'mime'      => 'image/jpeg',
+				'kind'      => 'image',
+			);
 		}
-		foreach ( array( 'document' => 'file', 'voice' => 'voice', 'audio' => 'voice' ) as $key => $kind ) {
+		foreach ( array(
+			'document' => 'file',
+			'voice'    => 'voice',
+			'audio'    => 'voice',
+		) as $key => $kind ) {
 			if ( ! empty( $m[ $key ]['file_id'] ) ) {
 				$default = 'voice' === $key ? 'voice.ogg' : ( 'audio' === $key ? 'audio.mp3' : 'file' );
 				$files[] = array(
@@ -140,7 +150,10 @@ final class UpdateProcessor {
 		if ( $msg->sender_is_bot && ! $msg->anonymous ) {
 			return 'ignored:bot_sender';
 		}
-		foreach ( array( 'forum_topic_closed' => 'closed', 'forum_topic_reopened' => 'open' ) as $key => $state ) {
+		foreach ( array(
+			'forum_topic_closed'   => 'closed',
+			'forum_topic_reopened' => 'open',
+		) as $key => $state ) {
 			if ( isset( $m[ $key ] ) && '' !== $msg->thread_id ) {
 				Mappings::set_thread_state( $this->account, $msg->chat_id, $msg->thread_id, $state );
 				return 'processed:topic_' . $state;
@@ -319,9 +332,12 @@ final class UpdateProcessor {
 				return 'ignored:anonymous_sender';
 			}
 			$op = Operators::consume_challenge( $mm[1], $msg->sender_id, $msg->sender_username );
-			$this->reply_private( $msg, $op
+			$this->reply_private(
+				$msg,
+				$op
 				? sprintf( /* translators: %s: operator display name */ __( 'Linked to Televixo operator %s. You can now reply to visitor messages in the support group.', 'televixo' ), (string) $op['display_name'] )
-				: __( 'That code is invalid or expired. Create a new code in WordPress → Televixo → Operators.', 'televixo' ) );
+				: __( 'That code is invalid or expired. Create a new code in WordPress → Televixo → Operators.', 'televixo' )
+			);
 			return $op ? 'processed:enrolled' : 'ignored:bad_challenge';
 		}
 		if ( preg_match( '#^/start\b#', $text ) ) {
@@ -399,7 +415,14 @@ final class UpdateProcessor {
 		$data    = (string) ( $q['data'] ?? '' );
 		$answer  = function ( string $text ) use ( $id ): void {
 			if ( '' !== $id ) {
-				$this->api->call( 'answerCallbackQuery', array( 'callback_query_id' => $id, 'text' => mb_substr( $text, 0, 190 ), 'show_alert' => false ) );
+				$this->api->call(
+					'answerCallbackQuery',
+					array(
+						'callback_query_id' => $id,
+						'text'              => mb_substr( $text, 0, 190 ),
+						'show_alert'        => false,
+					)
+				);
 			}
 		};
 		if ( ! preg_match( '/^tvx:(claim|close):([0-9a-z]{26})$/', $data, $mm ) ) {
