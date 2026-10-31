@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 final class ClientIp {
 
 	public static function resolve(): string {
-		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? (string) $_SERVER['REMOTE_ADDR'] : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- validated below.
+		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? (string) wp_unslash( $_SERVER['REMOTE_ADDR'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- validated below.
 		if ( ! filter_var( $remote, FILTER_VALIDATE_IP ) ) {
 			return '0.0.0.0';
 		}
@@ -24,7 +24,7 @@ final class ClientIp {
 		if ( ! $proxies || ! self::in_any( $remote, $proxies ) ) {
 			return $remote;
 		}
-		$header = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? (string) $_SERVER['HTTP_X_FORWARDED_FOR'] : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$header = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? (string) wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$chain  = array_reverse( array_map( 'trim', explode( ',', $header ) ) );
 		foreach ( $chain as $ip ) {
 			if ( ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {

@@ -10,7 +10,7 @@ use Televixo\Security\Secrets;
 foreach ( Schema::TABLES as $t ) {
 	Db::wpdb()->query( 'DELETE FROM ' . Schema::table( $t ) ); // phpcs:ignore
 }
-delete_option( 'tvx_e2e_calls' );
+tvx_e2e_calls( true );
 delete_option( Settings::OPTION );
 Settings::flush();
 Secrets::set( 'bot_token', '123456789:AAHe2eFakeTokenForBrowserTests_abcdef' );

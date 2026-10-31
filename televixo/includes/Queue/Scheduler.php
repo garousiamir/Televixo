@@ -100,7 +100,7 @@ final class Scheduler {
 			array(
 				'timeout'   => 0.01,
 				'blocking'  => false,
-				'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
+				'sslverify' => apply_filters( 'https_local_ssl_verify', false ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core filter.
 				'body'      => array( 'ts' => $ts, 'sig' => $sig ),
 			)
 		);

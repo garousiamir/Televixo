@@ -42,14 +42,14 @@ final class Db {
 		$suppress = $wpdb->suppress_errors( true );
 		$outer    = (int) $wpdb->get_var( 'SELECT @@in_transaction' ) === 1;
 		$wpdb->suppress_errors( $suppress );
-		$wpdb->query( $outer ? 'SAVEPOINT televixo_tx' : 'START TRANSACTION' );
+		$wpdb->query( $outer ? 'SAVEPOINT televixo_tx' : 'START TRANSACTION' ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- constant statements only.
 		self::$depth = 1;
 		try {
 			$result = $fn();
-			$wpdb->query( $outer ? 'RELEASE SAVEPOINT televixo_tx' : 'COMMIT' );
+			$wpdb->query( $outer ? 'RELEASE SAVEPOINT televixo_tx' : 'COMMIT' ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- constant statements only.
 			return $result;
 		} catch ( \Throwable $e ) {
-			$wpdb->query( $outer ? 'ROLLBACK TO SAVEPOINT televixo_tx' : 'ROLLBACK' );
+			$wpdb->query( $outer ? 'ROLLBACK TO SAVEPOINT televixo_tx' : 'ROLLBACK' ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- constant statements only.
 			throw $e;
 		} finally {
 			self::$depth = 0;

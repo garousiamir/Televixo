@@ -25,9 +25,13 @@ add_filter(
 			}
 			$params['_file'] = true;
 		}
-		$calls   = get_option( 'tvx_e2e_calls', array() );
-		$calls[] = array( 'method' => $method, 'params' => $params );
-		update_option( 'tvx_e2e_calls', $calls, false );
+		$latency = (int) get_option( 'tvx_e2e_latency', 0 );
+		if ( $latency ) {
+			usleep( $latency * 1000 ); // Simulated network latency for race tests.
+		}
+		// Append atomically so concurrent workers cannot lose recorded calls.
+		global $wpdb;
+		$wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}tvx_e2e_calls (method, params) VALUES (%s, %s)", $method, wp_json_encode( $params ) ) );
 		$next = (int) get_option( 'tvx_e2e_next', 1000 ) + 1;
 		update_option( 'tvx_e2e_next', $next, false );
 		$result = match ( $method ) {
@@ -59,11 +63,7 @@ add_action(
 				'methods'             => array( 'GET', 'DELETE' ),
 				'permission_callback' => '__return_true',
 				'callback'            => static function ( WP_REST_Request $r ) {
-					if ( 'DELETE' === $r->get_method() ) {
-						delete_option( 'tvx_e2e_calls' );
-						return array( 'ok' => true );
-					}
-					return get_option( 'tvx_e2e_calls', array() );
+					return tvx_e2e_calls( 'DELETE' === $r->get_method() );
 				},
 			)
 		);
@@ -78,6 +78,18 @@ add_action(
 		);
 	}
 );
+
+function tvx_e2e_calls( bool $reset = false ): array {
+	global $wpdb;
+	$t = $wpdb->prefix . 'tvx_e2e_calls';
+	$wpdb->query( "CREATE TABLE IF NOT EXISTS $t (id bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, method varchar(40) NOT NULL, params longtext NOT NULL)" ); // phpcs:ignore
+	if ( $reset ) {
+		$wpdb->query( "TRUNCATE $t" ); // phpcs:ignore
+		return array();
+	}
+	return array_map( static fn( $r ) => array( 'method' => $r['method'], 'params' => json_decode( $r['params'], true ) ), $wpdb->get_results( "SELECT method, params FROM $t ORDER BY id", ARRAY_A ) ); // phpcs:ignore
+}
+add_action( 'init', static fn() => tvx_e2e_calls(), 1 );
 
 // Locale switch for RTL tests: ?tvx_locale=fa_IR (cookie-persisted).
 add_filter(
@@ -99,3 +111,19 @@ add_action(
 	},
 	0
 );
+
+// Query budget probe: ?tvx_queries=1 records plugin queries of this request.
+if ( isset( $_GET['tvx_queries'] ) ) { // phpcs:ignore
+	if ( ! defined( 'SAVEQUERIES' ) ) {
+		define( 'SAVEQUERIES', true );
+	}
+	add_action(
+		'shutdown',
+		static function () {
+			global $wpdb;
+			$mine = array_values( array_filter( (array) $wpdb->queries, static fn( $q ) => str_contains( $q[0], 'televixo' ) ) );
+			update_option( 'tvx_e2e_query_probe', array( 'total' => count( (array) $wpdb->queries ), 'televixo' => count( $mine ), 'sql' => array_map( static fn( $q ) => substr( $q[0], 0, 160 ), $mine ) ), false );
+		},
+		PHP_INT_MAX
+	);
+}

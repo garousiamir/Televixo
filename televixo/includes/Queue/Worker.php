@@ -32,7 +32,9 @@ final class Worker {
 
 		while ( microtime( true ) < $deadline && $stats['outbox'] < $max_jobs ) {
 			$in    = Inbound::process_batch( 20, $deadline );
-			$jobs  = Outbox::claim( 10 );
+			// Small batches keep leases short and let concurrent workers share
+			// conversations instead of one worker leasing every queue head.
+			$jobs  = Outbox::claim( 2 );
 			$stats['inbound'] += $in;
 			if ( ! $jobs && 0 === $in ) {
 				break;
