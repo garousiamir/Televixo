@@ -1,0 +1,1105 @@
+{
+ "chio": {
+  "home": {
+   "label": "Home",
+   "group": "Browse",
+   "url": "chio-home.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2878
+    ],
+    "mobile": [
+     591,
+     1278
+    ],
+    "mobile_full": [
+     394,
+     6000
+    ]
+   }
+  },
+  "cart": {
+   "label": "Cart",
+   "group": "Purchase",
+   "url": "chio-cart.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1551
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "order-confirmation": {
+   "label": "Order confirmation",
+   "group": "Purchase",
+   "url": "chio-order-confirmation.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1679
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account": {
+   "label": "Customer account",
+   "group": "Account",
+   "url": "chio-account.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1033
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "shop": {
+   "label": "Shop / Collection",
+   "group": "Browse",
+   "url": "chio-shop.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2173
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "collections": {
+   "label": "All collections",
+   "group": "Browse",
+   "url": "chio-collections.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1839
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "product": {
+   "label": "Product",
+   "group": "Browse",
+   "url": "chio-product.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3283
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "search": {
+   "label": "Search results",
+   "group": "Browse",
+   "url": "chio-search.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1317
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "checkout": {
+   "label": "Checkout",
+   "group": "Purchase",
+   "url": "chio-checkout.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1134
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "wishlist": {
+   "label": "Wishlist",
+   "group": "Purchase",
+   "url": "chio-wishlist.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1564
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "blog": {
+   "label": "Blog",
+   "group": "Content",
+   "url": "chio-blog.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1371
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "article": {
+   "label": "Article",
+   "group": "Content",
+   "url": "chio-article.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3229
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "about": {
+   "label": "About us",
+   "group": "Content",
+   "url": "chio-about.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3309
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "contact": {
+   "label": "Contact",
+   "group": "Content",
+   "url": "chio-contact.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1605
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "faq": {
+   "label": "FAQ",
+   "group": "Content",
+   "url": "chio-faq.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2302
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "404": {
+   "label": "404",
+   "group": "Content",
+   "url": "chio-404.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1116
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account-login": {
+   "label": "Login / Register",
+   "group": "Account",
+   "url": "chio-account-login.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     716
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  }
+ },
+ "_features": {
+  "chio": {
+   "cart-drawer": [
+    1200,
+    750
+   ],
+   "search": [
+    1200,
+    750
+   ],
+   "quick-view": [
+    1200,
+    750
+   ],
+   "filters-mobile": [
+    591,
+    1278
+   ],
+   "menu-mobile": [
+    591,
+    1278
+   ],
+   "cart-mobile": [
+    591,
+    1278
+   ],
+   "reviews": [
+    1200,
+    750
+   ],
+   "checkout": [
+    1200,
+    750
+   ],
+   "product-mobile-sticky": [
+    591,
+    1278
+   ]
+  },
+  "ween": {
+   "cart-drawer": [
+    1200,
+    750
+   ],
+   "search": [
+    1200,
+    750
+   ],
+   "quick-view": [
+    1200,
+    750
+   ],
+   "filters-mobile": [
+    591,
+    1278
+   ],
+   "menu-mobile": [
+    591,
+    1278
+   ],
+   "cart-mobile": [
+    591,
+    1278
+   ],
+   "reviews": [
+    1200,
+    750
+   ],
+   "checkout": [
+    1200,
+    750
+   ],
+   "product-mobile-sticky": [
+    591,
+    1278
+   ]
+  },
+  "volin": {
+   "cart-drawer": [
+    1200,
+    750
+   ],
+   "search": [
+    1200,
+    750
+   ],
+   "quick-view": [
+    1200,
+    750
+   ],
+   "filters-mobile": [
+    591,
+    1278
+   ],
+   "menu-mobile": [
+    591,
+    1278
+   ],
+   "cart-mobile": [
+    591,
+    1278
+   ],
+   "reviews": [
+    1200,
+    750
+   ],
+   "checkout": [
+    1200,
+    750
+   ],
+   "product-mobile-sticky": [
+    591,
+    1278
+   ]
+  }
+ },
+ "ween": {
+  "home": {
+   "label": "Home",
+   "group": "Browse",
+   "url": "ween-home.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2534
+    ],
+    "mobile": [
+     591,
+     1278
+    ],
+    "mobile_full": [
+     394,
+     6000
+    ]
+   }
+  },
+  "shop": {
+   "label": "Shop / Collection",
+   "group": "Browse",
+   "url": "ween-shop.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2237
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "collections": {
+   "label": "All collections",
+   "group": "Browse",
+   "url": "ween-collections.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1648
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "product": {
+   "label": "Product",
+   "group": "Browse",
+   "url": "ween-product.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3822
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "search": {
+   "label": "Search results",
+   "group": "Browse",
+   "url": "ween-search.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1756
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "cart": {
+   "label": "Cart",
+   "group": "Purchase",
+   "url": "ween-cart.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1416
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "checkout": {
+   "label": "Checkout",
+   "group": "Purchase",
+   "url": "ween-checkout.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1148
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "order-confirmation": {
+   "label": "Order confirmation",
+   "group": "Purchase",
+   "url": "ween-order-confirmation.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1454
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "wishlist": {
+   "label": "Wishlist",
+   "group": "Purchase",
+   "url": "ween-wishlist.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1473
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "blog": {
+   "label": "Blog",
+   "group": "Content",
+   "url": "ween-blog.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1322
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "article": {
+   "label": "Article",
+   "group": "Content",
+   "url": "ween-article.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2563
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "about": {
+   "label": "About us",
+   "group": "Content",
+   "url": "ween-about.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2933
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "contact": {
+   "label": "Contact",
+   "group": "Content",
+   "url": "ween-contact.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1512
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "faq": {
+   "label": "FAQ",
+   "group": "Content",
+   "url": "ween-faq.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1994
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "404": {
+   "label": "404",
+   "group": "Content",
+   "url": "ween-404.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1111
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account-login": {
+   "label": "Login / Register",
+   "group": "Account",
+   "url": "ween-account-login.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     708
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account": {
+   "label": "Customer account",
+   "group": "Account",
+   "url": "ween-account.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1035
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  }
+ },
+ "volin": {
+  "home": {
+   "label": "Home",
+   "group": "Browse",
+   "url": "volin-home.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2442
+    ],
+    "mobile": [
+     591,
+     1278
+    ],
+    "mobile_full": [
+     394,
+     6000
+    ]
+   }
+  },
+  "shop": {
+   "label": "Shop / Collection",
+   "group": "Browse",
+   "url": "volin-shop.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2331
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "collections": {
+   "label": "All collections",
+   "group": "Browse",
+   "url": "volin-collections.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2094
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "product": {
+   "label": "Product",
+   "group": "Browse",
+   "url": "volin-product.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     4080
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "search": {
+   "label": "Search results",
+   "group": "Browse",
+   "url": "volin-search.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1085
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "cart": {
+   "label": "Cart",
+   "group": "Purchase",
+   "url": "volin-cart.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1529
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "checkout": {
+   "label": "Checkout",
+   "group": "Purchase",
+   "url": "volin-checkout.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1264
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "order-confirmation": {
+   "label": "Order confirmation",
+   "group": "Purchase",
+   "url": "volin-order-confirmation.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1593
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "wishlist": {
+   "label": "Wishlist",
+   "group": "Purchase",
+   "url": "volin-wishlist.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1565
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "blog": {
+   "label": "Blog",
+   "group": "Content",
+   "url": "volin-blog.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1296
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "article": {
+   "label": "Article",
+   "group": "Content",
+   "url": "volin-article.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3277
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "about": {
+   "label": "About us",
+   "group": "Content",
+   "url": "volin-about.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     3293
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "contact": {
+   "label": "Contact",
+   "group": "Content",
+   "url": "volin-contact.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1525
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "faq": {
+   "label": "FAQ",
+   "group": "Content",
+   "url": "volin-faq.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     2227
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "404": {
+   "label": "404",
+   "group": "Content",
+   "url": "volin-404.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1247
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account-login": {
+   "label": "Login / Register",
+   "group": "Account",
+   "url": "volin-account-login.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     727
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  },
+  "account": {
+   "label": "Customer account",
+   "group": "Account",
+   "url": "volin-account.html",
+   "shots": {
+    "cover": [
+     1200,
+     750
+    ],
+    "full": [
+     640,
+     1021
+    ],
+    "mobile": [
+     591,
+     1278
+    ]
+   }
+  }
+ }
+}
