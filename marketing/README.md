@@ -66,3 +66,37 @@ Requires Playwright with Chromium, ffmpeg and the Noto Color Emoji font.
 * The storefront screenshots come from the supplied Chio reference HTML, including its product photos. **Confirm you have the rights to those photos before publishing the video publicly.**
 * The Telegram name is used descriptively; no Telegram logo is shown.
 * “Sample data” is labelled on the reports scene.
+
+## Pricing comparison video
+
+* `televixo-pricing.mp4` — 45 s, 1920×1080 (16:9), 60 fps
+* `televixo-pricing-short.mp4` — 45 s, 1080×1920 (9:16), same soundtrack and timing
+
+Source in `pricing-video/` (shares fonts with `video/assets` via a symlink):
+
+| File | Purpose |
+|---|---|
+| `pricing-video/timeline.json` | 128 BPM, 24 bars = 45 s; section types, table row times and SFX cues |
+| `pricing-video/audio2.py` | Original soundtrack (D minor) + coin, counter, cash, strike and stamp SFX, all synthesized |
+| `pricing-video/pricing.html` | Motion graphics; one page, the 9:16 layout comes from an `orientation: portrait` media query |
+| `pricing-video/render.cjs`, `preview.cjs` | Same renderer and contact-sheet tool as the promo, defaulting to `pricing.html` |
+
+```bash
+python3 pricing-video/audio2.py
+```
+
+```bash
+OUT=wide.mp4 node pricing-video/render.cjs
+```
+
+```bash
+W=1080 H=1920 OUT=tall.mp4 node pricing-video/render.cjs
+```
+
+```bash
+ffmpeg -y -i pricing-video/build/wide.mp4 -i pricing-video/build/soundtrack.wav -c:v copy -c:a aac -b:a 256k -shortest -movflags +faststart televixo-pricing.mp4
+```
+
+Storyboard: hook "Tired of paying every month for live chat tools?" → 12 month tiles stamped PAID (−$165 each, Zendesk Suite Team example) → "Per seat. Per month. Forever." → table of six tools revealed row by row with monthly and 3-year totals → "What if you paid once?" → competitor prices struck through, Televixo row "$0/mo · No subscription" + PAY ONCE stamp → "Your own phone / Telegram / website" with a phone notification → outro "Pay once. Chat forever."
+
+**Price data** (entry paid plan, 3 agents, billed annually where offered, as published Nov 2026; collected from third-party pricing summaries because vendor sites were not reachable from the build environment): Tidio Starter $24.17/mo (100 conversations), Crisp Mini $45/mo per workspace (4 seats), LiveChat Starter $19/agent, Freshchat Growth $19/agent, Intercom Essential $29/seat + $0.99 per AI resolution, Zendesk Suite Team $55/agent. **Re-check every price on the vendor's own pricing page before running ads**, and update `ROWS` in `pricing.html` if anything changed. No Televixo price is shown on purpose — set it on your listing.

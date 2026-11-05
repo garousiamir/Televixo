@@ -1,0 +1,39 @@
+{
+  "bpm": 128,
+  "duration": 45,
+  "fps": 60,
+  "arrangement": [
+    [0, 3.75, "intro"],
+    [3.75, 11.25, "groove"],
+    [11.25, 26.25, "groove"],
+    [26.25, 30, "break"],
+    [30, 41.25, "drop"],
+    [41.25, 43.125, "drop"],
+    [43.125, 45, "end"]
+  ],
+  "rows": [12.19, 14.06, 15.94, 17.81, 19.69, 21.56],
+  "sfx": [
+    {"t": 0.0, "type": "tick"}, {"t": 0.47, "type": "tick"}, {"t": 0.94, "type": "tick"},
+    {"t": 1.875, "type": "whoosh"}, {"t": 2.34, "type": "tick"}, {"t": 2.81, "type": "tick"},
+    {"t": 3.75, "type": "impact"},
+    {"t": 4.22, "type": "coin"}, {"t": 4.69, "type": "coin"}, {"t": 5.16, "type": "coin"}, {"t": 5.63, "type": "coin"},
+    {"t": 6.09, "type": "coin"}, {"t": 6.56, "type": "coin"}, {"t": 7.03, "type": "coin"}, {"t": 7.5, "type": "coin"},
+    {"t": 7.97, "type": "coin"}, {"t": 8.44, "type": "coin"}, {"t": 8.91, "type": "coin"}, {"t": 9.38, "type": "coin"},
+    {"t": 9.84, "type": "hit"}, {"t": 10.31, "type": "hit"}, {"t": 10.78, "type": "hit"},
+    {"t": 11.25, "type": "whoosh"},
+    {"t": 12.19, "type": "count", "dur": 0.8}, {"t": 14.06, "type": "count", "dur": 0.8}, {"t": 15.94, "type": "count", "dur": 0.8},
+    {"t": 17.81, "type": "count", "dur": 0.8}, {"t": 19.69, "type": "count", "dur": 0.8}, {"t": 21.56, "type": "count", "dur": 0.8},
+    {"t": 23.44, "type": "cash"},
+    {"t": 26.25, "type": "swoosh"},
+    {"t": 30.0, "type": "impact"},
+    {"t": 30.47, "type": "strike"}, {"t": 30.94, "type": "strike"}, {"t": 31.41, "type": "strike"},
+    {"t": 31.88, "type": "strike"}, {"t": 32.34, "type": "strike"}, {"t": 32.81, "type": "strike"},
+    {"t": 33.28, "type": "stamp"},
+    {"t": 33.75, "type": "whoosh"},
+    {"t": 35.2, "type": "ping"},
+    {"t": 37.5, "type": "pop"}, {"t": 37.97, "type": "pop"}, {"t": 38.44, "type": "pop"}, {"t": 38.91, "type": "pop"}, {"t": 39.38, "type": "pop"},
+    {"t": 41.25, "type": "impact"},
+    {"t": 42.19, "type": "pop"},
+    {"t": 43.125, "type": "finale"}
+  ]
+}

@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Televixo pricing video</title>
+<style>
+@font-face { font-family: "Hanken"; font-weight: 400; src: url(assets/hanken-400.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 500; src: url(assets/hanken-500.woff2) format("woff2"); }
+@font-face { font-family: "Hanken"; font-weight: 900; src: url(assets/hanken-900.woff2) format("woff2"); }
+@font-face { font-family: "Serif"; font-style: italic; src: url(assets/serif-italic.woff2) format("woff2"); }
+:root { --pink: #e0385d; --cobalt: #2563eb; --sky: #2aabee; --amber: #efbc2f; --green: #109f55; --lime: #4ade80; --cream: #f6f4ef; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100vw; height: 100vh; overflow: hidden; background: #000; }
+body { font-family: "Hanken", "Noto Color Emoji", sans-serif; letter-spacing: -0.016em; -webkit-font-smoothing: antialiased; color: #000; }
+.serif { font-family: "Serif", "Noto Color Emoji", serif; font-style: italic; letter-spacing: -0.01em; font-weight: 400; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--cream); }
+.scene { position: absolute; inset: 0; overflow: hidden; display: none; }
+.abs { position: absolute; }
+.fill { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.hatch { background-image: repeating-linear-gradient(120deg, rgba(0,0,0,.045) 0 4.2px, transparent 4.2px 7.3px); }
+.btn-dark { background: linear-gradient(180deg, #333 0%, #111 100%); border: 1px solid #000; box-shadow: inset -2px -4px 4px #000, 0 1px 2px rgba(0,0,0,.08); color: #fff; }
+.arr { background: linear-gradient(180deg, #292929 0%, #393939 100%); border: .8px solid #000; box-shadow: inset -.64px -1.2px 0 rgba(255,255,255,.25), inset 2.4px 3.2px 3.2px rgba(0,0,0,.13), inset -1.6px 0 3.2px rgba(255,255,255,.25); }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; }
+.word { display: inline-block; will-change: transform; }
+.big { color: #fff; font-size: 150px; font-weight: 500; line-height: 1.02; letter-spacing: -0.045em; }
+.big .serif { font-size: 172px; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.grain { position: absolute; inset: -50%; opacity: .05; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.conf { position: absolute; border-radius: 4px; left: 50%; top: 50%; }
+
+/* months */
+#mHead { position: absolute; left: 0; right: 0; top: 96px; text-align: center; font-size: 96px; font-weight: 500; letter-spacing: -0.045em; }
+#months { position: absolute; left: 50%; top: 290px; width: 1640px; margin-left: -820px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; }
+.mt { position: relative; height: 240px; border-radius: 28px; background: #fff; border: 1px solid #e8e6e0; box-shadow: 0 30px 60px -36px rgba(0,0,0,.35); padding: 26px 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.mt .mn { font-size: 26px; text-transform: uppercase; letter-spacing: .04em; color: #6f6f6f; }
+.mt .amt { font-size: 62px; font-weight: 500; letter-spacing: -0.04em; color: var(--pink); }
+.mt .paid { position: absolute; right: 18px; top: 20px; border: 3px solid var(--pink); color: var(--pink); border-radius: 10px; padding: 2px 10px; font-size: 20px; font-weight: 900; letter-spacing: .08em; transform: rotate(8deg); }
+#mTotal { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; font-size: 46px; font-weight: 500; letter-spacing: -0.03em; }
+#mTotal b { color: var(--pink); font-weight: 500; font-variant-numeric: tabular-nums; }
+#mNote { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; font-size: 22px; color: #6f6f6f; }
+#slam { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.sl { position: absolute; background: #0b0b0b; color: #fff; font-size: 150px; font-weight: 500; letter-spacing: -0.05em; padding: 10px 60px 22px; border-radius: 36px; white-space: nowrap; }
+
+/* table */
+#tWrap { position: absolute; left: 50%; top: 50%; width: 1640px; margin-left: -820px; height: 980px; margin-top: -490px; }
+#tHead { font-size: 84px; font-weight: 500; letter-spacing: -0.045em; line-height: 1; margin-bottom: 30px; display: flex; align-items: baseline; gap: 22px; }
+#tHead .serif { color: var(--pink); font-size: 96px; }
+.tbl { background: #fff; border-radius: 30px; border: 1px solid #e8e6e0; box-shadow: 0 40px 90px -50px rgba(0,0,0,.45); overflow: hidden; }
+.tr { display: grid; grid-template-columns: 1fr 300px 520px; align-items: center; height: 92px; padding: 0 40px; border-bottom: 1px solid #f0eee8; position: relative; }
+.tr.h { height: 64px; background: #1c1c1c; color: #fff; font-size: 20px; text-transform: uppercase; letter-spacing: .06em; border: 0; }
+.tr .nm { display: flex; align-items: center; gap: 22px; }
+.tr .bd { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 500; font-size: 26px; flex: none; }
+.tr .nmt { font-size: 38px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+.tr .pl { font-size: 19px; color: #6f6f6f; margin-top: 6px; letter-spacing: 0; }
+.tr .mo { font-size: 46px; font-weight: 500; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; position: relative; justify-self: start; }
+.tr .mo small { font-size: 22px; color: #6f6f6f; font-weight: 400; letter-spacing: 0; }
+.tr .y3 { display: flex; align-items: center; gap: 20px; }
+.tr .bar { height: 26px; border-radius: 13px; background: var(--pink); transform-origin: 0 50%; flex: none; }
+.tr .y3 b { font-size: 40px; font-weight: 500; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.tr .x { position: absolute; left: -12px; right: -12px; top: 50%; height: 6px; margin-top: -3px; background: var(--pink); border-radius: 3px; transform-origin: 0 50%; }
+.tr .tag { position: absolute; right: 40px; top: 8px; font-size: 16px; background: #fdf0d2; color: #8a5b00; border-radius: 8px; padding: 3px 10px; letter-spacing: 0; text-transform: none; }
+.tr.tv { background: linear-gradient(90deg, #109f55, #0c8a49); color: #fff; height: 112px; border: 0; }
+.tr.tv .pl { color: rgba(255,255,255,.8); }
+.tr.tv .mo small { color: rgba(255,255,255,.8); }
+#tFoot { font-size: 18px; color: #6f6f6f; margin-top: 18px; line-height: 1.4; max-width: 1400px; }
+#callout { position: absolute; right: -30px; top: -10px; background: var(--pink); color: #fff; font-size: 52px; font-weight: 500; letter-spacing: -0.035em; padding: 20px 36px 26px; border-radius: 28px; box-shadow: 0 30px 60px -20px rgba(224,56,93,.6); line-height: 1.05; text-align: center; }
+#callout .serif { font-size: 60px; }
+#stamp { position: absolute; right: 10px; top: -30px; border: 8px solid var(--green); color: var(--green); background: rgba(255,255,255,.92); border-radius: 26px; padding: 14px 34px; font-size: 64px; font-weight: 900; letter-spacing: .02em; line-height: 1; text-align: center; }
+#stamp small { display: block; font-size: 26px; letter-spacing: .14em; margin-top: 8px; }
+
+/* phone scene */
+#pTxt { position: absolute; left: 160px; top: 50%; margin-top: -330px; width: 900px; }
+.pl1 { font-size: 104px; font-weight: 500; letter-spacing: -0.045em; line-height: 1.04; }
+.pl1 .serif { font-size: 118px; }
+#chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 50px; }
+.chip { display: inline-flex; align-items: center; gap: 12px; height: 64px; padding: 0 26px; border-radius: 16px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 26px; text-transform: uppercase; letter-spacing: 0; color: #222; white-space: nowrap; }
+.chip i { width: 30px; height: 30px; border-radius: 50%; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 18px; }
+.phone { position: absolute; right: 230px; top: 50%; margin-top: -440px; width: 430px; height: 880px; border-radius: 64px; background: #111; padding: 14px; box-shadow: 0 60px 120px -40px rgba(0,0,0,.55), inset 0 0 0 2px #333; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #e9eef3; }
+.tgbar { height: 132px; background: linear-gradient(135deg, #2563eb, #2aabee); color: #fff; padding: 62px 26px 0; display: flex; gap: 14px; align-items: center; }
+.tgav { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 20px; }
+.tgchat { position: absolute; top: 132px; left: 0; right: 0; bottom: 84px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; justify-content: flex-end; }
+.tgmsg { background: #fff; border-radius: 18px 18px 18px 6px; padding: 12px 14px; font-size: 16px; line-height: 22px; box-shadow: 0 1px 1px rgba(0,0,0,.08); max-width: 340px; align-self: flex-start; }
+.tgmsg .who { color: #2563eb; font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+.tgmsg.mine { background: #e5f9ea; border-radius: 18px 18px 6px 18px; align-self: flex-end; }
+.tginput { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #fff; display: flex; align-items: center; padding: 0 18px 18px; gap: 12px; }
+.tginput .box { flex: 1; height: 46px; border-radius: 23px; background: #f1f3f5; display: flex; align-items: center; padding: 0 16px; color: #999; font-size: 16px; }
+.tgsend { width: 46px; height: 46px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; }
+.notif { position: absolute; left: 14px; right: 14px; top: 12px; background: rgba(255,255,255,.96); border-radius: 22px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; box-shadow: 0 18px 40px -16px rgba(0,0,0,.45); font-size: 15px; line-height: 20px; }
+.notif .ic { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #2aabee); flex: none; display: flex; align-items: center; justify-content: center; }
+
+/* outro */
+#outro { width: 1600px; }
+#oLogo { display: inline-flex; align-items: center; gap: 30px; }
+#oLogo .mk { width: 132px; height: 132px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+#oLogo .wm { font-size: 170px; font-weight: 500; letter-spacing: -0.06em; }
+#oTag { font-size: 84px; font-weight: 500; letter-spacing: -0.04em; margin-top: 20px; }
+#oTag .serif { color: var(--pink); font-size: 98px; }
+#oCta { display: inline-flex; align-items: center; gap: 20px; height: 110px; border-radius: 999px; padding: 0 14px 0 50px; font-size: 40px; font-weight: 500; margin-top: 50px; }
+#oCta .arr { width: 82px; height: 82px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+#oFoot { font-size: 24px; color: #6f6f6f; margin-top: 40px; text-transform: uppercase; letter-spacing: .02em; }
+#oLegal { position: absolute; left: 0; right: 0; bottom: 40px; text-align: center; font-size: 17px; color: #8a8a8a; }
+
+/* ---------------- 9:16 layout ---------------- */
+@media (orientation: portrait) {
+  .big { font-size: 120px; }
+  .big .serif { font-size: 138px; }
+  #hookA, #hookB { width: 960px; }
+  #mHead { top: 230px; font-size: 76px; padding: 0 60px; }
+  #months { width: 960px; margin-left: -480px; top: 450px; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .mt { height: 210px; padding: 22px 22px; }
+  .mt .amt { font-size: 52px; }
+  #mTotal { bottom: auto; top: 1370px; font-size: 42px; padding: 0 40px; }
+  #mNote { bottom: auto; top: 1440px; font-size: 20px; padding: 0 60px; }
+  .sl { font-size: 116px; padding: 8px 46px 18px; }
+  #tWrap { width: 1000px; margin-left: -500px; top: 230px; margin-top: 0; height: 1340px; }
+  #tHead { font-size: 66px; flex-direction: column; gap: 4px; align-items: flex-start; margin-bottom: 24px; }
+  #tHead .serif { font-size: 78px; }
+  .tr { grid-template-columns: 1fr 180px 250px; height: 134px; padding: 0 26px; }
+  .tr.h { font-size: 17px; height: 56px; }
+  .tr .nm { gap: 16px; }
+  .tr .bd { width: 46px; height: 46px; font-size: 22px; }
+  .tr .nmt { font-size: 38px; }
+  .tr .pl { font-size: 19px; max-width: 360px; line-height: 1.25; }
+  .tr .mo { font-size: 44px; }
+  .tr .mo small { font-size: 18px; }
+  .tr .y3 { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .tr .bar { height: 14px; }
+  .tr .y3 b { font-size: 38px; }
+  .tr .tag { right: 18px; top: 6px; font-size: 14px; }
+  .tr.tv { height: 150px; }
+  #tFoot { font-size: 18px; }
+  #callout { right: -10px; top: 40px; font-size: 42px; padding: 16px 28px 20px; }
+  #callout .serif { font-size: 48px; }
+  #stamp { right: 0; top: 30px; font-size: 52px; }
+  #pTxt { left: 70px; top: 200px; margin-top: 0; width: 940px; }
+  .pl1 { font-size: 80px; }
+  .pl1 .serif { font-size: 90px; }
+  #chips { position: absolute; top: 1130px; left: 0; width: 940px; margin-top: 0; gap: 12px; }
+  .chip { height: 54px; font-size: 21px; padding: 0 20px; }
+  .phone { right: auto; left: 50%; margin-left: -215px; top: 520px; margin-top: 0; }
+  #outro { width: 980px; }
+  #oLogo .mk { width: 104px; height: 104px; }
+  #oLogo .mk svg { width: 50px; height: 50px; }
+  #oLogo .wm { font-size: 130px; }
+  #oTag { font-size: 70px; }
+  #oTag .serif { font-size: 82px; }
+  #oFoot { font-size: 21px; padding: 0 40px; }
+  #oLegal { bottom: 420px; font-size: 16px; padding: 0 60px; }
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1. HOOK -->
+  <section class="scene" id="s1" style="background:#0b0b0b">
+    <div class="blob" id="s1b1" style="width:700px;height:700px;left:-120px;top:-180px;background:#e0385d"></div>
+    <div class="blob" id="s1b2" style="width:800px;height:800px;right:-200px;bottom:-260px;background:#efbc2f;opacity:.35"></div>
+    <div class="fill"><div class="big" id="hookA">
+      <div><span class="word" id="w1">Tired</span> <span class="word" id="w2">of</span> <span class="word" id="w3">paying</span></div>
+      <div><span class="word serif" id="w4" style="color:#e0385d">every month?</span></div>
+    </div></div>
+    <div class="fill"><div class="big" id="hookB">
+      <div><span class="word" id="w5">For</span> <span class="word" id="w6">live</span> <span class="word" id="w7">chat</span> <span class="word serif" id="w8" style="color:#efbc2f">tools?</span></div>
+      <div id="w9" style="font-size:34px;font-weight:400;letter-spacing:.02em;text-transform:uppercase;color:#a0a0a0;margin-top:34px">Crisp · Intercom · LiveChat · Zendesk · Tidio · Freshchat</div>
+    </div></div>
+  </section>
+
+  <!-- 2. MONTHS -->
+  <section class="scene hatch" id="s2" style="background-color:#fff">
+    <div id="mHead">The meter <span class="serif" style="color:#e0385d;font-size:110px">never stops.</span></div>
+    <div id="months"></div>
+    <div id="mTotal">Paid so far: <b id="mSum">$0</b></div>
+    <div id="mNote">Example: 3 agents on Zendesk Suite Team at $55 per agent / month, billed annually.</div>
+    <div id="slam"><div class="sl" id="sl1">Per seat.</div><div class="sl" id="sl2" style="background:#e0385d">Per month.</div><div class="sl serif" id="sl3" style="background:#efbc2f;color:#000;font-size:170px">Forever.</div></div>
+  </section>
+
+  <!-- 3/5. TABLE -->
+  <section class="scene" id="s3" style="background:#f3f2ee">
+    <div class="blob" id="s3b1" style="width:900px;height:900px;left:-300px;top:-300px;background:#2563eb;opacity:.14"></div>
+    <div class="blob" id="s3b2" style="width:800px;height:800px;right:-260px;bottom:-320px;background:#e0385d;opacity:.14"></div>
+    <div id="tWrap">
+      <div id="tHead"><span>What 3 agents cost</span><span class="serif" id="tHead2">every single month.</span></div>
+      <div class="tbl" id="tbl">
+        <div class="tr h"><span>Live chat tool · entry paid plan</span><span>Per month</span><span>Over 3 years</span></div>
+      </div>
+      <div id="tFoot">Starting list prices in USD for 3 agents on each vendor’s entry paid plan, billed annually where offered, as published Nov 2026. Excludes AI/usage add-ons and taxes. Prices change — check vendor websites. Trademarks belong to their owners; no affiliation.</div>
+      <div id="callout">Up to <b style="font-weight:500">$5,940</b><br><span class="serif">in 3 years.</span></div>
+      <div id="stamp">PAY ONCE<small>USE FOREVER</small></div>
+    </div>
+  </section>
+
+  <!-- 4. BREAK -->
+  <section class="scene" id="s4" style="background:#e0385d;color:#fff">
+    <div class="abs hatch" style="inset:0;opacity:.35"></div>
+    <div class="fill"><div class="big" id="brk">
+      <div><span class="word" id="k1">What</span> <span class="word" id="k2">if</span> <span class="word" id="k3">you</span> <span class="word" id="k4">paid</span></div>
+      <div><span class="word serif" id="k5" style="color:#000;font-size:200px">once?</span></div>
+    </div></div>
+  </section>
+
+  <!-- 6. OWN PHONE -->
+  <section class="scene" id="s6" style="background:#f3f2ee">
+    <div class="blob" id="s6b1" style="width:800px;height:800px;right:-200px;top:-260px;background:#2aabee;opacity:.25"></div>
+    <div class="blob" id="s6b2" style="width:700px;height:700px;left:-200px;bottom:-300px;background:#109f55;opacity:.18"></div>
+    <div id="pTxt">
+      <div class="pl1" id="pl1">Your own <span class="serif" style="color:#2563eb">phone.</span></div>
+      <div class="pl1" id="pl2">Your own <span class="serif" style="color:#2aabee">Telegram.</span></div>
+      <div class="pl1" id="pl3">Your own <span class="serif" style="color:#109f55">website.</span></div>
+      <div id="chips"></div>
+    </div>
+    <div class="phone" id="phone"><div class="screen">
+      <div class="tgbar"><div class="tgav">CS</div><div><div style="font-size:21px;font-weight:500">Chio Support Team</div><div style="font-size:15px;opacity:.85">your group · 4 operators</div></div></div>
+      <div class="tgchat">
+        <div class="tgmsg" id="pm1"><div class="who">Chio care bot</div>💬 C-7K2M9Q · Anna<br>🌐 /product/oversized-sweatshirt<br><br>Do you ship to Berlin? 🙂</div>
+        <div class="tgmsg mine" id="pm2">Yes! 2–3 days, free over €50 📦</div>
+      </div>
+      <div class="tginput"><div class="box">Message</div><div class="tgsend"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3 11.5 20 4l-4.5 16-4-6.5z"/></svg></div></div>
+      <div class="notif" id="notif"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></div>
+        <div><b style="font-weight:500">New website chat</b><br><span style="color:#555">Anna: Do you ship to Berlin? 🙂</span></div></div>
+    </div></div>
+  </section>
+
+  <!-- 7. OUTRO -->
+  <section class="scene hatch" id="s7" style="background-color:#fff">
+    <div class="blob" id="ob1" style="width:700px;height:700px;left:-200px;top:-200px;background:#109f55;opacity:.22"></div>
+    <div class="blob" id="ob2" style="width:700px;height:700px;right:-200px;top:-150px;background:#e0385d;opacity:.2"></div>
+    <div class="blob" id="ob3" style="width:700px;height:700px;left:40%;bottom:-400px;background:#efbc2f;opacity:.25"></div>
+    <div class="fill"><div id="outro">
+      <div id="oLogo"><span class="btn-dark mk"><svg width="62" height="62" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></span><span class="wm">Televixo</span></div>
+      <div id="oTag">Pay once. <span class="serif">Chat forever.</span></div>
+      <div id="oCta" class="btn-dark">Get Televixo<span class="arr"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      <div id="oFoot">WordPress plugin · No monthly fees · by pdthemes</div>
+    </div></div>
+    <div id="oLegal">Competitor prices: entry paid plans, 3 agents, as published Nov 2026. Telegram is a trademark of its owner; Televixo is not affiliated with Telegram or any vendor shown.</div>
+    <div id="confetti"></div>
+  </section>
+
+  <div class="grain" id="grain"></div>
+  <div class="flash" id="flash"></div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const P = (t, a, b) => clamp((t - a) / (b - a));
+const oc = (k) => 1 - Math.pow(1 - k, 3);
+const io = (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+const ob = (k) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+const BEAT = 60 / 128;
+const VERT = innerHeight > innerWidth;
+function S(el, o) {
+  if (typeof el === 'string') el = $(el);
+  if (!el) return;
+  let tr = '';
+  if (o.x != null || o.y != null) tr += `translate(${o.x || 0}px, ${o.y || 0}px) `;
+  if (o.rx != null) tr += `perspective(1600px) rotateX(${o.rx}deg) `;
+  if (o.r != null) tr += `rotate(${o.r}deg) `;
+  if (o.s != null) tr += `scale(${o.s}) `;
+  if (o.sx != null) tr += `scaleX(${o.sx}) `;
+  el.style.transform = tr;
+  if (o.o != null) { el.style.opacity = o.o; el.style.visibility = o.o <= 0.001 ? 'hidden' : 'visible'; }
+  if (o.blur != null) el.style.filter = o.blur > 0.05 ? `blur(${o.blur}px)` : 'none';
+}
+const pop = (t, t0, d = .45) => ob(P(t, t0, t0 + d));
+const kickEnv = (t) => Math.exp(-((t % BEAT) / 0.11));
+const inDrop = (t) => t >= 30 && t < 43.125;
+const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
+function scene(id, t, a, b) { const on = t >= a && t < b; $(id).style.display = on ? 'block' : 'none'; return on; }
+
+// ---------- data (see footnote; verify before publishing ads) ----------
+const ROWS = [
+  ['Tidio', 'Starter · $24.17/mo · 100 conversations', 24.17, '#1c1c1c', ''],
+  ['Crisp', 'Mini · $45/mo per workspace · 4 seats', 45, '#2563eb', ''],
+  ['LiveChat', 'Starter · $19 per agent / mo', 57, '#efbc2f', ''],
+  ['Freshchat', 'Growth · $19 per agent / mo', 57, '#109f55', ''],
+  ['Intercom', 'Essential · $29 per seat / mo', 87, '#2aabee', '+ $0.99 per AI resolution'],
+  ['Zendesk', 'Suite Team · $55 per agent / mo', 165, '#e0385d', ''],
+];
+const ROWT = [12.19, 14.06, 15.94, 17.81, 19.69, 21.56];
+const STRIKE = [30.47, 30.94, 31.41, 31.88, 32.34, 32.81];
+const MAX3 = 165 * 36;
+ROWS.forEach(([n, pl, mo, c, tag], i) => {
+  const d = document.createElement('div'); d.className = 'tr'; d.id = 'r' + i;
+  d.innerHTML = `<div class="nm"><span class="bd" style="background:${c}">${n[0]}</span><div><div class="nmt">${n}</div><div class="pl">${pl}</div></div></div>
+    <div class="mo"><span id="mo${i}">$0</span><small>/mo</small><div class="x" id="x${i}"></div></div>
+    <div class="y3"><span class="bar" id="bar${i}" style="width:${(VERT ? 230 : 300) * mo * 36 / MAX3}px"></span><b id="y${i}">$0</b></div>${tag ? `<span class="tag">${tag}</span>` : ''}`;
+  $('tbl').appendChild(d);
+});
+{
+  const d = document.createElement('div'); d.className = 'tr tv'; d.id = 'rtv';
+  d.innerHTML = `<div class="nm"><span class="bd btn-dark" style="background:#111"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"/></svg></span><div><div class="nmt" style="font-size:${VERT ? 40 : 46}px">Televixo</div><div class="pl">One-time license · unlimited operators</div></div></div>
+    <div class="mo" style="font-size:${VERT ? 48 : 58}px">$0<small>/mo</small></div>
+    <div class="y3"><b style="font-size:${VERT ? 30 : 38}px">No subscription</b></div>`;
+  $('tbl').appendChild(d);
+}
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const COIN = MONTHS.map((_, i) => 4.22 + i * BEAT);
+MONTHS.forEach((m, i) => {
+  const d = document.createElement('div'); d.className = 'mt'; d.id = 'mt' + i;
+  d.innerHTML = `<div class="mn">${m}</div><div class="amt">−$165</div><div class="paid" id="pd${i}">PAID</div>`;
+  $('months').appendChild(d);
+});
+[['No per-seat fees'], ['No monthly bill'], ['Unlimited operators'], ['Data stays in WordPress'], ['Reply from anywhere']].forEach(([l], i) => {
+  const d = document.createElement('div'); d.className = 'chip'; d.id = 'ch' + i; d.innerHTML = `<i>✓</i>${l}`; $('chips').appendChild(d);
+});
+const CONF = [], CC = ['#e0385d', '#2563eb', '#efbc2f', '#109f55', '#2aabee', '#1c1c1c'];
+let seed = 5; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < 100; i++) {
+  const d = document.createElement('div'); d.className = 'conf'; const w = 10 + rnd() * 16;
+  d.style.cssText = `width:${w}px;height:${w * (rnd() > .5 ? 1 : .45)}px;background:${CC[i % CC.length]}`;
+  $('confetti').appendChild(d); CONF.push({ el: d, a: rnd() * Math.PI * 2, v: 700 + rnd() * 900, spin: (rnd() - .5) * 1440 });
+}
+
+// ---------- scenes ----------
+function words(t, ids, t0, step = BEAT) {
+  ids.forEach((w, i) => { const k = pop(t, t0 + i * step, .4); S(w, { y: (1 - k) * 90, o: clamp(k * 1.5), blur: (1 - clamp(k)) * 12 }); });
+}
+function s1(t) {
+  if (!scene('s1', t, 0, 3.75)) return;
+  words(t, ['w1', 'w2', 'w3'], 0, BEAT / 2); S('w4', { o: 0 });
+  const k4 = pop(t, .94, .45); S('w4', { s: lerp(.6, 1, k4), o: clamp(k4 * 2), blur: (1 - clamp(k4)) * 14 });
+  const out1 = io(P(t, 1.65, 1.875));
+  S('hookA', { y: -out1 * 160, o: 1 - out1, blur: out1 * 20 });
+  words(t, ['w5', 'w6', 'w7', 'w8'], 1.875, BEAT / 2);
+  const k9 = oc(P(t, 2.81, 3.2)); S('w9', { y: (1 - k9) * 30, o: k9 });
+  const z = io(P(t, 3.3, 3.75));
+  S('hookB', { s: 1 + z * 2.4, o: 1 - z, blur: z * 18 });
+  S('s1b1', { x: Math.sin(t * 1.2) * 60, y: Math.cos(t) * 40, s: 1 + t * .06 });
+  S('s1b2', { x: Math.cos(t * 1.1) * 70, y: Math.sin(t * .9) * 50 });
+}
+function s2(t) {
+  if (!scene('s2', t, 3.75, 11.25)) return;
+  const h = ob(P(t, 3.75, 4.25)); S('mHead', { y: (1 - h) * -80, o: clamp(h * 2) });
+  let paid = 0;
+  MONTHS.forEach((_, i) => {
+    const k = pop(t, COIN[i] - .1, .4);
+    S('mt' + i, { y: (1 - k) * 120, s: lerp(.7, 1, k), r: (1 - k) * (i % 2 ? 6 : -6), o: clamp(k * 2) });
+    const st = ob(P(t, COIN[i] + .08, COIN[i] + .3));
+    S('pd' + i, { s: lerp(2.4, 1, st), r: 8, o: clamp(st * 3) });
+    if (t >= COIN[i]) paid += 165;
+  });
+  $('mSum').textContent = money(paid) + (paid >= 1980 ? ' a year' : '');
+  S('mTotal', { o: P(t, 4.1, 4.4), s: 1 + (t >= 4.22 && t < 9.6 ? kickEnv(t + BEAT - .02) * 0 + Math.exp(-(((t - 4.22) % BEAT) / .12)) * .04 : 0) });
+  S('mNote', { o: P(t, 4.4, 4.8) });
+  const dim = P(t, 9.7, 9.9);
+  S('months', { s: 1 - dim * .06, blur: dim * 8, o: 1 - dim * .5 });
+  ['sl1', 'sl2', 'sl3'].forEach((id, i) => {
+    const t0 = 9.84 + i * BEAT, k = ob(P(t, t0, t0 + .3));
+    const nxt = i < 2 ? P(t, t0 + BEAT, t0 + BEAT + .12) : 0;
+    const yo = VERT ? [-300, 0, 300][i] : [-260, 0, 260][i];
+    S(id, { x: (VERT ? 0 : [-380, 120, 420][i]), y: yo, s: lerp(2.2, 1, k), r: [-4, 3, -2][i], o: clamp(k * 3) * (1 - nxt * .0) });
+  });
+  const out = io(P(t, 11.0, 11.25));
+  S('slam', { s: 1 + out * .5, o: 1 - out, blur: out * 10 });
+}
+function s3(t) {
+  const on = scene('s3', t, 11.25, 26.25) || scene('s3', t, 30, 33.75);
+  if (!on) return;
+  S('s3b1', { x: Math.sin(t * .6) * 80, y: Math.cos(t * .5) * 60 });
+  S('s3b2', { x: Math.cos(t * .5) * 80, y: Math.sin(t * .7) * 60 });
+  const en = oc(P(t, 11.25, 12));
+  const back = t >= 30 ? ob(P(t, 30, 30.4)) : 1;
+  S('tWrap', { y: (1 - en) * 200, o: en, s: (t >= 30 ? lerp(1.15, 1, back) : 1) });
+  const hk = ob(P(t, 11.4, 11.9)); S('tHead', { y: (1 - hk) * 50, o: clamp(hk * 2) });
+  $('tHead2').textContent = t >= 30 ? 'or pay once.' : 'every single month.';
+  $('tHead2').style.color = t >= 30 ? '#109f55' : '#e0385d';
+  ROWS.forEach(([, , mo], i) => {
+    const t0 = ROWT[i] - .1, k = oc(P(t, t0, t0 + .5));
+    S('r' + i, { x: (1 - k) * 500, o: k });
+    const c = oc(P(t, ROWT[i], ROWT[i] + .8));
+    $('mo' + i).textContent = money(mo * c);
+    $('y' + i).textContent = money(mo * 36 * c);
+    S('bar' + i, { sx: c });
+    const x = io(P(t, STRIKE[i], STRIKE[i] + .25));
+    S('x' + i, { sx: x });
+    $('r' + i).style.filter = x > 0 ? `grayscale(${x})` : 'none';
+    $('r' + i).style.opacity = k * (1 - x * .45);
+  });
+  // highlight the most expensive row with the callout
+  const ck = ob(P(t, 23.44, 23.8));
+  S('callout', { s: ck * (1 + (t > 23.8 ? Math.sin((t - 23.8) * 6) * .02 : 0)), r: lerp(-20, -6, ck), o: clamp(ck * 2) * (t >= 30 ? 0 : 1) });
+  S('tFoot', { o: P(t, 12.4, 12.9) });
+  // Televixo row + stamp in the drop
+  const tv = ob(P(t, 32.9, 33.3));
+  S('rtv', { s: lerp(.6, 1, tv), o: t >= 30 ? clamp(tv * 2) : 0, y: (1 - tv) * 60 });
+  $('rtv').style.display = t >= 30 ? 'grid' : 'none';
+  const sp = ob(P(t, 33.28, 33.5));
+  S('stamp', { s: lerp(3, 1, sp), r: -10, o: t >= 33.28 ? clamp(sp * 3) : 0 });
+  const out = io(P(t, 33.5, 33.75));
+  if (out > 0) S('tWrap', { s: 1 + out * .3, o: 1 - out, blur: out * 12 });
+}
+function s4(t) {
+  if (!scene('s4', t, 26.25, 30)) return;
+  words(t, ['k1', 'k2', 'k3', 'k4'], 26.4);
+  const k = pop(t, 28.3, .6);
+  S('k5', { s: lerp(.4, 1, k) * (1 + (t > 28.9 ? Math.sin((t - 28.9) * 8) * .015 : 0)), o: clamp(k * 2), r: (1 - k) * -10 });
+  const z = io(P(t, 29.6, 30));
+  S('brk', { s: 1 + z * 2.5, o: 1 - z, blur: z * 16 });
+}
+function s6(t) {
+  if (!scene('s6', t, 33.75, 41.25)) return;
+  S('s6b1', { x: Math.sin(t * .7) * 80, y: Math.cos(t * .6) * 60 });
+  S('s6b2', { x: Math.cos(t * .6) * 80 });
+  ['pl1', 'pl2', 'pl3'].forEach((id, i) => { const k = ob(P(t, 33.9 + i * BEAT * 2, 34.4 + i * BEAT * 2)); S(id, { x: (1 - k) * -120, o: clamp(k * 2) }); });
+  const ph = oc(P(t, 33.85, 34.6));
+  S('phone', { y: (1 - ph) * 900, r: (1 - ph) * 8, s: (VERT ? .8 : 1) * (1 + (inDrop(t) ? kickEnv(t) * .006 : 0)), o: ph });
+  const n = ob(P(t, 35.2, 35.55)), nOut = io(P(t, 36.6, 36.9));
+  S('notif', { y: (1 - n) * -140 - nOut * 140, o: clamp(n * 2) * (1 - nOut) });
+  const m1 = ob(P(t, 35.6, 35.95)); S('pm1', { s: lerp(.6, 1, m1), o: clamp(m1 * 2), y: (1 - m1) * 20 });
+  const m2 = ob(P(t, 36.6, 36.95)); S('pm2', { s: lerp(.6, 1, m2), o: clamp(m2 * 2), y: (1 - m2) * 20 });
+  [37.5, 37.97, 38.44, 38.91, 39.38].forEach((a, i) => { const k = ob(P(t, a - .05, a + .35)); S('ch' + i, { s: k, o: clamp(k * 2), y: (1 - k) * 30 }); });
+  const out = io(P(t, 40.9, 41.25));
+  if (out > 0) { S('pTxt', { x: -out * 300, o: 1 - out }); } else S('pTxt', {});
+}
+function s7(t) {
+  if (!scene('s7', t, 41.25, 45)) return;
+  const lt = t - 41.25;
+  ['ob1', 'ob2', 'ob3'].forEach((b, i) => S(b, { x: Math.sin(t * .7 + i) * 80, y: Math.cos(t * .6 + i) * 60, s: 1 + (inDrop(t) ? kickEnv(t) * .05 : 0) }));
+  const lg = ob(P(lt, 0, .6));
+  S('oLogo', { s: lerp(.6, 1, lg) * (1 + (inDrop(t) ? kickEnv(t) * .015 : 0)), o: clamp(lg * 2), blur: (1 - clamp(lg)) * 12 });
+  const tg = oc(P(lt, .45, 1.0)); S('oTag', { y: (1 - tg) * 50, o: tg });
+  const cta = ob(P(t, 42.19, 42.6));
+  const pulse = t > 43.125 ? 1 + Math.sin((t - 43.125) * 5) * .025 * Math.exp(-(t - 43.125) * .6) : 1;
+  S('oCta', { s: cta * pulse, o: clamp(cta * 2) });
+  S('oFoot', { o: oc(P(t, 42.5, 43)) });
+  S('oLegal', { o: oc(P(t, 42.7, 43.2)) });
+  const ft = t - 43.125;
+  CONF.forEach((c) => {
+    if (ft < 0) { S(c.el, { o: 0 }); return; }
+    S(c.el, { x: Math.cos(c.a) * c.v * ft, y: Math.sin(c.a) * c.v * ft + 600 * ft * ft, r: c.spin * ft, o: clamp(1 - ft / 1.8) });
+  });
+  S('outro', { o: 1 - io(P(t, 44.4, 45)) });
+}
+const IMPACTS = [3.75, 30, 41.25, 43.125];
+function render(t) {
+  let sx = 0, sy = 0;
+  for (const it of [...IMPACTS, 33.28]) { const d = t - it; if (d >= 0 && d < .45) { const a = 14 * Math.exp(-d * 9); sx += Math.sin(d * 90) * a; sy += Math.cos(d * 70) * a; } }
+  $('stage').style.transform = `translate(${sx}px, ${sy}px)`;
+  s1(t); s2(t); s3(t); s4(t); s6(t); s7(t);
+  let f = 0;
+  for (const it of IMPACTS) { const d = t - it; if (d >= 0 && d < .35) f = Math.max(f, (1 - d / .35) * (it === 43.125 ? .6 : .85)); }
+  $('flash').style.opacity = f;
+  $('grain').style.transform = `translate(${(Math.floor(t * 24) * 37) % 200}px, ${(Math.floor(t * 24) * 53) % 200}px)`;
+}
+window.render = render;
+window.ready = document.fonts.ready;
+render(0);
+</script>
+</body>
+</html>

@@ -158,3 +158,26 @@ televixo, wordpress live chat, telegram live chat, wordpress plugin, live chat p
 * **Ad headline (≤ 30 chars):** `Live Chat, Replied in Telegram` · **Long headline (≤ 90):** `WordPress live chat your team answers from Telegram — no monthly fees` · **CTA:** `Learn more` (or `Shop now`).
 * **Policy:** Google Ads may limit ads that use other companies' trademarks (e.g. "Telegram") in ad text. Keep the name descriptive, don't use the Telegram logo, and keep the "not affiliated" line on the landing page.
 * **Test:** run both thumbnails/headlines for a week and keep the higher CTR; send ad traffic to the landing page (`BUY_URL` set) rather than straight to checkout.
+
+---
+
+## 6. Pricing comparison video (45 s, 16:9 + 9:16)
+
+**Title (long):** `Stop Paying Monthly for Live Chat — Crisp, Intercom, Zendesk vs a One-Time WordPress Plugin`
+**Title (Short):** `Live chat without the monthly bill 💸 #Shorts`
+
+**Description:**
+
+```
+Live chat tools charge per seat, every month, forever. For 3 agents, the entry plans of popular tools add up to as much as $5,940 over three years.
+
+Televixo is a WordPress live chat plugin with a one-time license: no monthly fees, no per-seat pricing. Visitors chat on your website; you and your team reply from your own phone in your own Telegram app. Conversations stay in your WordPress database.
+
+👉 Get Televixo: [YOUR LINK]
+
+Prices shown: starting list prices in USD for 3 agents on each vendor's entry paid plan, billed annually where offered, as published November 2026. They exclude AI/usage add-ons and taxes, and they change — check each vendor's website. All trademarks belong to their owners. Televixo is made by pdthemes and is not affiliated with Telegram, Crisp, Intercom, LiveChat, Zendesk, Tidio or Freshworks.
+```
+
+**Tags:** `crisp alternative, intercom alternative, zendesk alternative, tidio alternative, livechat alternative, live chat without monthly fee, one time payment live chat, wordpress live chat plugin, telegram live chat, woocommerce live chat, self hosted live chat, customer support wordpress`
+
+**Ads note:** comparison ads that name competitors are allowed in many regions but trademark use in ad *text* can be restricted — keep competitor names in the video and description, not in the ad headline, and verify prices before launch.
