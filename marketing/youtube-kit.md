@@ -161,23 +161,116 @@ televixo, wordpress live chat, telegram live chat, wordpress plugin, live chat p
 
 ---
 
-## 6. Pricing comparison video (45 s, 16:9 + 9:16)
+## 6. Pricing comparison video (`televixo-pricing.mp4` 16:9 · `televixo-pricing-short.mp4` 9:16)
 
-**Title (long):** `Stop Paying Monthly for Live Chat — Crisp, Intercom, Zendesk vs a One-Time WordPress Plugin`
-**Title (Short):** `Live chat without the monthly bill 💸 #Shorts`
+### 6.1 Thumbnail prompt — long video (16:9, 1280×720)
+
+```
+Create a bold, high-contrast YouTube thumbnail, 16:9, 1280×720, for a video about saving money on live chat software.
+
+Layout: split composition.
+LEFT 60%: a deep near-black background (#0b0b0b) with a soft blurred pink glow (#e0385d) in the top-left corner. Huge headline in a clean modern geometric sans-serif (like Hanken Grotesk), white, very tight letter spacing, 2 lines:
+"STOP PAYING"
+"MONTHLY" — this word in an elegant italic serif (like Instrument Serif Italic), coloured hot pink #e0385d.
+Under it, a small white rounded receipt / invoice card, slightly tilted −6°, listing three lines "$165 / month", "$1,980 / year", "$5,940 / 3 years", the last line struck through with a thick pink line, with a red rubber-stamp style "PAID" mark.
+RIGHT 40%: a realistic modern smartphone, tilted 8°, screen showing a blue messaging-app style chat (blue gradient header #2563eb→#2aabee, white and light-green chat bubbles), with a notification at the top "New website chat". Next to the phone, a large green (#109f55) circular badge with white text "$0/mo" and smaller "PAY ONCE" under it, with a subtle glow.
+Small floating gold coins (#efbc2f) falling out of the receipt toward the bottom edge, motion-blurred.
+
+Style: premium SaaS marketing, crisp edges, soft studio shadows, subtle diagonal hatch texture, lots of contrast, readable at small size on mobile. Exactly the text given above, spelled correctly, no other words. No brand logos of any company, no Telegram logo, no people, no watermark.
+```
+
+### 6.2 Thumbnail prompt — Short (9:16, 1080×1920)
+
+```
+Create a vertical 9:16 (1080×1920) YouTube Shorts cover for a video about live chat software without monthly fees.
+
+Background: warm off-white (#f6f4ef) with soft blurred colour blobs in pink (#e0385d) top-right and green (#109f55) bottom-left, and a very subtle diagonal hatch texture.
+Top third (keep inside y 200–700): huge black headline in a clean geometric sans-serif (like Hanken Grotesk), tight spacing, centred, 3 lines:
+"LIVE CHAT"
+"WITHOUT THE"
+"monthly bill" — in an elegant italic serif (like Instrument Serif Italic), hot pink #e0385d.
+Middle (y 750–1400): a realistic smartphone, slightly tilted, showing a blue messaging-app style chat (blue gradient header, white and light-green bubbles) with a "New website chat" notification. Beside the phone, a white rounded invoice card showing "$5,940" struck through with a thick pink line, and overlapping it a green rubber stamp reading "PAY ONCE · USE FOREVER".
+Bottom area (below y 1500) mostly empty, just soft background, so YouTube's interface doesn't cover anything important.
+
+Style: premium, clean, high contrast, readable on a phone. Exactly the text given above, spelled correctly, no other words. No company logos, no Telegram logo, no people, no watermark.
+```
+
+### 6.3 Long video — title, description, tags
+
+**Title (pick one, ≤ 100 chars):**
+
+1. `Stop Paying Monthly for Live Chat — Pay Once, Reply From Your Phone (WordPress)`
+2. `Crisp, Intercom & Zendesk Cost Up to $5,940 in 3 Years. This WordPress Chat Costs $0/Month`
+3. `The Live Chat Plugin With No Monthly Fees — Answer Customers From Telegram`
 
 **Description:**
 
 ```
-Live chat tools charge per seat, every month, forever. For 3 agents, the entry plans of popular tools add up to as much as $5,940 over three years.
+Live chat tools charge per seat, every month, forever. For a team of 3, the entry plans of popular live chat tools add up to as much as $5,940 over three years — before AI add-ons.
 
-Televixo is a WordPress live chat plugin with a one-time license: no monthly fees, no per-seat pricing. Visitors chat on your website; you and your team reply from your own phone in your own Telegram app. Conversations stay in your WordPress database.
+Televixo is a WordPress live chat plugin you pay for once. No monthly fees. No per-seat pricing. Visitors chat on your website; you and your team reply from your own phone, in your own Telegram app. Every conversation is stored in your own WordPress database.
 
 👉 Get Televixo: [YOUR LINK]
 
-Prices shown: starting list prices in USD for 3 agents on each vendor's entry paid plan, billed annually where offered, as published November 2026. They exclude AI/usage add-ons and taxes, and they change — check each vendor's website. All trademarks belong to their owners. Televixo is made by pdthemes and is not affiliated with Telegram, Crisp, Intercom, LiveChat, Zendesk, Tidio or Freshworks.
+What you get
+✅ One-time license — no subscription
+✅ Unlimited operators, no per-seat fees
+✅ Reply from Telegram on any phone or desktop
+✅ Private chats or one forum topic per conversation
+✅ Beautiful, fast chat widget for your site (RTL & translations ready)
+✅ Business hours, targeting rules, offline messages, ratings and reports
+✅ Data stays in WordPress — GDPR export & erase built in
+
+Chapters
+0:00 Tired of paying every month?
+0:04 The meter never stops
+0:11 What 3 agents cost per month
+0:26 What if you paid once?
+0:30 $0 per month with Televixo
+0:34 Your own phone, your own Telegram
+0:41 Get Televixo
+
+Prices shown (USD, 3 agents, entry paid plan, billed annually where offered, as published November 2026): Tidio Starter $24.17/mo (100 conversations) · Crisp Mini $45/mo per workspace · LiveChat Starter $19/agent/mo · Freshchat Growth $19/agent/mo · Intercom Essential $29/seat/mo + $0.99 per AI resolution · Zendesk Suite Team $55/agent/mo. Prices exclude taxes and usage add-ons and can change — check each vendor's website for current pricing.
+
+All trademarks belong to their respective owners. Televixo is made by pdthemes (https://pdthemes.de) and is not affiliated with or endorsed by Telegram, Crisp, Intercom, LiveChat, Zendesk, Tidio or Freshworks.
+
+#WordPress #LiveChat #WordPressPlugin
 ```
 
-**Tags:** `crisp alternative, intercom alternative, zendesk alternative, tidio alternative, livechat alternative, live chat without monthly fee, one time payment live chat, wordpress live chat plugin, telegram live chat, woocommerce live chat, self hosted live chat, customer support wordpress`
+**Tags (≈ 480 chars):**
 
-**Ads note:** comparison ads that name competitors are allowed in many regions but trademark use in ad *text* can be restricted — keep competitor names in the video and description, not in the ad headline, and verify prices before launch.
+```
+wordpress live chat, live chat plugin, live chat without monthly fee, one time payment live chat, crisp alternative, intercom alternative, zendesk alternative, tidio alternative, livechat alternative, freshchat alternative, telegram live chat, wordpress telegram plugin, woocommerce live chat, self hosted live chat, customer support wordpress, live chat for small business, televixo, pdthemes
+```
+
+### 6.4 Short (9:16) — title, description, tags
+
+**Title (pick one):**
+
+1. `Live chat without the monthly bill 💸 #Shorts`
+2. `$5,940 for live chat?! Or pay once 👀 #Shorts`
+
+**Description:**
+
+```
+Per seat. Per month. Forever. 💸
+Televixo is a WordPress live chat you pay for once — reply to website visitors from your own phone in Telegram. No subscription, no per-seat fees.
+
+👉 [YOUR LINK]
+
+Competitor prices: entry paid plans for 3 agents, billed annually, as published Nov 2026 — check vendor sites for current prices. Not affiliated with Telegram or any vendor shown. By pdthemes.
+
+#Shorts #WordPress #LiveChat #SmallBusiness #Telegram
+```
+
+**Tags:**
+
+```
+shorts, wordpress live chat, live chat no monthly fee, crisp alternative, intercom alternative, zendesk alternative, telegram live chat, wordpress plugin, small business tools, televixo
+```
+
+### 6.5 Ads notes for this video
+
+* Comparison ads naming competitors are allowed in many regions, but Google Ads can restrict other companies' trademarks in ad **text**. Keep competitor names in the video and description, not in the ad headline. Safe headline: `Live Chat With No Monthly Fees` · long headline: `WordPress live chat you pay for once — reply from your own phone`.
+* Re-check every price on the vendors' own pages before launch and re-render (`ROWS` in `pricing-video/pricing.html`) if anything changed.
+* Good audiences: custom segments from searches like "crisp pricing", "intercom pricing", "zendesk pricing", "tidio alternative", "live chat for wordpress".
